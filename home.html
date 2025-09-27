@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>miro.restaurant | Art & Gastronomie</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLwFj92xV2u+t4I1fXb6M0Xb9I4N0Q2FhK4x2I7A9X5u6cW5aB7H6o05i5k5Xk4Cq5O8xM5A6q9Vq3E2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* --- Variables et Styles de base --- */
+        :root {
+            --primary-color: #d4af7f; /* Or cuivré */
+            --secondary-color: #f4f4f4; /* Blanc cassé */
+            --dark-color: #1a1a1a; /* Noir profond */
+            --darker-color: #111; /* Noir très profond */
+            --text-color: #e0e0e0;
+
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--dark-color);
+            color: var(--secondary-color);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- Header --- */
+        header {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--secondary-color);
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .header-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), var(--dark-color));
+            z-index: 2;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 3;
+            padding: 20px;
+        }
+
+        .header-content h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-content p {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            font-style: italic;
+            color: var(--primary-color);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 15px 40px;
+            margin-top: 30px;
+            background-color: var(--primary-color);
+            color: var(--darker-color);
+            text-transform: uppercase;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            background-color: #b08c53;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            background-color: var(--darker-color);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        nav a {
+            padding: 20px 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover, nav a:focus {
+            background-color: var(--primary-color);
+            color: var(--darker-color);
+        }
+
+        /* --- Sections --- */
+        section {
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        section h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        section p {
+            max-width: 800px;
+            margin: 0 auto 25px auto;
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            color: var(--text-color);
+        }
+
+        /* --- Info Cards --- */
+        .info-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background-color: #222;
+            border-radius: 15px;
+            padding: 30px;
+            width: clamp(250px, 90%, 350px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: left;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+        }
+        
+        .card i {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: clamp(1.3rem, 3vw, 1.5rem);
+            font-family: var(--font-display);
+        }
+
+        .card p {
+            color: #ccc;
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* --- Galerie & Nos Plats --- */
+        .gallery, .plats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            justify-items: center;
+            margin-top: 40px;
+        }
+
+        .gallery-item, .plat-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover, .plat-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img, .plat-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img, .plat-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .item-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0,0,0,0.7);
+            color: var(--secondary-color);
+            padding: 10px;
+            font-size: 0.9rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .item-caption, .plat-item:hover .item-caption {
+            transform: translateY(0);
+        }
+
+        /* --- Formulaire Contact --- */
+        #contact {
+            background-color: var(--darker-color);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+            gap: 15px;
+        }
+
+        form input, form textarea {
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            border: none;
+            background-color: #333;
+            color: var(--secondary-color);
+            font-size: 1rem;
+            font-family: var(--font-body);
+            transition: outline 0.3s ease;
+        }
+
+        form input::placeholder, form textarea::placeholder {
+            color: #aaa;
+        }
+
+        form input:focus, form textarea:focus {
+            outline: 2px solid var(--primary-color);
+        }
+
+        form button {
+            padding: 15px 40px;
+            background-color: var(--primary-color);
+            color: var(--darker-color);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background 0.3s ease, transform 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        form button:hover, form button:focus {
+            background-color: #b08c53;
+            transform: translateY(-3px);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--darker-color);
+            color: var(--primary-color);
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.95rem;
+            border-top: 1px solid #333;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            nav {
+                flex-wrap: wrap;
+            }
+            nav a {
+                padding: 15px 10px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-bg">
+            <img src="images/image1.webp" alt="Miro Restaurant">
+        </div>
+        <div class="header-overlay"></div>
+        <div class="header-content">
+            <h1>miro.restaurant</h1>
+            <p>Art, Chic & Luxe – Une expérience gastronomique unique</p>
+            <a href="https://votre-site-de-reservation.com" target="_blank" class="btn-primary">Réserver une table</a>
+        </div>
+    </header>
+
+    <nav aria-label="Navigation principale">
+        <a href="#about">À propos</a>
+        <a href="#info">Informations</a>
+        <a href="#gallery">Galerie</a>
+        <a href="#plats">Nos plats</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <main>
+        <section id="about">
+            <h2>À propos de nous</h2>
+            <p>Bienvenue chez <strong>miro.restaurant</strong>, un lieu où le luxe rencontre l'art culinaire. Profitez de nos espaces élégants : salle, bar, jardin, lounge et rooftop, pour un moment inoubliable en famille ou entre amis.</p>
+        </section>
+
+        <section id="info">
+            <h2>Informations</h2>
+            <p>Découvrez nos horaires et comment nous trouver pour une expérience sans accroc.</p>
+            <div class="info-cards">
+                <div class="card">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Déjeuner</h3>
+                    <p>12H - 15H (sauf le Vendredi)</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-moon"></i>
+                    <h3>Dîner</h3>
+                    <p>19H - 02H</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Contact</h3>
+                    <p><a href="tel:0560800700">0560-800-700</a></p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Adresse</h3>
+                    <p>Bois des arcades, Alger</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-glass-cheers"></i>
+                    <h3>Espaces</h3>
+                    <p>Salle, Bar, Jardin, Lounge, Rooftop – Familial</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <h2>Notre Galerie</h2>
+            <p>Explorez les images de notre restaurant et découvrez l'ambiance unique qui vous y attend.</p>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="images/image1.webp" alt="Intérieur du restaurant">
+                    <div class="item-caption">Intérieur du restaurant</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/image2.webp" alt="Bar élégant">
+                    <div class="item-caption">Notre bar élégant</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/image3.webp" alt="Vue du jardin">
+                    <div class="item-caption">Vue du jardin</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/image4.webp" alt="Terrasse sur le toit">
+                    <div class="item-caption">Terrasse sur le toit</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="images/image5.webp" alt="Salle à manger privée">
+                    <div class="item-caption">Salle à manger privée</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="plats">
+            <h2>Nos Plats</h2>
+            <p>Découvrez une sélection de nos créations culinaires, préparées avec passion et des ingrédients de première qualité.</p>
+            <div class="plats">
+                <div class="plat-item">
+                    <img src="images/plat1.webp" alt="Salade fraîche">
+                    <div class="item-caption">Salade fraîche</div>
+                </div>
+                <div class="plat-item">
+                    <img src="images/plat2.webp" alt="Pâtes aux fruits de mer">
+                    <div class="item-caption">Pâtes aux fruits de mer</div>
+                </div>
+                <div class="plat-item">
+                    <img src="images/plat3.webp" alt="Viande grillée">
+                    <div class="item-caption">Viande grillée</div>
+                </div>
+                <div class="plat-item">
+                    <img src="images/plat4.webp" alt="Dessert au chocolat">
+                    <div class="item-caption">Dessert au chocolat</div>
+                </div>
+                <div class="plat-item">
+                    <img src="images/plat5.webp" alt="Plat de poisson">
+                    <div class="item-caption">Plat de poisson</div>
+                </div>
+                <div class="plat-item">
+                    <img src="images/plat6.webp" alt="Cocktail fruité">
+                    <div class="item-caption">Cocktail signature</div>
+                </div>
+                <div class="plat-item">
+                    <img src="images/plat7.webp" alt="Crème brûlée">
+                    <div class="item-caption">Crème brûlée</div>
+                </div>
+                <div class="plat-item">
+                    <img src="images/plat8.webp" alt="Planche de fromage">
+                    <div class="item-caption">Planche de fromages</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contactez-nous</h2>
+            <p>Envoyez-nous un message et nous vous répondrons rapidement. Pour une réservation, merci d'utiliser le lien ci-dessus.</p>
+            <form action="#" method="POST" class="contact-form">
+                <input type="text" name="name" placeholder="Votre nom" required>
+                <input type="email" name="email" placeholder="Votre email" required>
+                <textarea name="message" placeholder="Votre message" rows="5" required></textarea>
+                <button type="submit">Envoyer</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 miro.restaurant – Tous droits réservés</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('.contact-form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const inputs = form.querySelectorAll('input, textarea');
+                let isValid = true;
+                inputs.forEach(input => {
+                    if (!input.value.trim()) {
+                        isValid = false;
+                        input.style.outline = '2px solid red';
+                    } else {
+                        input.style.outline = 'none';
+                    }
+                });
+
+                if (isValid) {
+                    alert('Votre message a été envoyé avec succès !');
+                    form.reset();
+                } else {
+                    alert('Veuillez remplir tous les champs obligatoires.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
