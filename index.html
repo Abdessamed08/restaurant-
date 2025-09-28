@@ -24,7 +24,7 @@
             --font-display: 'Playfair Display', serif; /* Police pour les titres, élégante */
             --font-body: 'Montserrat', sans-serif; /* Police pour le corps, moderne */
             --transition-duration: 0.3s; /* Durée standard pour les transitions */
-            --artistic-bg-texture: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="p" width="100" height="100" patternUnits="userSpaceOnUse"><path data-name="path174" d="m15.539 74.461c-3.138-1.78-6.17-3.951-8.9-6.495c-2.731-2.544-5.183-5.462-7.3-8.681c-2.116-3.22-3.83-6.702-5.13-10.375c-1.299-3.674-2.1-7.5-2.39-11.383c-0.29-3.884-0.1-7.8-0.08-11.7c0.016-3.896-0.081-7.8-0.45-11.666c-0.37-3.866-1-7.7-1.89-11.411c-0.89-3.712-2.07-7.2-3.56-10.428l-0.08 0.08z" fill="%23222" opacity="0.1"/><path data-name="path175" d="m84.461 25.539c3.138 1.78 6.17 3.951 8.9 6.495c2.731 2.544 5.183 5.462 7.3 8.681c2.116 3.22 3.83 6.702 5.13 10.375c1.299 3.674 2.1 7.5 2.39 11.383c0.29 3.884 0.1 7.8 0.08 11.7c-0.016 3.896 0.081 7.8 0.45 11.666c0.37 3.866 1 7.7 1.89 11.411c0.89 3.712 2.07 7.2 3.56 10.428l0.08-0.08z" fill="%23222" opacity="0.1" transform="rotate(180 50 50)"/></pattern></defs><rect width="100" height="100" fill="url(%23p)"/></svg>');
+            --artistic-bg-texture: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="p" width="100" height="100" patternUnits="userSpaceOnUse"><path data-name="path174" d="m15.539 74.461c-3.138-1.78-6.17-3.951-8.9-6.495c-2.731-2.544-5.183-5.462-7.3-8.681c-2.116-3.22-3.83-6.702-5.13-10.375c-1.299-3.674-2.1-7.5-2.39-11.383c-0.29-3.884-0.1-7.8-0.08-11.7c0.016-3.896-0.081-7.8-0.45-11.666c-0.37-3.866-1-7.7-1.89-11.411c-0.89-3.712-2.07-7.2-3.56-10.428l-0.08 0.08z" fill="%23222" opacity="0.1"/><path data-name="path175" d="m84.461 25.539c3.138 1.78 6.17 3.951 8.9 6.495c2.731 2.544 5.183 5.462 7.3 8.681c2.116 3.22 3.83 6.702 5.13 10.375c1.299 3.674 2.1 7.5 2.39 11.383c0.29 3.884 0.1 7.8 0.08 11.7c-0.016 3.896 0.081 7.8 0.45 11.666c0.37-3.866 1-7.7 1.89-11.411c0.89-3.712 2.07-7.2 3.56-10.428l0.08-0.08z" fill="%23222" opacity="0.1" transform="rotate(180 50 50)"/></pattern></defs><rect width="100" height="100" fill="url(%23p)"/></svg>');
         }
 
         /* Styles de réinitialisation et de base */
@@ -42,8 +42,8 @@
             /* Touche artistique: Arrière-plan texturé subtil */
             background-image: var(--artistic-bg-texture);
             background-repeat: repeat;
-            background-size: 50px 50px; /* Taille du motif */
-            background-blend-mode: multiply; /* Rend le motif plus subtil */
+            background-size: 50px 50px;
+            background-blend-mode: multiply;
         }
 
         a { text-decoration: none; color: inherit; }
@@ -78,12 +78,12 @@
             height: 100%;
             object-fit: cover;
             z-index: 1;
-            filter: brightness(0.6) blur(3px); /* Effet plus artistique au départ */
+            filter: brightness(0.6) blur(3px);
             transition: filter 1.5s ease-in-out;
         }
         
         .header-bg-img.loaded {
-            filter: brightness(0.6) blur(0); /* Moins de flou une fois chargé */
+            filter: brightness(0.6) blur(0);
         }
 
         .header-overlay {
@@ -92,7 +92,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.6), var(--dark-color) 70%); /* Dégradé plus prononcé */
+            background: linear-gradient(rgba(0,0,0,0.6), var(--dark-color) 70%);
             z-index: 2;
         }
 
@@ -100,17 +100,16 @@
             position: relative;
             z-index: 3;
             padding: 20px;
-            animation: fadeIn 2s ease-out forwards; /* Animation plus douce */
+            animation: fadeIn 2s ease-out forwards;
         }
 
         .header-content h1 {
             font-family: var(--font-display);
-            font-size: clamp(2.8rem, 9vw, 6rem); /* Taille plus grande pour un impact artistique */
+            font-size: clamp(2.8rem, 9vw, 6rem);
             font-weight: 700;
-            letter-spacing: 4px; /* Espacement plus grand */
+            letter-spacing: 4px;
             margin-bottom: 20px;
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
-            /* Touche artistique: Dégradé de texte subtil */
             background: linear-gradient(45deg, var(--primary-color), #f7e0c4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -131,18 +130,18 @@
             background-color: var(--primary-color);
             color: var(--darker-color);
             text-transform: uppercase;
-            font-weight: 700; /* Plus gras */
-            border-radius: 8px; /* Bords légèrement plus arrondis */
+            font-weight: 700;
+            border-radius: 8px;
             transition: transform var(--transition-duration) ease, background-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Ombre pour la profondeur */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             letter-spacing: 0.5px;
         }
 
         .btn:hover, .btn:focus {
-            transform: translateY(-5px) scale(1.02); /* Effet plus prononcé */
-            background-color: #c09d6b; /* Teinte légèrement différente au survol */
+            transform: translateY(-5px) scale(1.02);
+            background-color: #c09d6b;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
         }
 
@@ -154,8 +153,8 @@
             display: flex;
             justify-content: center;
             background-color: var(--darker-color);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Ombre plus profonde */
-            border-bottom: 1px solid #333; /* Ligne subtile */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid #333;
         }
         
         nav ul {
@@ -171,11 +170,11 @@
             text-transform: uppercase;
             transition: background var(--transition-duration) ease, color var(--transition-duration) ease, transform var(--transition-duration) ease;
             display: block;
-            position: relative; /* Pour l'effet underscore */
+            position: relative;
             overflow: hidden;
         }
 
-        nav a::before { /* Ligne du dessous artistique */
+        nav a::before {
             content: '';
             position: absolute;
             bottom: 0;
@@ -192,14 +191,88 @@
         }
 
         nav a:hover, nav a:focus, nav a.active {
-            background-color: rgba(212, 175, 127, 0.1); /* Survol plus subtil */
+            background-color: rgba(212, 175, 127, 0.1);
             color: var(--primary-color);
-            transform: translateY(-2px); /* Léger mouvement */
+            transform: translateY(-2px);
         }
+
+        /* NOUVEAU: Styles spécifiques à la navigation mobile */
+        .menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 15px;
+            z-index: 200;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .menu-toggle .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 5px 0;
+            transition: transform var(--transition-duration) ease, opacity var(--transition-duration) ease;
+        }
+
+        /* Animation du bouton au clic (croix) */
+        .nav-open .menu-toggle .bar:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-open .menu-toggle .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .nav-open .menu-toggle .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .nav-links {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: var(--darker-color);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in-out;
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+            
+            .nav-links a {
+                padding: 20px 0;
+                font-size: 1.5rem;
+                width: 100%;
+                text-align: center;
+            }
+            nav ul {
+                display: none; /* Cache la liste de navigation par défaut sur mobile */
+            }
+        }
+        /* --- Fin des styles de navigation mobile --- */
+
 
         /* --- 4. Sections principales --- */
         section {
-            padding: 100px 20px; /* Plus d'espacement */
+            padding: 100px 20px;
             text-align: center;
             position: relative;
         }
@@ -211,14 +284,14 @@
             margin-bottom: 30px;
             font-weight: 700;
             position: relative;
-            display: inline-block; /* Pour centrer le pseudo-élément */
-            padding-bottom: 15px; /* Espace pour le trait */
-            opacity: 0; /* Pour l'animation d'apparition */
+            display: inline-block;
+            padding-bottom: 15px;
+            opacity: 0;
             transform: translateY(20px);
             animation: slideInUp 1s ease-out forwards;
         }
 
-        .section-title::after { /* Touche artistique: Ligne décorative sous le titre */
+        .section-title::after {
             content: '';
             position: absolute;
             left: 50%;
@@ -232,12 +305,98 @@
 
         .section-description {
             max-width: 800px;
-            margin: 0 auto 40px auto; /* Plus d'espace */
+            margin: 0 auto 40px auto;
             font-size: clamp(1rem, 2vw, 1.15rem);
             color: var(--text-color);
             opacity: 0;
             transform: translateY(20px);
-            animation: slideInUp 1s ease-out 0.3s forwards; /* Délai pour après le titre */
+            animation: slideInUp 1s ease-out 0.3s forwards;
+        }
+        
+        /* Style spécifique pour la section 'À propos de nous' avec vidéo en background */
+        #about {
+            position: relative;
+            min-height: 100vh;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: var(--darker-color);
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            filter: brightness(0.7);
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .video-background.playing {
+            opacity: 1;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2;
+        }
+
+        #about .about-content {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.75);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.9);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1.5s ease-out forwards;
+            animation-delay: 1s;
+            border: 1px solid var(--primary-color);
+        }
+
+        #about .about-content .section-title,
+        #about .about-content .section-description {
+            animation: none;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #about .about-content .section-title {
+            animation-delay: 1.2s;
+        }
+        #about .about-content .section-description {
+            animation-delay: 1.5s;
+        }
+
+        /* NOUVEAU: Optimisation des vidéos pour le mobile */
+        @media (max-width: 768px) {
+            #about {
+                background-image: url('images/video-placeholder.webp');
+                background-size: cover;
+                background-position: center;
+                min-height: 50vh;
+            }
+
+            .video-background, .video-overlay {
+                display: none;
+            }
+
+            #about .about-content {
+                padding: 20px;
+            }
         }
 
         /* --- 5. Cartes d'information --- */
@@ -245,23 +404,22 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px; /* Plus d'espace */
+            gap: 30px;
             margin-top: 50px;
         }
 
         .card {
-            background-color: #1e1e1e; /* Fond légèrement plus clair que le dark-color */
+            background-color: #1e1e1e;
             border-radius: 15px;
-            padding: 35px; /* Plus de padding */
-            width: clamp(280px, 90%, 380px); /* Taille légèrement ajustée */
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6); /* Ombre plus prononcée */
+            padding: 35px;
+            width: clamp(280px, 90%, 380px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
             transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease, background-color var(--transition-duration) ease;
             text-align: left;
-            border: 1px solid rgba(212, 175, 127, 0.2); /* Bordure subtile */
+            border: 1px solid rgba(212, 175, 127, 0.2);
             opacity: 0;
-            animation: slideInUp 0.8s ease-out forwards; /* Animation d'apparition */
+            animation: slideInUp 0.8s ease-out forwards;
         }
-        /* Délai pour l'animation des cartes */
         .info-cards .card:nth-child(1) { animation-delay: 0.2s; }
         .info-cards .card:nth-child(2) { animation-delay: 0.4s; }
         .info-cards .card:nth-child(3) { animation-delay: 0.6s; }
@@ -272,7 +430,7 @@
             .card:hover {
                 transform: translateY(-10px) scale(1.01);
                 box-shadow: 0 18px 45px rgba(0, 0, 0, 0.8);
-                background-color: #252525; /* Changement de couleur au survol */
+                background-color: #252525;
             }
         }
 
@@ -293,9 +451,9 @@
 
         .card-icon i {
             color: var(--primary-color);
-            font-size: 2.2rem; /* Icônes plus grandes */
+            font-size: 2.2rem;
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 5px rgba(212, 175, 127, 0.5)); /* Ombre sur l'icône */
+            filter: drop-shadow(0 0 5px rgba(212, 175, 127, 0.5));
         }
 
         .contact-link {
@@ -309,8 +467,8 @@
         /* --- 6. Galerie et Plats (Grille) --- */
         .gallery, .plats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Taille min légèrement augmentée */
-            gap: 25px; /* Plus d'espace */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
             justify-items: center;
             margin-top: 50px;
         }
@@ -318,16 +476,15 @@
         .gallery-item, .plat-item {
             position: relative;
             overflow: hidden;
-            border-radius: 18px; /* Bords plus arrondis */
+            border-radius: 18px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-            transition: transform 0.4s ease-out, box-shadow 0.4s ease-out; /* Transitions plus douces */
+            transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
             cursor: pointer;
-            border: 2px solid transparent; /* Bordure transparente pour effet au survol */
+            border: 2px solid transparent;
             opacity: 0;
             transform: translateY(30px);
             animation: slideInUp 0.8s ease-out forwards;
         }
-        /* Délai d'animation pour les éléments de la galerie */
         .gallery-item:nth-child(1), .plat-item:nth-child(1) { animation-delay: 0.2s; }
         .gallery-item:nth-child(2), .plat-item:nth-child(2) { animation-delay: 0.3s; }
         .gallery-item:nth-child(3), .plat-item:nth-child(3) { animation-delay: 0.4s; }
@@ -340,23 +497,23 @@
 
         .gallery-item:hover, .plat-item:hover,
         .gallery-item:focus, .plat-item:focus {
-            transform: scale(1.07); /* Zoom plus grand */
+            transform: scale(1.07);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
-            border: 2px solid var(--primary-color); /* Bordure artistique au survol */
+            border: 2px solid var(--primary-color);
             outline: none;
         }
 
         .gallery-item img, .plat-item img {
             width: 100%;
-            height: 250px; /* Hauteur fixe pour une uniformité */
+            height: 250px;
             object-fit: cover;
             display: block;
-            transition: transform 0.6s ease; /* Transition de zoom plus lente */
+            transition: transform 0.6s ease;
         }
         
         .gallery-item:hover img, .plat-item:hover img,
         .gallery-item:focus img, .plat-item:focus img {
-            transform: scale(1.15); /* Zoom plus grand pour l'image */
+            transform: scale(1.15);
         }
 
         .item-caption {
@@ -364,15 +521,25 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(0,0,0,0.85); /* Fond plus opaque */
+            background-color: rgba(0,0,0,0.85);
             color: var(--secondary-color);
-            padding: 12px; /* Plus de padding */
+            padding: 12px;
             font-size: 1rem;
             transform: translateY(100%);
             transition: transform var(--transition-duration) ease;
             text-align: center;
             font-weight: 600;
             letter-spacing: 0.5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .plat-price {
+            font-family: var(--font-display);
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: bold;
         }
 
         .gallery-item:hover .item-caption, .plat-item:hover .item-caption,
@@ -392,7 +559,7 @@
             align-items: center;
             max-width: 600px;
             margin: 0 auto;
-            gap: 25px; /* Plus d'espace */
+            gap: 25px;
         }
 
         .form-group {
@@ -401,7 +568,6 @@
             animation: slideInUp 0.8s ease-out forwards;
             opacity: 0;
         }
-        /* Délai pour l'animation des champs */
         .form-group:nth-child(1) { animation-delay: 0.2s; }
         .form-group:nth-child(2) { animation-delay: 0.4s; }
         .form-group:nth-child(3) { animation-delay: 0.6s; }
@@ -411,17 +577,17 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 700; /* Plus gras */
+            font-weight: 700;
             color: var(--primary-color);
             text-align: left;
             font-size: 1.1rem;
         }
 
         form input, form textarea {
-            padding: 14px; /* Plus de padding */
+            padding: 14px;
             width: 100%;
-            border-radius: 10px; /* Bords plus arrondis */
-            border: 1px solid #555; /* Bordure plus visible */
+            border-radius: 10px;
+            border: 1px solid #555;
             background-color: #2a2a2a;
             color: var(--secondary-color);
             font-size: 1.05rem;
@@ -431,13 +597,13 @@
 
         form input::placeholder, form textarea::placeholder {
             color: #999;
-            font-style: italic; /* Placeholders stylisés */
+            font-style: italic;
         }
 
         form input:focus, form textarea:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(212, 175, 127, 0.6); /* Ombre plus intense */
-            background-color: #333; /* Légèrement plus clair au focus */
+            box-shadow: 0 0 0 3px rgba(212, 175, 127, 0.6);
+            background-color: #333;
             outline: none;
         }
 
@@ -459,23 +625,66 @@
             min-height: 20px;
             text-align: left;
         }
+        
+        /* Styles pour la carte */
+        #map .map-container {
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            margin: 40px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
 
         /* --- 8. Footer --- */
         footer {
             background-color: var(--darker-color);
             color: var(--primary-color);
             text-align: center;
-            padding: 40px 20px; /* Plus de padding */
+            padding: 40px 20px;
             font-size: 0.95rem;
             border-top: 1px solid #222;
             letter-spacing: 0.5px;
             opacity: 0;
-            animation: fadeIn 1s ease-out 1s forwards; /* Animation d'apparition */
+            animation: fadeIn 1s ease-out 1s forwards;
+        }
+
+        /* NOUVEAU: Ajustements finaux pour les très petits écrans */
+        @media (max-width: 500px) {
+            .header-content h1 {
+                font-size: clamp(2.5rem, 10vw, 4rem);
+            }
+            .header-content p {
+                font-size: clamp(1rem, 4vw, 1.5rem);
+            }
+
+            .btn {
+                padding: 12px 30px;
+                font-size: 0.9rem;
+            }
+
+            section {
+                padding: 80px 15px;
+            }
+
+            .info-cards, .gallery, .plats {
+                gap: 20px;
+            }
+
+            .card {
+                padding: 25px;
+            }
         }
     </style>
 </head>
 <body>
-
     <header role="banner">
         <picture>
             <source media="(max-width: 768px)" srcset="images/image1-mobile.webp" type="image/webp">
@@ -490,19 +699,40 @@
     </header>
 
     <nav role="navigation" aria-label="Navigation principale">
-        <ul>
+        <button class="menu-toggle" aria-controls="main-menu" aria-expanded="false" aria-label="Ouvrir le menu de navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <ul id="main-menu" class="nav-links">
             <li><a href="#about">À propos</a></li>
             <li><a href="#info">Informations</a></li>
             <li><a href="#gallery">Galerie</a></li>
             <li><a href="#plats">Nos plats</a></li>
+            <li><a href="#map">Carte</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
 
     <main role="main">
         <section id="about" aria-labelledby="about-heading">
-            <h2 id="about-heading" class="section-title">À propos de nous</h2>
-            <p class="section-description">Bienvenue chez miro.restaurant, un lieu où le luxe rencontre l'art culinaire. Profitez de nos espaces élégants : salle, bar, jardin, lounge et rooftop, pour un moment inoubliable en famille ou entre amis.</p>
+            <video class="video-background" id="video1" autoplay muted loop playsinline>
+                <source src="images/video1.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas les vidéos HTML5.
+            </video>
+            <video class="video-background" id="video2" muted loop playsinline>
+                <source src="images/video2.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas les vidéos HTML5.
+            </video>
+            <video class="video-background" id="video3" muted loop playsinline>
+                <source src="images/video3.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas les vidéos HTML5.
+            </video>
+            <div class="video-overlay"></div>
+            <div class="about-content">
+                <h2 id="about-heading" class="section-title">À propos de nous</h2>
+                <p class="section-description">Bienvenue chez miro.restaurant, un lieu où le luxe rencontre l'art culinaire. Profitez de nos espaces élégants : salle, bar, jardin, lounge et rooftop, pour un moment inoubliable en famille ou entre amis.</p>
+            </div>
         </section>
 
         <section id="info" aria-labelledby="info-heading">
@@ -528,6 +758,7 @@
                     <i class="fas fa-map-marker-alt"></i>
                     <h3>Adresse</h3>
                     <p>Bois des arcades, Alger</p>
+                    <p><a href="#map" class="contact-link">Voir sur la carte</a></p>
                 </div>
                 <div class="card card-icon">
                     <i class="fas fa-glass-cheers"></i>
@@ -570,36 +801,44 @@
             <div class="plats">
                 <figure class="plat-item" tabindex="0">
                     <img src="images/plat1.webp" alt="Salade fraîche et colorée" loading="lazy">
-                    <figcaption class="item-caption">Salade fraîche</figcaption>
+                    <figcaption class="item-caption">Salade fraîche <span class="plat-price">2200 DA</span></figcaption>
                 </figure>
                 <figure class="plat-item" tabindex="0">
                     <img src="images/plat2.webp" alt="Pâtes aux fruits de mer" loading="lazy">
-                    <figcaption class="item-caption">Pâtes aux fruits de mer</figcaption>
+                    <figcaption class="item-caption">Pâtes aux fruits de mer <span class="plat-price">3500 DA</span></figcaption>
                 </figure>
                 <figure class="plat-item" tabindex="0">
                     <img src="images/plat3.webp" alt="Viande grillée avec accompagnement" loading="lazy">
-                    <figcaption class="item-caption">Viande grillée</figcaption>
+                    <figcaption class="item-caption">Viande grillée <span class="plat-price">4800 DA</span></figcaption>
                 </figure>
                 <figure class="plat-item" tabindex="0">
                     <img src="images/plat4.webp" alt="Dessert au chocolat fondu" loading="lazy">
-                    <figcaption class="item-caption">Dessert au chocolat</figcaption>
+                    <figcaption class="item-caption">Dessert au chocolat <span class="plat-price">1800 DA</span></figcaption>
                 </figure>
                 <figure class="plat-item" tabindex="0">
                     <img src="images/plat5.webp" alt="Plat de poisson savoureux" loading="lazy">
-                    <figcaption class="item-caption">Plat de poisson</figcaption>
+                    <figcaption class="item-caption">Plat de poisson <span class="plat-price">4200 DA</span></figcaption>
                 </figure>
                 <figure class="plat-item" tabindex="0">
                     <img src="images/plat6.webp" alt="Cocktail fruité et rafraîchissant" loading="lazy">
-                    <figcaption class="item-caption">Cocktail signature</figcaption>
+                    <figcaption class="item-caption">Cocktail signature <span class="plat-price">1500 DA</span></figcaption>
                 </figure>
                 <figure class="plat-item" tabindex="0">
                     <img src="images/plat7.webp" alt="Crème brûlée avec sucre caramélisé" loading="lazy">
-                    <figcaption class="item-caption">Crème brûlée</figcaption>
+                    <figcaption class="item-caption">Crème brûlée <span class="plat-price">1700 DA</span></figcaption>
                 </figure>
                 <figure class="plat-item" tabindex="0">
                     <img src="images/plat8.webp" alt="Planche de fromages variés" loading="lazy">
-                    <figcaption class="item-caption">Planche de fromages</figcaption>
+                    <figcaption class="item-caption">Planche de fromages <span class="plat-price">2900 DA</span></figcaption>
                 </figure>
+            </div>
+        </section>
+
+        <section id="map" aria-labelledby="map-heading">
+            <h2 id="map-heading" class="section-title">Notre Emplacement</h2>
+            <p class="section-description">Trouvez-nous facilement sur la carte pour planifier votre visite.</p>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1598.6739987483848!2d2.980649520443916!3d36.757041539659396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128e469e8b746c0d%3A0x6d859421295b9275!2sBois%20des%20Arcades%2C%20Bouchefa!5e0!3m2!1sfr!2sdz!4v1700877543813!5m2!1sfr!2sdz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </section>
 
@@ -628,11 +867,57 @@
     </main>
 
     <footer role="contentinfo">
-        <p>&copy; 2025 miro.restaurant – Tous droits réservés. Design et développement par [Votre nom]</p>
+        <p>© 2025 miro.restaurant – Tous droits réservés. Design et développement par [Votre nom]</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // NOUVEAU: Gestion du menu mobile
+            const navToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            const mainNav = document.querySelector('nav');
+
+            navToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                mainNav.classList.toggle('nav-open');
+                const isExpanded = navToggle.getAttribute('aria-expanded') === 'true' || false;
+                navToggle.setAttribute('aria-expanded', !isExpanded);
+            });
+            
+            // Ferme le menu au clic sur un lien de navigation
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mainNav.classList.remove('nav-open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // Video background management for #about section
+            const videos = document.querySelectorAll('#about .video-background');
+            let currentVideoIndex = 0;
+
+            function playNextVideo() {
+                if (window.innerWidth > 768) { // Ne joue la vidéo que sur grand écran
+                    videos[currentVideoIndex].classList.remove('playing');
+                    videos[currentVideoIndex].pause();
+                    
+                    currentVideoIndex = (currentVideoIndex + 1) % videos.length;
+                    
+                    videos[currentVideoIndex].classList.add('playing');
+                    videos[currentVideoIndex].play();
+                }
+            }
+
+            videos.forEach(video => {
+                video.addEventListener('ended', playNextVideo);
+                video.loop = true; 
+            });
+
+            if (videos.length > 0 && window.innerWidth > 768) {
+                videos[currentVideoIndex].classList.add('playing');
+                videos[currentVideoIndex].play();
+            }
 
             // 1. Optimisation du chargement d'image du header avec blur progressif
             const headerImg = document.querySelector('.header-bg-img');
@@ -648,19 +933,19 @@
 
             // 2. Gestion de la navigation active (highlight de la section courante)
             const sections = document.querySelectorAll('section[id]');
-            const navLinks = document.querySelectorAll('nav ul li a');
+            const navLinksA = document.querySelectorAll('nav ul li a');
 
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
-                threshold: 0.5 // Active la navigation quand 50% de la section est visible
+                threshold: 0.5
             };
 
             const sectionObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const currentSectionId = entry.target.id;
-                        navLinks.forEach(link => {
+                        navLinksA.forEach(link => {
                             link.classList.remove('active');
                             if (link.getAttribute('href') === `#${currentSectionId}`) {
                                 link.classList.add('active');
@@ -682,7 +967,6 @@
 
             const inputs = [nameInput, emailInput, messageTextarea];
 
-            // Fonction de validation individuelle d'un champ
             const validateField = (input) => {
                 const errorMessage = input.parentElement.querySelector('.error-message');
                 if (input.validity.valid) {
@@ -702,34 +986,29 @@
                 }
             };
 
-            // Écouteurs d'événements pour la validation en temps réel sur chaque champ
             inputs.forEach(input => {
                 input.addEventListener('input', () => validateField(input));
             });
 
-            // Écouteur d'événement pour la soumission du formulaire
             form.addEventListener('submit', (e) => {
-                e.preventDefault(); // Empêche l'envoi par défaut du formulaire
+                e.preventDefault();
                 let isFormValid = true;
 
                 inputs.forEach(input => {
-                    validateField(input); // Re-valide tous les champs avant de soumettre
+                    validateField(input);
                     if (!input.validity.valid) {
                         isFormValid = false;
                     }
                 });
 
                 if (isFormValid) {
-                    // Si le formulaire est valide, simule l'envoi et réinitialise
                     console.log('Formulaire valide, envoi des données...');
                     alert('Votre message a été envoyé avec succès ! Merci de nous avoir contactés.');
                     form.reset();
-                    // Retirer les classes de validation visuelles après l'envoi réussi
                     inputs.forEach(input => {
                         input.classList.remove('valid', 'invalid');
                     });
                 } else {
-                    // Si invalide, scroll au premier champ invalide
                     const firstInvalid = document.querySelector('.contact-form .invalid');
                     if (firstInvalid) {
                         firstInvalid.focus();
@@ -743,31 +1022,30 @@
 
             galleryItems.forEach(item => {
                 item.addEventListener('keypress', (e) => {
-                    // Active les effets de survol/focus au "Enter" pour l'accessibilité
                     if (e.key === 'Enter') {
-                        item.focus(); // Assure que l'élément est focusable
-                        item.classList.toggle('focused'); // Ajoute une classe pour gérer l'état
+                        item.focus();
+                        item.classList.toggle('focused');
                     }
                 });
                 item.addEventListener('blur', () => {
-                    item.classList.remove('focused'); // Retire la classe au blur
+                    item.classList.remove('focused');
                 });
             });
 
             // 5. Observer pour les animations d'apparition au scroll
-            const animatedElements = document.querySelectorAll('.section-title, .section-description, .card, .gallery-item, .plat-item, .form-group, footer');
+            const animatedElements = document.querySelectorAll('.section-title, .section-description, .card, .gallery-item, .plat-item, .form-group, footer, #about .about-content');
 
             const animateObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.style.opacity = '1';
                         entry.target.style.transform = 'translateY(0)';
-                        animateObserver.unobserve(entry.target); // Arrête d'observer une fois animé
+                        animateObserver.unobserve(entry.target);
                     }
                 });
             }, {
                 rootMargin: '0px',
-                threshold: 0.1 // Déclenche l'animation quand 10% de l'élément est visible
+                threshold: 0.1
             });
 
             animatedElements.forEach(el => animateObserver.observe(el));
