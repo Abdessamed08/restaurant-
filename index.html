@@ -3,48 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>miro.restaurant | Art & Gastronomie</title>
+    <title>miro.restaurant | L'Art & la Gastronomie</title>
+    <meta name="description" content="Découvrez miro.restaurant, une expérience gastronomique unique à Alger. Un restaurant où l'art, le chic et le luxe se rencontrent.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    
+    <link rel="preload" href="https://fonts.gstatic.com/s/playfairdisplay/v30/2hLAuH-Cthh7h4E6iXg0jA.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHJzK_Lg.woff2" as="font" type="font/woff2" crossorigin>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLwFj92xV2u+t4I1fXb6M0Xb9I4N0Q2FhK4x2I7A9X5u6cW5aB7H6o05i5k5Xk4Cq5O8xM5A6q9Vq3E2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         /* --- 1. Variables et Styles de base --- */
         :root {
-            --primary-color: #d4af7f;
-            --secondary-color: #f4f4f4;
-            --dark-color: #1a1a1a;
-            --darker-color: #111;
-            --text-color: #e0e0e0;
-
-            --font-display: 'Playfair Display', serif;
-            --font-body: 'Montserrat', sans-serif;
+            --primary-color: #d4af7f; /* Or, couleur principale */
+            --secondary-color: #f4f4f4; /* Blanc cassé, texte clair */
+            --dark-color: #1a1a1a; /* Noir très foncé, fond principal */
+            --darker-color: #0d0d0d; /* Noir absolu, pour la navigation et le footer */
+            --text-color: #e0e0e0; /* Gris clair, texte secondaire */
+            --font-display: 'Playfair Display', serif; /* Police pour les titres, élégante */
+            --font-body: 'Montserrat', sans-serif; /* Police pour le corps, moderne */
+            --transition-duration: 0.3s; /* Durée standard pour les transitions */
+            --artistic-bg-texture: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="p" width="100" height="100" patternUnits="userSpaceOnUse"><path data-name="path174" d="m15.539 74.461c-3.138-1.78-6.17-3.951-8.9-6.495c-2.731-2.544-5.183-5.462-7.3-8.681c-2.116-3.22-3.83-6.702-5.13-10.375c-1.299-3.674-2.1-7.5-2.39-11.383c-0.29-3.884-0.1-7.8-0.08-11.7c0.016-3.896-0.081-7.8-0.45-11.666c-0.37-3.866-1-7.7-1.89-11.411c-0.89-3.712-2.07-7.2-3.56-10.428l-0.08 0.08z" fill="%23222" opacity="0.1"/><path data-name="path175" d="m84.461 25.539c3.138 1.78 6.17 3.951 8.9 6.495c2.731 2.544 5.183 5.462 7.3 8.681c2.116 3.22 3.83 6.702 5.13 10.375c1.299 3.674 2.1 7.5 2.39 11.383c0.29 3.884 0.1 7.8 0.08 11.7c-0.016 3.896 0.081 7.8 0.45 11.666c0.37 3.866 1 7.7 1.89 11.411c0.89 3.712 2.07 7.2 3.56 10.428l0.08-0.08z" fill="%23222" opacity="0.1" transform="rotate(180 50 50)"/></pattern></defs><rect width="100" height="100" fill="url(%23p)"/></svg>');
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        /* Styles de réinitialisation et de base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: var(--font-body);
             background-color: var(--dark-color);
             color: var(--secondary-color);
             line-height: 1.8;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-text-size-adjust: 100%;
+            /* Touche artistique: Arrière-plan texturé subtil */
+            background-image: var(--artistic-bg-texture);
+            background-repeat: repeat;
+            background-size: 50px 50px; /* Taille du motif */
+            background-blend-mode: multiply; /* Rend le motif plus subtil */
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
+        a { text-decoration: none; color: inherit; }
+        ::selection { background: var(--primary-color); color: var(--darker-color); }
+
+        /* Animations de base */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* --- 2. Header - Section d'introduction --- */
@@ -57,21 +69,21 @@
             text-align: center;
             color: var(--secondary-color);
         }
-        
-        /* Styles pour l'image de fond */
-        .header-bg-picture,
+
         .header-bg-img {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             z-index: 1;
+            filter: brightness(0.6) blur(3px); /* Effet plus artistique au départ */
+            transition: filter 1.5s ease-in-out;
         }
-
-        .header-bg-img {
-            filter: brightness(0.7);
+        
+        .header-bg-img.loaded {
+            filter: brightness(0.6) blur(0); /* Moins de flou une fois chargé */
         }
 
         .header-overlay {
@@ -80,7 +92,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.5), var(--dark-color));
+            background: linear-gradient(rgba(0,0,0,0.6), var(--dark-color) 70%); /* Dégradé plus prononcé */
             z-index: 2;
         }
 
@@ -88,83 +100,144 @@
             position: relative;
             z-index: 3;
             padding: 20px;
+            animation: fadeIn 2s ease-out forwards; /* Animation plus douce */
         }
 
         .header-content h1 {
             font-family: var(--font-display);
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-size: clamp(2.8rem, 9vw, 6rem); /* Taille plus grande pour un impact artistique */
             font-weight: 700;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 4px; /* Espacement plus grand */
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+            /* Touche artistique: Dégradé de texte subtil */
+            background: linear-gradient(45deg, var(--primary-color), #f7e0c4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .header-content p {
-            font-size: clamp(1rem, 3vw, 1.5rem);
+            font-size: clamp(1.1rem, 3.5vw, 1.8rem);
             font-style: italic;
             color: var(--primary-color);
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+            letter-spacing: 1px;
         }
 
-        .btn-primary {
+        .btn {
             display: inline-block;
-            padding: 15px 40px;
-            margin-top: 30px;
+            padding: 16px 45px;
+            margin-top: 40px;
             background-color: var(--primary-color);
             color: var(--darker-color);
             text-transform: uppercase;
-            font-weight: 600;
-            border-radius: 5px;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            font-weight: 700; /* Plus gras */
+            border-radius: 8px; /* Bords légèrement plus arrondis */
+            transition: transform var(--transition-duration) ease, background-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Ombre pour la profondeur */
+            letter-spacing: 0.5px;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            background-color: #b08c53;
+        .btn:hover, .btn:focus {
+            transform: translateY(-5px) scale(1.02); /* Effet plus prononcé */
+            background-color: #c09d6b; /* Teinte légèrement différente au survol */
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
         }
 
         /* --- 3. Navigation --- */
         nav {
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 100;
             display: flex;
             justify-content: center;
             background-color: var(--darker-color);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Ombre plus profonde */
+            border-bottom: 1px solid #333; /* Ligne subtile */
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            padding: 0;
+            margin: 0;
         }
 
         nav a {
             padding: 20px 30px;
             font-weight: 600;
             text-transform: uppercase;
-            transition: background 0.3s ease, color 0.3s ease;
+            transition: background var(--transition-duration) ease, color var(--transition-duration) ease, transform var(--transition-duration) ease;
+            display: block;
+            position: relative; /* Pour l'effet underscore */
+            overflow: hidden;
         }
 
-        nav a:hover, nav a:focus {
+        nav a::before { /* Ligne du dessous artistique */
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
             background-color: var(--primary-color);
-            color: var(--darker-color);
+            transform: translateX(-100%);
+            transition: transform var(--transition-duration) ease-out;
+        }
+
+        nav a:hover::before, nav a:focus::before, nav a.active::before {
+            transform: translateX(0);
+        }
+
+        nav a:hover, nav a:focus, nav a.active {
+            background-color: rgba(212, 175, 127, 0.1); /* Survol plus subtil */
+            color: var(--primary-color);
+            transform: translateY(-2px); /* Léger mouvement */
         }
 
         /* --- 4. Sections principales --- */
         section {
-            padding: 80px 20px;
+            padding: 100px 20px; /* Plus d'espacement */
             text-align: center;
+            position: relative;
         }
 
-        section h2 {
+        .section-title {
             font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
             color: var(--primary-color);
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             font-weight: 700;
+            position: relative;
+            display: inline-block; /* Pour centrer le pseudo-élément */
+            padding-bottom: 15px; /* Espace pour le trait */
+            opacity: 0; /* Pour l'animation d'apparition */
+            transform: translateY(20px);
+            animation: slideInUp 1s ease-out forwards;
         }
 
-        section p {
+        .section-title::after { /* Touche artistique: Ligne décorative sous le titre */
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background-color: var(--primary-color);
+            box-shadow: 0 0 8px var(--primary-color);
+        }
+
+        .section-description {
             max-width: 800px;
-            margin: 0 auto 25px auto;
-            font-size: clamp(1rem, 2vw, 1.1rem);
+            margin: 0 auto 40px auto; /* Plus d'espace */
+            font-size: clamp(1rem, 2vw, 1.15rem);
             color: var(--text-color);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideInUp 1s ease-out 0.3s forwards; /* Délai pour après le titre */
         }
 
         /* --- 5. Cartes d'information --- */
@@ -172,80 +245,118 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 25px;
-            margin-top: 40px;
+            gap: 30px; /* Plus d'espace */
+            margin-top: 50px;
         }
 
         .card {
-            background-color: #222;
+            background-color: #1e1e1e; /* Fond légèrement plus clair que le dark-color */
             border-radius: 15px;
-            padding: 30px;
-            width: clamp(250px, 90%, 350px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            padding: 35px; /* Plus de padding */
+            width: clamp(280px, 90%, 380px); /* Taille légèrement ajustée */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6); /* Ombre plus prononcée */
+            transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease, background-color var(--transition-duration) ease;
             text-align: left;
+            border: 1px solid rgba(212, 175, 127, 0.2); /* Bordure subtile */
+            opacity: 0;
+            animation: slideInUp 0.8s ease-out forwards; /* Animation d'apparition */
         }
-        
+        /* Délai pour l'animation des cartes */
+        .info-cards .card:nth-child(1) { animation-delay: 0.2s; }
+        .info-cards .card:nth-child(2) { animation-delay: 0.4s; }
+        .info-cards .card:nth-child(3) { animation-delay: 0.6s; }
+        .info-cards .card:nth-child(4) { animation-delay: 0.8s; }
+        .info-cards .card:nth-child(5) { animation-delay: 1s; }
+
         @media (min-width: 769px) {
             .card:hover {
-                transform: translateY(-8px);
-                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+                transform: translateY(-10px) scale(1.01);
+                box-shadow: 0 18px 45px rgba(0, 0, 0, 0.8);
+                background-color: #252525; /* Changement de couleur au survol */
             }
-        }
-
-        .card i {
-            color: var(--primary-color);
-            font-size: 2rem;
-            margin-bottom: 15px;
         }
 
         .card h3 {
             color: var(--primary-color);
-            margin-bottom: 15px;
-            font-size: clamp(1.3rem, 3vw, 1.5rem);
+            margin-bottom: 12px;
+            font-size: clamp(1.4rem, 3.5vw, 1.7rem);
             font-family: var(--font-display);
+            letter-spacing: 0.5px;
         }
 
         .card p {
             color: #ccc;
             font-size: clamp(1rem, 2vw, 1.1rem);
             margin: 0;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        /* --- 6. Galerie et Plats --- */
+        .card-icon i {
+            color: var(--primary-color);
+            font-size: 2.2rem; /* Icônes plus grandes */
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 5px rgba(212, 175, 127, 0.5)); /* Ombre sur l'icône */
+        }
+
+        .contact-link {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+        .contact-link:hover {
+            color: #c09d6b;
+        }
+
+        /* --- 6. Galerie et Plats (Grille) --- */
         .gallery, .plats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Taille min légèrement augmentée */
+            gap: 25px; /* Plus d'espace */
             justify-items: center;
-            margin-top: 40px;
+            margin-top: 50px;
         }
 
         .gallery-item, .plat-item {
             position: relative;
             overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease;
+            border-radius: 18px; /* Bords plus arrondis */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            transition: transform 0.4s ease-out, box-shadow 0.4s ease-out; /* Transitions plus douces */
+            cursor: pointer;
+            border: 2px solid transparent; /* Bordure transparente pour effet au survol */
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideInUp 0.8s ease-out forwards;
         }
+        /* Délai d'animation pour les éléments de la galerie */
+        .gallery-item:nth-child(1), .plat-item:nth-child(1) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(2), .plat-item:nth-child(2) { animation-delay: 0.3s; }
+        .gallery-item:nth-child(3), .plat-item:nth-child(3) { animation-delay: 0.4s; }
+        .gallery-item:nth-child(4), .plat-item:nth-child(4) { animation-delay: 0.5s; }
+        .gallery-item:nth-child(5), .plat-item:nth-child(5) { animation-delay: 0.6s; }
+        .gallery-item:nth-child(6), .plat-item:nth-child(6) { animation-delay: 0.7s; }
+        .gallery-item:nth-child(7), .plat-item:nth-child(7) { animation-delay: 0.8s; }
+        .gallery-item:nth-child(8), .plat-item:nth-child(8) { animation-delay: 0.9s; }
 
-        .gallery-item:hover, .plat-item:hover {
-            transform: scale(1.05);
+
+        .gallery-item:hover, .plat-item:hover,
+        .gallery-item:focus, .plat-item:focus {
+            transform: scale(1.07); /* Zoom plus grand */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--primary-color); /* Bordure artistique au survol */
+            outline: none;
         }
 
         .gallery-item img, .plat-item img {
             width: 100%;
-            height: 100%;
+            height: 250px; /* Hauteur fixe pour une uniformité */
             object-fit: cover;
             display: block;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease; /* Transition de zoom plus lente */
         }
         
-        .gallery-item:hover img, .plat-item:hover img {
-            transform: scale(1.1);
+        .gallery-item:hover img, .plat-item:hover img,
+        .gallery-item:focus img, .plat-item:focus img {
+            transform: scale(1.15); /* Zoom plus grand pour l'image */
         }
 
         .item-caption {
@@ -253,21 +364,26 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(0,0,0,0.7);
+            background-color: rgba(0,0,0,0.85); /* Fond plus opaque */
             color: var(--secondary-color);
-            padding: 10px;
-            font-size: 0.9rem;
+            padding: 12px; /* Plus de padding */
+            font-size: 1rem;
             transform: translateY(100%);
-            transition: transform 0.3s ease;
+            transition: transform var(--transition-duration) ease;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
-        .gallery-item:hover .item-caption, .plat-item:hover .item-caption {
+        .gallery-item:hover .item-caption, .plat-item:hover .item-caption,
+        .gallery-item:focus .item-caption, .plat-item:focus .item-caption {
             transform: translateY(0);
         }
 
         /* --- 7. Formulaire de Contact --- */
         #contact {
             background-color: var(--darker-color);
+            padding-bottom: 100px;
         }
 
         .contact-form {
@@ -276,46 +392,72 @@
             align-items: center;
             max-width: 600px;
             margin: 0 auto;
-            gap: 15px;
+            gap: 25px; /* Plus d'espace */
+        }
+
+        .form-group {
+            width: 100%;
+            position: relative;
+            animation: slideInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        /* Délai pour l'animation des champs */
+        .form-group:nth-child(1) { animation-delay: 0.2s; }
+        .form-group:nth-child(2) { animation-delay: 0.4s; }
+        .form-group:nth-child(3) { animation-delay: 0.6s; }
+        .contact-form .btn-primary { animation-delay: 0.8s; }
+
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700; /* Plus gras */
+            color: var(--primary-color);
+            text-align: left;
+            font-size: 1.1rem;
         }
 
         form input, form textarea {
-            padding: 12px;
+            padding: 14px; /* Plus de padding */
             width: 100%;
-            border-radius: 8px;
-            border: none;
-            background-color: #333;
+            border-radius: 10px; /* Bords plus arrondis */
+            border: 1px solid #555; /* Bordure plus visible */
+            background-color: #2a2a2a;
             color: var(--secondary-color);
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-family: var(--font-body);
-            transition: outline 0.3s ease;
+            transition: border-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease, background-color var(--transition-duration) ease;
         }
 
         form input::placeholder, form textarea::placeholder {
-            color: #aaa;
+            color: #999;
+            font-style: italic; /* Placeholders stylisés */
         }
 
         form input:focus, form textarea:focus {
-            outline: 2px solid var(--primary-color);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(212, 175, 127, 0.6); /* Ombre plus intense */
+            background-color: #333; /* Légèrement plus clair au focus */
+            outline: none;
         }
 
-        form button {
-            padding: 15px 40px;
-            background-color: var(--primary-color);
-            color: var(--darker-color);
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: background 0.3s ease, transform 0.3s ease;
-            width: 100%;
-            margin-top: 10px;
+        form input.invalid, form textarea.invalid {
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.6);
         }
 
-        form button:hover, form button:focus {
-            background-color: #b08c53;
-            transform: translateY(-3px);
+        form input.valid, form textarea.valid {
+            border-color: #2ecc71;
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.6);
+        }
+
+        .error-message {
+            font-size: 0.85rem;
+            color: #e74c3c;
+            margin-top: 5px;
+            display: block;
+            min-height: 20px;
+            text-align: left;
         }
 
         /* --- 8. Footer --- */
@@ -323,178 +465,312 @@
             background-color: var(--darker-color);
             color: var(--primary-color);
             text-align: center;
-            padding: 30px 20px;
+            padding: 40px 20px; /* Plus de padding */
             font-size: 0.95rem;
-            border-top: 1px solid #333;
+            border-top: 1px solid #222;
+            letter-spacing: 0.5px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1s forwards; /* Animation d'apparition */
         }
     </style>
 </head>
 <body>
 
-    <header>
+    <header role="banner">
         <picture>
-            <source media="(max-width: 768px)" srcset="images/image1-mobile.jpg">
-            <img src="images/image1.webp" alt="Intérieur du Miro Restaurant" class="header-bg-img">
+            <source media="(max-width: 768px)" srcset="images/image1-mobile.webp" type="image/webp">
+            <img src="images/image1.webp" alt="Intérieur élégant et chaleureux du Miro Restaurant" class="header-bg-img">
         </picture>
         <div class="header-overlay"></div>
         <div class="header-content">
             <h1>miro.restaurant</h1>
             <p>Art, Chic & Luxe – Une expérience gastronomique unique</p>
-            <a href="https://votre-site-de-reservation.com" target="_blank" class="btn-primary">Réserver une table</a>
+            <a href="https://votre-site-de-reservation.com" target="_blank" class="btn btn-primary" rel="noopener noreferrer">Réserver une table</a>
         </div>
     </header>
 
-    <nav aria-label="Navigation principale">
-        <a href="#about">À propos</a>
-        <a href="#info">Informations</a>
-        <a href="#gallery">Galerie</a>
-        <a href="#plats">Nos plats</a>
-        <a href="#contact">Contact</a>
+    <nav role="navigation" aria-label="Navigation principale">
+        <ul>
+            <li><a href="#about">À propos</a></li>
+            <li><a href="#info">Informations</a></li>
+            <li><a href="#gallery">Galerie</a></li>
+            <li><a href="#plats">Nos plats</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
 
-    <main>
-        <section id="about">
-            <h2>À propos de nous</h2>
-            <p>Bienvenue chez **miro.restaurant**, un lieu où le luxe rencontre l'art culinaire. Profitez de nos espaces élégants : salle, bar, jardin, lounge et rooftop, pour un moment inoubliable en famille ou entre amis.</p>
+    <main role="main">
+        <section id="about" aria-labelledby="about-heading">
+            <h2 id="about-heading" class="section-title">À propos de nous</h2>
+            <p class="section-description">Bienvenue chez miro.restaurant, un lieu où le luxe rencontre l'art culinaire. Profitez de nos espaces élégants : salle, bar, jardin, lounge et rooftop, pour un moment inoubliable en famille ou entre amis.</p>
         </section>
 
-        <section id="info">
-            <h2>Informations</h2>
-            <p>Découvrez nos horaires et comment nous trouver pour une expérience sans accroc.</p>
+        <section id="info" aria-labelledby="info-heading">
+            <h2 id="info-heading" class="section-title">Informations Pratiques</h2>
+            <p class="section-description">Découvrez nos horaires et comment nous trouver pour une expérience sans accroc.</p>
             <div class="info-cards">
-                <div class="card">
+                <div class="card card-icon">
                     <i class="fas fa-utensils"></i>
                     <h3>Déjeuner</h3>
                     <p>12H - 15H (sauf le Vendredi)</p>
                 </div>
-                <div class="card">
+                <div class="card card-icon">
                     <i class="fas fa-moon"></i>
                     <h3>Dîner</h3>
                     <p>19H - 02H</p>
                 </div>
-                <div class="card">
+                <div class="card card-icon">
                     <i class="fas fa-phone-alt"></i>
                     <h3>Contact</h3>
-                    <p><a href="tel:0560800700">0560-800-700</a></p>
+                    <p><a href="tel:0560800700" class="contact-link">0560-800-700</a></p>
                 </div>
-                <div class="card">
+                <div class="card card-icon">
                     <i class="fas fa-map-marker-alt"></i>
                     <h3>Adresse</h3>
                     <p>Bois des arcades, Alger</p>
                 </div>
-                <div class="card">
+                <div class="card card-icon">
                     <i class="fas fa-glass-cheers"></i>
                     <h3>Espaces</h3>
-                    <p>Salle, Bar, Jardin, Lounge, Rooftop – Familial</p>
+                    <p>Salle, Bar, Jardin, Lounge, Rooftop</p>
                 </div>
             </div>
         </section>
 
-        <section id="gallery">
-            <h2>Notre Galerie</h2>
-            <p>Explorez les images de notre restaurant et découvrez l'ambiance unique qui vous y attend.</p>
+        <section id="gallery" aria-labelledby="gallery-heading">
+            <h2 id="gallery-heading" class="section-title">Notre Galerie</h2>
+            <p class="section-description">Explorez les images de notre restaurant et découvrez l'ambiance unique qui vous y attend.</p>
             <div class="gallery">
-                <div class="gallery-item">
-                    <img src="images/image1.webp" alt="Intérieur du restaurant" loading="lazy">
-                    <div class="item-caption">Intérieur du restaurant</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/image2.webp" alt="Bar élégant" loading="lazy">
-                    <div class="item-caption">Notre bar élégant</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/image3.webp" alt="Vue du jardin" loading="lazy">
-                    <div class="item-caption">Vue du jardin</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/image4.webp" alt="Terrasse sur le toit" loading="lazy">
-                    <div class="item-caption">Terrasse sur le toit</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/image5.webp" alt="Salle à manger privée" loading="lazy">
-                    <div class="item-caption">Salle à manger privée</div>
-                </div>
+                <figure class="gallery-item" tabindex="0">
+                    <img src="images/image1.webp" alt="Intérieur du restaurant avec de larges baies vitrées" loading="lazy">
+                    <figcaption class="item-caption">Intérieur du restaurant</figcaption>
+                </figure>
+                <figure class="gallery-item" tabindex="0">
+                    <img src="images/image2.webp" alt="Notre bar élégant, prêt à accueillir les clients" loading="lazy">
+                    <figcaption class="item-caption">Notre bar élégant</figcaption>
+                </figure>
+                <figure class="gallery-item" tabindex="0">
+                    <img src="images/image3.webp" alt="Vue du jardin extérieur et de la terrasse" loading="lazy">
+                    <figcaption class="item-caption">Vue du jardin</figcaption>
+                </figure>
+                <figure class="gallery-item" tabindex="0">
+                    <img src="images/image4.webp" alt="Terrasse sur le toit offrant une vue panoramique" loading="lazy">
+                    <figcaption class="item-caption">Terrasse sur le toit</figcaption>
+                </figure>
+                <figure class="gallery-item" tabindex="0">
+                    <img src="images/image5.webp" alt="Salle à manger privée pour les événements spéciaux" loading="lazy">
+                    <figcaption class="item-caption">Salle à manger privée</figcaption>
+                </figure>
             </div>
         </section>
 
-        <section id="plats">
-            <h2>Nos Plats</h2>
-            <p>Découvrez une sélection de nos créations culinaires, préparées avec passion et des ingrédients de première qualité.</p>
+        <section id="plats" aria-labelledby="plats-heading">
+            <h2 id="plats-heading" class="section-title">Nos Plats Signature</h2>
+            <p class="section-description">Découvrez une sélection de nos créations culinaires, préparées avec passion et des ingrédients de première qualité.</p>
             <div class="plats">
-                <div class="plat-item">
-                    <img src="images/plat1.webp" alt="Salade fraîche" loading="lazy">
-                    <div class="item-caption">Salade fraîche</div>
-                </div>
-                <div class="plat-item">
+                <figure class="plat-item" tabindex="0">
+                    <img src="images/plat1.webp" alt="Salade fraîche et colorée" loading="lazy">
+                    <figcaption class="item-caption">Salade fraîche</figcaption>
+                </figure>
+                <figure class="plat-item" tabindex="0">
                     <img src="images/plat2.webp" alt="Pâtes aux fruits de mer" loading="lazy">
-                    <div class="item-caption">Pâtes aux fruits de mer</div>
-                </div>
-                <div class="plat-item">
-                    <img src="images/plat3.webp" alt="Viande grillée" loading="lazy">
-                    <div class="item-caption">Viande grillée</div>
-                </div>
-                <div class="plat-item">
-                    <img src="images/plat4.webp" alt="Dessert au chocolat" loading="lazy">
-                    <div class="item-caption">Dessert au chocolat</div>
-                </div>
-                <div class="plat-item">
-                    <img src="images/plat5.webp" alt="Plat de poisson" loading="lazy">
-                    <div class="item-caption">Plat de poisson</div>
-                </div>
-                <div class="plat-item">
-                    <img src="images/plat6.webp" alt="Cocktail fruité" loading="lazy">
-                    <div class="item-caption">Cocktail signature</div>
-                </div>
-                <div class="plat-item">
-                    <img src="images/plat7.webp" alt="Crème brûlée" loading="lazy">
-                    <div class="item-caption">Crème brûlée</div>
-                </div>
-                <div class="plat-item">
-                    <img src="images/plat8.webp" alt="Planche de fromage" loading="lazy">
-                    <div class="item-caption">Planche de fromages</div>
-                </div>
+                    <figcaption class="item-caption">Pâtes aux fruits de mer</figcaption>
+                </figure>
+                <figure class="plat-item" tabindex="0">
+                    <img src="images/plat3.webp" alt="Viande grillée avec accompagnement" loading="lazy">
+                    <figcaption class="item-caption">Viande grillée</figcaption>
+                </figure>
+                <figure class="plat-item" tabindex="0">
+                    <img src="images/plat4.webp" alt="Dessert au chocolat fondu" loading="lazy">
+                    <figcaption class="item-caption">Dessert au chocolat</figcaption>
+                </figure>
+                <figure class="plat-item" tabindex="0">
+                    <img src="images/plat5.webp" alt="Plat de poisson savoureux" loading="lazy">
+                    <figcaption class="item-caption">Plat de poisson</figcaption>
+                </figure>
+                <figure class="plat-item" tabindex="0">
+                    <img src="images/plat6.webp" alt="Cocktail fruité et rafraîchissant" loading="lazy">
+                    <figcaption class="item-caption">Cocktail signature</figcaption>
+                </figure>
+                <figure class="plat-item" tabindex="0">
+                    <img src="images/plat7.webp" alt="Crème brûlée avec sucre caramélisé" loading="lazy">
+                    <figcaption class="item-caption">Crème brûlée</figcaption>
+                </figure>
+                <figure class="plat-item" tabindex="0">
+                    <img src="images/plat8.webp" alt="Planche de fromages variés" loading="lazy">
+                    <figcaption class="item-caption">Planche de fromages</figcaption>
+                </figure>
             </div>
         </section>
 
-        <section id="contact">
-            <h2>Contactez-nous</h2>
-            <p>Envoyez-nous un message et nous vous répondrons rapidement. Pour une réservation, merci d'utiliser le lien ci-dessus.</p>
-            <form action="#" method="POST" class="contact-form">
-                <input type="text" name="name" placeholder="Votre nom" required>
-                <input type="email" name="email" placeholder="Votre email" required>
-                <textarea name="message" placeholder="Votre message" rows="5" required></textarea>
-                <button type="submit">Envoyer</button>
+        <section id="contact" aria-labelledby="contact-heading">
+            <h2 id="contact-heading" class="section-title">Contactez-nous</h2>
+            <p class="section-description">Envoyez-nous un message et nous vous répondrons rapidement. Pour une réservation, merci d'utiliser le lien ci-dessus.</p>
+            <form action="#" method="POST" class="contact-form" novalidate>
+                <div class="form-group">
+                    <label for="name">Votre nom</label>
+                    <input type="text" id="name" name="name" placeholder="John Doe" required>
+                    <span class="error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Votre email</label>
+                    <input type="email" id="email" name="email" placeholder="john.doe@exemple.com" required>
+                    <span class="error-message"></span>
+                </div>
+                <div class="form-group">
+                    <label for="message">Votre message</label>
+                    <textarea id="message" name="message" placeholder="Votre message..." rows="5" required></textarea>
+                    <span class="error-message"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Envoyer le message</button>
             </form>
         </section>
     </main>
 
-    <footer>
-        <p>© 2025 miro.restaurant – Tous droits réservés</p>
+    <footer role="contentinfo">
+        <p>&copy; 2025 miro.restaurant – Tous droits réservés. Design et développement par [Votre nom]</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. Optimisation du chargement d'image du header avec blur progressif
+            const headerImg = document.querySelector('.header-bg-img');
+            if (headerImg) {
+                if (headerImg.complete) {
+                    headerImg.classList.add('loaded');
+                } else {
+                    headerImg.addEventListener('load', () => {
+                        headerImg.classList.add('loaded');
+                    });
+                }
+            }
+
+            // 2. Gestion de la navigation active (highlight de la section courante)
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav ul li a');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5 // Active la navigation quand 50% de la section est visible
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const currentSectionId = entry.target.id;
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${currentSectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // 3. Validation de formulaire améliorée avec feedback en temps réel
             const form = document.querySelector('.contact-form');
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const inputs = form.querySelectorAll('input, textarea');
-                let isValid = true;
-                inputs.forEach(input => {
-                    if (!input.value.trim()) {
-                        isValid = false;
-                        input.style.outline = '2px solid red';
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const messageTextarea = document.getElementById('message');
+
+            const inputs = [nameInput, emailInput, messageTextarea];
+
+            // Fonction de validation individuelle d'un champ
+            const validateField = (input) => {
+                const errorMessage = input.parentElement.querySelector('.error-message');
+                if (input.validity.valid) {
+                    input.classList.remove('invalid');
+                    input.classList.add('valid');
+                    errorMessage.textContent = '';
+                } else {
+                    input.classList.remove('valid');
+                    input.classList.add('invalid');
+                    if (input.validity.valueMissing) {
+                        errorMessage.textContent = 'Ce champ est obligatoire.';
+                    } else if (input.validity.typeMismatch) {
+                        errorMessage.textContent = 'Veuillez entrer une adresse e-mail valide.';
                     } else {
-                        input.style.outline = 'none';
+                        errorMessage.textContent = 'Veuillez corriger ce champ.';
+                    }
+                }
+            };
+
+            // Écouteurs d'événements pour la validation en temps réel sur chaque champ
+            inputs.forEach(input => {
+                input.addEventListener('input', () => validateField(input));
+            });
+
+            // Écouteur d'événement pour la soumission du formulaire
+            form.addEventListener('submit', (e) => {
+                e.preventDefault(); // Empêche l'envoi par défaut du formulaire
+                let isFormValid = true;
+
+                inputs.forEach(input => {
+                    validateField(input); // Re-valide tous les champs avant de soumettre
+                    if (!input.validity.valid) {
+                        isFormValid = false;
                     }
                 });
 
-                if (isValid) {
-                    alert('Votre message a été envoyé avec succès !');
+                if (isFormValid) {
+                    // Si le formulaire est valide, simule l'envoi et réinitialise
+                    console.log('Formulaire valide, envoi des données...');
+                    alert('Votre message a été envoyé avec succès ! Merci de nous avoir contactés.');
                     form.reset();
+                    // Retirer les classes de validation visuelles après l'envoi réussi
+                    inputs.forEach(input => {
+                        input.classList.remove('valid', 'invalid');
+                    });
                 } else {
-                    alert('Veuillez remplir tous les champs obligatoires.');
+                    // Si invalide, scroll au premier champ invalide
+                    const firstInvalid = document.querySelector('.contact-form .invalid');
+                    if (firstInvalid) {
+                        firstInvalid.focus();
+                    }
+                    alert('Veuillez corriger les erreurs dans le formulaire avant d\'envoyer.');
                 }
             });
+
+            // 4. Gestion de l'accessibilité pour les éléments de galerie (interaction au clavier)
+            const galleryItems = document.querySelectorAll('.gallery-item, .plat-item');
+
+            galleryItems.forEach(item => {
+                item.addEventListener('keypress', (e) => {
+                    // Active les effets de survol/focus au "Enter" pour l'accessibilité
+                    if (e.key === 'Enter') {
+                        item.focus(); // Assure que l'élément est focusable
+                        item.classList.toggle('focused'); // Ajoute une classe pour gérer l'état
+                    }
+                });
+                item.addEventListener('blur', () => {
+                    item.classList.remove('focused'); // Retire la classe au blur
+                });
+            });
+
+            // 5. Observer pour les animations d'apparition au scroll
+            const animatedElements = document.querySelectorAll('.section-title, .section-description, .card, .gallery-item, .plat-item, .form-group, footer');
+
+            const animateObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        animateObserver.unobserve(entry.target); // Arrête d'observer une fois animé
+                    }
+                });
+            }, {
+                rootMargin: '0px',
+                threshold: 0.1 // Déclenche l'animation quand 10% de l'élément est visible
+            });
+
+            animatedElements.forEach(el => animateObserver.observe(el));
         });
     </script>
 </body>
