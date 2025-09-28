@@ -241,78 +241,99 @@
         }
         
         /* Style spécifique pour la section 'À propos de nous' avec vidéo en background */
+        /* Style pour la section "À propos de nous" (présentation) */
         #about {
             position: relative;
-            min-height: 100vh; /* Prend au moins toute la hauteur de la vue */
-            padding: 0; /* Pas de padding pour que la vidéo prenne toute la place */
+            padding: 80px 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden; /* Cache le débordement des vidéos */
-            background-color: var(--darker-color); /* Couleur de fallback */
-        }
-
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Recouvre toute la zone */
-            z-index: 1;
-            filter: brightness(0.7); /* Assombrit légèrement la vidéo */
-            opacity: 0; /* Masqué par défaut */
-            transition: opacity 1.5s ease-in-out; /* Transition douce entre les vidéos */
-        }
-
-        .video-background.playing {
-            opacity: 1; /* Affiche la vidéo active */
-        }
-
-        .video-overlay { /* Overlay pour améliorer la lisibilité du texte */
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6); /* Fond semi-transparent foncé */
-            z-index: 2;
+            background-color: var(--darker-color);
+            color: var(--light-color);
+            text-align: center;
+            min-height: 40vh;
         }
 
         #about .about-content {
-            position: relative;
-            z-index: 3; /* S'assure que le contenu est au-dessus de la vidéo et de l'overlay */
             max-width: 800px;
-            padding: 40px; /* Plus de padding */
-            background-color: rgba(0, 0, 0, 0.75); /* Fond plus opaque pour le texte */
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.5);
             border-radius: 15px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.9); /* Ombre plus intense */
+            box-shadow: 0 0 30px rgba(0,0,0,0.9);
             text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 1.5s ease-out forwards;
-            animation-delay: 1s; /* Délai pour l'apparition du contenu */
-            border: 1px solid var(--primary-color); /* Bordure artistique */
+            border: 1px solid var(--primary-color);
         }
 
-        #about .about-content .section-title {
-            animation: none; /* Désactive l'animation par défaut pour le titre ici */
-            opacity: 1;
-            transform: translateY(0);
-        }
-        #about .about-content .section-description {
-            animation: none; /* Désactive l'animation par défaut pour la description ici */
-            opacity: 1;
-            transform: translateY(0);
-        }
-        /* Assure que les animations sont appliquées via le parent .about-content */
-        #about .about-content .section-title {
-            animation-delay: 1.2s; /* Délai pour que le titre apparaisse après le conteneur */
-        }
-        #about .about-content .section-description {
-            animation-delay: 1.5s; /* Délai pour que la description apparaisse après le titre */
+        /* Style pour la nouvelle section de cartes vidéo */
+        .video-cards-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 50px 20px;
+            background-color: var(--darker-color);
         }
 
+        /* Style pour chaque carte vidéo */
+        .video-card {
+            position: relative;
+            width: 100%;
+            max-width: 350px;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Vidéo en arrière-plan de chaque carte */
+        .card-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            filter: brightness(0.7);
+            transition: filter 0.3s ease;
+        }
+
+        /* Contenu de la carte (titre et texte) */
+        .video-card-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .video-card-content h4 {
+            margin-top: auto;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .video-card-content p {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+
+        /* Effets au survol */
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .video-card:hover .card-video {
+            filter: brightness(1.0);
+        }
 
         /* --- 5. Cartes d'information --- */
         .info-cards {
@@ -602,25 +623,52 @@
     </nav>
 
     <main role="main">
-        <section id="about" aria-labelledby="about-heading">
-            <video class="video-background" id="video1" autoplay muted loop playsinline>
-                <source src="images/video1.mp4" type="video/mp4">
-                Votre navigateur ne supporte pas les vidéos HTML5.
-            </video>
-            <video class="video-background" id="video2" muted loop playsinline>
-                <source src="images/video2.mp4" type="video/mp4">
-                Votre navigateur ne supporte pas les vidéos HTML5.
-            </video>
-            <video class="video-background" id="video3" muted loop playsinline>
-                <source src="images/video3.mp4" type="video/mp4">
-                Votre navigateur ne supporte pas les vidéos HTML5.
-            </video>
-            <div class="video-overlay"></div>
-            <div class="about-content">
-                <h2 id="about-heading" class="section-title">À propos de nous</h2>
-                <p class="section-description">Bienvenue chez miro.restaurant, un lieu où le luxe rencontre l'art culinaire. Profitez de nos espaces élégants : salle, bar, jardin, lounge et rooftop, pour un moment inoubliable en famille ou entre amis.</p>
-            </div>
-        </section>
+        <main role="main">
+            <section id="about" aria-labelledby="about-heading">
+                <div class="about-content">
+                    <h2 id="about-heading" class="section-title">À propos de nous</h2>
+                    <p class="section-description">Bienvenue chez miro.restaurant, un lieu où le luxe rencontre l'art culinaire. Profitez de nos espaces élégants : salle, bar, jardin, lounge et rooftop, pour un moment inoubliable en famille ou entre amis.</p>
+                </div>
+            </section>
+
+            <section class="video-cards-container">
+                <div class="video-card">
+                    <video class="card-video" id="video1" autoplay muted loop playsinline>
+                        <source src="images/video1.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas les vidéos HTML5.
+                    </video>
+                    <div class="video-card-content">
+                        <h4>La salle</h4>
+                        <p>Découvrez notre espace principal pour une expérience culinaire raffinée.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <video class="card-video" id="video2" autoplay muted loop playsinline>
+                        <source src="images/video2.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas les vidéos HTML5.
+                    </video>
+                    <div class="video-card-content">
+                        <h4>Le Bar & Lounge</h4>
+                        <p>L'endroit idéal pour déguster un cocktail dans une ambiance décontractée.</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <video class="card-video" id="video3" autoplay muted loop playsinline>
+                        <source src="images/video3.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas les vidéos HTML5.
+                    </video>
+                    <div class="video-card-content">
+                        <h4>Le Jardin & Rooftop</h4>
+                        <p>Un havre de paix en plein air pour des moments magiques sous le ciel.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+</body>
+</html>
 
         <section id="info" aria-labelledby="info-heading">
             <h2 id="info-heading" class="section-title">Informations Pratiques</h2>
