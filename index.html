@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.gstatic.com/s/playfairdisplay/v30/2hLAuH-Cthh7h4E6iXg0jA.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="https://fonts.gstatic.com/s/montserrat/v25/JTUSjIg1_i6t8kCHJzK_Lg.woff2" as="font" type="font/woff2" crossorigin>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLwFj92xV2u+t4I1fXb6M0Xb9I4N0Q2FhK4x2I7A9X5u6cW5aB7H6o05i5k5Xk4Cq5O8xM5A6q9Vq3E2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
@@ -39,11 +38,10 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             -webkit-text-size-adjust: 100%;
-            /* Touche artistique: Arrière-plan texturé subtil */
             background-image: var(--artistic-bg-texture);
             background-repeat: repeat;
-            background-size: 50px 50px; /* Taille du motif */
-            background-blend-mode: multiply; /* Rend le motif plus subtil */
+            background-size: 50px 50px;
+            background-blend-mode: multiply;
         }
 
         a { text-decoration: none; color: inherit; }
@@ -78,12 +76,12 @@
             height: 100%;
             object-fit: cover;
             z-index: 1;
-            filter: brightness(0.6) blur(3px); /* Effet plus artistique au départ */
+            filter: brightness(0.6) blur(3px);
             transition: filter 1.5s ease-in-out;
         }
         
         .header-bg-img.loaded {
-            filter: brightness(0.6) blur(0); /* Moins de flou une fois chargé */
+            filter: brightness(0.6) blur(0);
         }
 
         .header-overlay {
@@ -92,7 +90,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.6), var(--dark-color) 70%); /* Dégradé plus prononcé */
+            background: linear-gradient(rgba(0,0,0,0.6), var(--dark-color) 70%);
             z-index: 2;
         }
 
@@ -100,17 +98,16 @@
             position: relative;
             z-index: 3;
             padding: 20px;
-            animation: fadeIn 2s ease-out forwards; /* Animation plus douce */
+            animation: fadeIn 2s ease-out forwards;
         }
 
         .header-content h1 {
             font-family: var(--font-display);
-            font-size: clamp(2.8rem, 9vw, 6rem); /* Taille plus grande pour un impact artistique */
+            font-size: clamp(2.8rem, 9vw, 6rem);
             font-weight: 700;
-            letter-spacing: 4px; /* Espacement plus grand */
+            letter-spacing: 4px;
             margin-bottom: 20px;
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
-            /* Touche artistique: Dégradé de texte subtil */
             background: linear-gradient(45deg, var(--primary-color), #f7e0c4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -131,18 +128,18 @@
             background-color: var(--primary-color);
             color: var(--darker-color);
             text-transform: uppercase;
-            font-weight: 700; /* Plus gras */
-            border-radius: 8px; /* Bords légèrement plus arrondis */
+            font-weight: 700;
+            border-radius: 8px;
             transition: transform var(--transition-duration) ease, background-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Ombre pour la profondeur */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
             letter-spacing: 0.5px;
         }
 
         .btn:hover, .btn:focus {
-            transform: translateY(-5px) scale(1.02); /* Effet plus prononcé */
-            background-color: #c09d6b; /* Teinte légèrement différente au survol */
+            transform: translateY(-5px) scale(1.02);
+            background-color: #c09d6b;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
         }
 
@@ -154,8 +151,8 @@
             display: flex;
             justify-content: center;
             background-color: var(--darker-color);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Ombre plus profonde */
-            border-bottom: 1px solid #333; /* Ligne subtile */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid #333;
         }
         
         nav ul {
@@ -171,11 +168,11 @@
             text-transform: uppercase;
             transition: background var(--transition-duration) ease, color var(--transition-duration) ease, transform var(--transition-duration) ease;
             display: block;
-            position: relative; /* Pour l'effet underscore */
+            position: relative;
             overflow: hidden;
         }
 
-        nav a::before { /* Ligne du dessous artistique */
+        nav a::before {
             content: '';
             position: absolute;
             bottom: 0;
@@ -192,14 +189,70 @@
         }
 
         nav a:hover, nav a:focus, nav a.active {
-            background-color: rgba(212, 175, 127, 0.1); /* Survol plus subtil */
+            background-color: rgba(212, 175, 127, 0.1);
             color: var(--primary-color);
-            transform: translateY(-2px); /* Léger mouvement */
+            transform: translateY(-2px);
+        }
+        
+        /* Menu Hamburger pour mobile */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            padding: 20px;
+            z-index: 200;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+        }
+        .hamburger .bar {
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        @media (max-width: 768px) {
+            nav {
+                justify-content: space-between;
+                padding: 0 20px;
+            }
+            .hamburger {
+                display: flex;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--darker-color);
+                border-top: 1px solid #333;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+                transition: transform 0.3s ease;
+                transform: translateY(-100%);
+            }
+            nav ul.active {
+                display: flex;
+                transform: translateY(0);
+            }
+            nav ul li {
+                width: 100%;
+                text-align: center;
+            }
+            nav ul li a {
+                padding: 15px 0;
+                width: 100%;
+                border-bottom: 1px solid #222;
+            }
+            .hamburger.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
         }
 
         /* --- 4. Sections principales --- */
         section {
-            padding: 100px 20px; /* Plus d'espacement */
+            padding: 100px 20px;
             text-align: center;
             position: relative;
         }
@@ -211,14 +264,14 @@
             margin-bottom: 30px;
             font-weight: 700;
             position: relative;
-            display: inline-block; /* Pour centrer le pseudo-élément */
-            padding-bottom: 15px; /* Espace pour le trait */
-            opacity: 0; /* Pour l'animation d'apparition */
+            display: inline-block;
+            padding-bottom: 15px;
+            opacity: 0;
             transform: translateY(20px);
             animation: slideInUp 1s ease-out forwards;
         }
 
-        .section-title::after { /* Touche artistique: Ligne décorative sous le titre */
+        .section-title::after {
             content: '';
             position: absolute;
             left: 50%;
@@ -232,16 +285,14 @@
 
         .section-description {
             max-width: 800px;
-            margin: 0 auto 40px auto; /* Plus d'espace */
+            margin: 0 auto 40px auto;
             font-size: clamp(1rem, 2vw, 1.15rem);
             color: var(--text-color);
             opacity: 0;
             transform: translateY(20px);
-            animation: slideInUp 1s ease-out 0.3s forwards; /* Délai pour après le titre */
+            animation: slideInUp 1s ease-out 0.3s forwards;
         }
         
-        /* Style spécifique pour la section 'À propos de nous' avec vidéo en background */
-        /* Style pour la section "À propos de nous" (présentation) */
         #about {
             position: relative;
             padding: 80px 20px;
@@ -253,7 +304,6 @@
             text-align: center;
             min-height: 40vh;
         }
-
         #about .about-content {
             max-width: 800px;
             padding: 40px;
@@ -264,7 +314,6 @@
             border: 1px solid var(--primary-color);
         }
 
-        /* Style pour la nouvelle section de cartes vidéo */
         .video-cards-container {
             display: flex;
             justify-content: center;
@@ -274,7 +323,6 @@
             background-color: var(--darker-color);
         }
 
-        /* Style pour chaque carte vidéo */
         .video-card {
             position: relative;
             width: 100%;
@@ -285,8 +333,6 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        /* Vidéo en arrière-plan de chaque carte */
         .card-video {
             position: absolute;
             top: 0;
@@ -298,8 +344,6 @@
             filter: brightness(0.7);
             transition: filter 0.3s ease;
         }
-
-        /* Contenu de la carte (titre et texte) */
         .video-card-content {
             position: relative;
             z-index: 2;
@@ -312,51 +356,56 @@
             flex-direction: column;
             justify-content: flex-end;
         }
-
         .video-card-content h4 {
             margin-top: auto;
             margin-bottom: 10px;
             font-size: 1.8rem;
             color: var(--primary-color);
         }
-
         .video-card-content p {
             font-size: 1rem;
             margin-bottom: 0;
         }
-
-        /* Effets au survol */
         .video-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
         }
-
         .video-card:hover .card-video {
             filter: brightness(1.0);
         }
+        /* Amélioration pour mobile: Vidéos s'affichent en grille sur les petits écrans */
+        @media (max-width: 768px) {
+            .video-cards-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .video-card {
+                height: 300px; /* Hauteur réduite pour mobile */
+            }
+        }
+
 
         /* --- 5. Cartes d'information --- */
         .info-cards {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px; /* Plus d'espace */
+            gap: 30px;
             margin-top: 50px;
         }
 
         .card {
-            background-color: #1e1e1e; /* Fond légèrement plus clair que le dark-color */
+            background-color: #1e1e1e;
             border-radius: 15px;
-            padding: 35px; /* Plus de padding */
-            width: clamp(280px, 90%, 380px); /* Taille légèrement ajustée */
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6); /* Ombre plus prononcée */
+            padding: 35px;
+            width: clamp(280px, 90%, 380px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
             transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease, background-color var(--transition-duration) ease;
             text-align: left;
-            border: 1px solid rgba(212, 175, 127, 0.2); /* Bordure subtile */
+            border: 1px solid rgba(212, 175, 127, 0.2);
             opacity: 0;
-            animation: slideInUp 0.8s ease-out forwards; /* Animation d'apparition */
+            animation: slideInUp 0.8s ease-out forwards;
         }
-        /* Délai pour l'animation des cartes */
         .info-cards .card:nth-child(1) { animation-delay: 0.2s; }
         .info-cards .card:nth-child(2) { animation-delay: 0.4s; }
         .info-cards .card:nth-child(3) { animation-delay: 0.6s; }
@@ -367,9 +416,15 @@
             .card:hover {
                 transform: translateY(-10px) scale(1.01);
                 box-shadow: 0 18px 45px rgba(0, 0, 0, 0.8);
-                background-color: #252525; /* Changement de couleur au survol */
+                background-color: #252525;
             }
         }
+        @media (max-width: 768px) {
+            .card {
+                text-align: center; /* Centrer le texte pour une meilleure lecture sur mobile */
+            }
+        }
+
 
         .card h3 {
             color: var(--primary-color);
@@ -378,21 +433,18 @@
             font-family: var(--font-display);
             letter-spacing: 0.5px;
         }
-
         .card p {
             color: #ccc;
             font-size: clamp(1rem, 2vw, 1.1rem);
             margin: 0;
             line-height: 1.7;
         }
-
         .card-icon i {
             color: var(--primary-color);
-            font-size: 2.2rem; /* Icônes plus grandes */
+            font-size: 2.2rem;
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 5px rgba(212, 175, 127, 0.5)); /* Ombre sur l'icône */
+            filter: drop-shadow(0 0 5px rgba(212, 175, 127, 0.5));
         }
-
         .contact-link {
             color: var(--primary-color);
             text-decoration: underline;
@@ -404,8 +456,8 @@
         /* --- 6. Galerie et Plats (Grille) --- */
         .gallery, .plats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Taille min légèrement augmentée */
-            gap: 25px; /* Plus d'espace */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
             justify-items: center;
             margin-top: 50px;
         }
@@ -413,16 +465,15 @@
         .gallery-item, .plat-item {
             position: relative;
             overflow: hidden;
-            border-radius: 18px; /* Bords plus arrondis */
+            border-radius: 18px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-            transition: transform 0.4s ease-out, box-shadow 0.4s ease-out; /* Transitions plus douces */
+            transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
             cursor: pointer;
-            border: 2px solid transparent; /* Bordure transparente pour effet au survol */
+            border: 2px solid transparent;
             opacity: 0;
             transform: translateY(30px);
             animation: slideInUp 0.8s ease-out forwards;
         }
-        /* Délai d'animation pour les éléments de la galerie */
         .gallery-item:nth-child(1), .plat-item:nth-child(1) { animation-delay: 0.2s; }
         .gallery-item:nth-child(2), .plat-item:nth-child(2) { animation-delay: 0.3s; }
         .gallery-item:nth-child(3), .plat-item:nth-child(3) { animation-delay: 0.4s; }
@@ -435,23 +486,23 @@
 
         .gallery-item:hover, .plat-item:hover,
         .gallery-item:focus, .plat-item:focus {
-            transform: scale(1.07); /* Zoom plus grand */
+            transform: scale(1.07);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
-            border: 2px solid var(--primary-color); /* Bordure artistique au survol */
+            border: 2px solid var(--primary-color);
             outline: none;
         }
 
         .gallery-item img, .plat-item img {
             width: 100%;
-            height: 250px; /* Hauteur fixe pour une uniformité */
+            height: 250px;
             object-fit: cover;
             display: block;
-            transition: transform 0.6s ease; /* Transition de zoom plus lente */
+            transition: transform 0.6s ease;
         }
         
         .gallery-item:hover img, .plat-item:hover img,
         .gallery-item:focus img, .plat-item:focus img {
-            transform: scale(1.15); /* Zoom plus grand pour l'image */
+            transform: scale(1.15);
         }
 
         .item-caption {
@@ -459,9 +510,9 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(0,0,0,0.85); /* Fond plus opaque */
+            background-color: rgba(0,0,0,0.85);
             color: var(--secondary-color);
-            padding: 12px; /* Plus de padding */
+            padding: 12px;
             font-size: 1rem;
             transform: translateY(100%);
             transition: transform var(--transition-duration) ease;
@@ -472,6 +523,24 @@
             justify-content: space-between;
             align-items: center;
         }
+        
+        /* Amélioration pour mobile: Le texte de la légende reste visible */
+        @media (max-width: 768px) {
+            .item-caption {
+                transform: translateY(0);
+                padding: 15px; /* Augmenter le padding pour le mobile */
+                flex-direction: column; /* Organiser le titre et le prix en colonne */
+                align-items: center;
+            }
+            .plat-item:hover .item-caption {
+                transform: translateY(0); /* Désactiver l'animation de glissement pour mobile */
+            }
+            .plat-item .item-caption {
+                position: static;
+                background-color: transparent;
+            }
+        }
+
 
         .plat-price {
             font-family: var(--font-display);
@@ -497,7 +566,7 @@
             align-items: center;
             max-width: 600px;
             margin: 0 auto;
-            gap: 25px; /* Plus d'espace */
+            gap: 25px;
         }
 
         .form-group {
@@ -506,7 +575,6 @@
             animation: slideInUp 0.8s ease-out forwards;
             opacity: 0;
         }
-        /* Délai pour l'animation des champs */
         .form-group:nth-child(1) { animation-delay: 0.2s; }
         .form-group:nth-child(2) { animation-delay: 0.4s; }
         .form-group:nth-child(3) { animation-delay: 0.6s; }
@@ -516,17 +584,17 @@
         .form-group label {
             display: block;
             margin-bottom: 8px;
-            font-weight: 700; /* Plus gras */
+            font-weight: 700;
             color: var(--primary-color);
             text-align: left;
             font-size: 1.1rem;
         }
 
         form input, form textarea {
-            padding: 14px; /* Plus de padding */
+            padding: 14px;
             width: 100%;
-            border-radius: 10px; /* Bords plus arrondis */
-            border: 1px solid #555; /* Bordure plus visible */
+            border-radius: 10px;
+            border: 1px solid #555;
             background-color: #2a2a2a;
             color: var(--secondary-color);
             font-size: 1.05rem;
@@ -536,13 +604,13 @@
 
         form input::placeholder, form textarea::placeholder {
             color: #999;
-            font-style: italic; /* Placeholders stylisés */
+            font-style: italic;
         }
 
         form input:focus, form textarea:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(212, 175, 127, 0.6); /* Ombre plus intense */
-            background-color: #333; /* Légèrement plus clair au focus */
+            box-shadow: 0 0 0 3px rgba(212, 175, 127, 0.6);
+            background-color: #333;
             outline: none;
         }
 
@@ -565,7 +633,6 @@
             text-align: left;
         }
         
-        /* Styles pour la carte */
         #map .map-container {
             width: 100%;
             max-width: 800px;
@@ -587,17 +654,16 @@
             background-color: var(--darker-color);
             color: var(--primary-color);
             text-align: center;
-            padding: 40px 20px; /* Plus de padding */
+            padding: 40px 20px;
             font-size: 0.95rem;
             border-top: 1px solid #222;
             letter-spacing: 0.5px;
             opacity: 0;
-            animation: fadeIn 1s ease-out 1s forwards; /* Animation d'apparition */
+            animation: fadeIn 1s ease-out 1s forwards;
         }
     </style>
 </head>
 <body>
-
     <header role="banner">
         <picture>
             <source media="(max-width: 768px)" srcset="images/image1-mobile.webp" type="image/webp">
@@ -612,6 +678,11 @@
     </header>
 
     <nav role="navigation" aria-label="Navigation principale">
+        <button class="hamburger" aria-label="Ouvrir le menu de navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
         <ul>
             <li><a href="#about">À propos</a></li>
             <li><a href="#info">Informations</a></li>
@@ -623,52 +694,47 @@
     </nav>
 
     <main role="main">
-        <main role="main">
-            <section id="about" aria-labelledby="about-heading">
-                <div class="about-content">
-                    <h2 id="about-heading" class="section-title">À propos de nous</h2>
-                    <p class="section-description">Bienvenue chez miro.restaurant, un lieu où le luxe rencontre l'art culinaire. Profitez de nos espaces élégants : salle, bar, jardin, lounge et rooftop, pour un moment inoubliable en famille ou entre amis.</p>
-                </div>
-            </section>
+        <section id="about" aria-labelledby="about-heading">
+            <div class="about-content">
+                <h2 id="about-heading" class="section-title">À propos de nous</h2>
+                <p class="section-description">Bienvenue chez miro.restaurant, un lieu où le luxe rencontre l'art culinaire. Profitez de nos espaces élégants : salle, bar, jardin, lounge et rooftop, pour un moment inoubliable en famille ou entre amis.</p>
+            </div>
+        </section>
 
-            <section class="video-cards-container">
-                <div class="video-card">
-                    <video class="card-video" id="video1" autoplay muted loop playsinline>
-                        <source src="images/video1.mp4" type="video/mp4">
-                        Votre navigateur ne supporte pas les vidéos HTML5.
-                    </video>
-                    <div class="video-card-content">
-                        <h4>La salle</h4>
-                        <p>Découvrez notre espace principal pour une expérience culinaire raffinée.</p>
-                    </div>
+        <section class="video-cards-container">
+            <div class="video-card">
+                <video class="card-video" id="video1" autoplay muted loop playsinline>
+                    <source src="images/video1.mp4" type="video/mp4">
+                    Votre navigateur ne supporte pas les vidéos HTML5.
+                </video>
+                <div class="video-card-content">
+                    <h4>La salle</h4>
+                    <p>Découvrez notre espace principal pour une expérience culinaire raffinée.</p>
                 </div>
+            </div>
 
-                <div class="video-card">
-                    <video class="card-video" id="video2" autoplay muted loop playsinline>
-                        <source src="images/video2.mp4" type="video/mp4">
-                        Votre navigateur ne supporte pas les vidéos HTML5.
-                    </video>
-                    <div class="video-card-content">
-                        <h4>Le Bar & Lounge</h4>
-                        <p>L'endroit idéal pour déguster un cocktail dans une ambiance décontractée.</p>
-                    </div>
+            <div class="video-card">
+                <video class="card-video" id="video2" autoplay muted loop playsinline>
+                    <source src="images/video2.mp4" type="video/mp4">
+                    Votre navigateur ne supporte pas les vidéos HTML5.
+                </video>
+                <div class="video-card-content">
+                    <h4>Le Bar & Lounge</h4>
+                    <p>L'endroit idéal pour déguster un cocktail dans une ambiance décontractée.</p>
                 </div>
+            </div>
 
-                <div class="video-card">
-                    <video class="card-video" id="video3" autoplay muted loop playsinline>
-                        <source src="images/video3.mp4" type="video/mp4">
-                        Votre navigateur ne supporte pas les vidéos HTML5.
-                    </video>
-                    <div class="video-card-content">
-                        <h4>Le Jardin & Rooftop</h4>
-                        <p>Un havre de paix en plein air pour des moments magiques sous le ciel.</p>
-                    </div>
+            <div class="video-card">
+                <video class="card-video" id="video3" autoplay muted loop playsinline>
+                    <source src="images/video3.mp4" type="video/mp4">
+                    Votre navigateur ne supporte pas les vidéos HTML5.
+                </video>
+                <div class="video-card-content">
+                    <h4>Le Jardin & Rooftop</h4>
+                    <p>Un havre de paix en plein air pour des moments magiques sous le ciel.</p>
                 </div>
-            </section>
-        </main>
-
-</body>
-</html>
+            </div>
+        </section>
 
         <section id="info" aria-labelledby="info-heading">
             <h2 id="info-heading" class="section-title">Informations Pratiques</h2>
@@ -773,7 +839,16 @@
             <h2 id="map-heading" class="section-title">Notre Emplacement</h2>
             <p class="section-description">Trouvez-nous facilement sur la carte pour planifier votre visite.</p>
             <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1599.9868770548135!2d3.0674640000000005!3d36.74548480000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128f1cc430d41829%3A0x633d76e93e2300b0!2sP3VC%2BFVP%2C%20El%20Madania%2C%20Algeria!5e0!3m2!1sen!2s!4v1714909289569!5m2!1sen!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                 <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1599.3789490196726!2d3.0336219438316164!3d36.75620942544256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128fd26a26880299%3A0x6a10061e330d087b!2sBois%20des%20Arcades%2C%20Draria!5e0!3m2!1sfr!2sdz!4v1695945893321!5m2!1sfr!2sdz"
+                    width="600"
+                    height="450"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Carte de localisation du Miro Restaurant à Draria, Alger"
+                ></iframe>
             </div>
         </section>
 
@@ -807,36 +882,23 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Video background management for #about section
-            const videos = document.querySelectorAll('#about .video-background');
-            let currentVideoIndex = 0;
+            // Script de gestion du menu hamburger
+            const hamburger = document.querySelector('.hamburger');
+            const navUl = document.querySelector('nav ul');
 
-            function playNextVideo() {
-                // Pause and hide current video
-                videos[currentVideoIndex].classList.remove('playing');
-                videos[currentVideoIndex].pause();
-                
-                // Move to the next video
-                currentVideoIndex = (currentVideoIndex + 1) % videos.length;
-                
-                // Play and show the next video
-                videos[currentVideoIndex].classList.add('playing');
-                videos[currentVideoIndex].play();
-            }
-
-            // Loop through all videos to set up event listeners
-            videos.forEach(video => {
-                video.addEventListener('ended', playNextVideo);
-                // Ensure loop is explicitly set for older browsers if needed, though 'loop' attribute handles it
-                video.loop = true; 
+            hamburger.addEventListener('click', () => {
+                navUl.classList.toggle('active');
+                hamburger.classList.toggle('active');
             });
-
-            // Start playing the first video
-            if (videos.length > 0) {
-                videos[currentVideoIndex].classList.add('playing');
-                videos[currentVideoIndex].play();
-            }
-
+            
+            navUl.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navUl.classList.contains('active')) {
+                        navUl.classList.remove('active');
+                        hamburger.classList.remove('active');
+                    }
+                });
+            });
 
             // 1. Optimisation du chargement d'image du header avec blur progressif
             const headerImg = document.querySelector('.header-bg-img');
@@ -857,7 +919,7 @@
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
-                threshold: 0.5 // Active la navigation quand 50% de la section est visible
+                threshold: 0.5
             };
 
             const sectionObserver = new IntersectionObserver((entries) => {
@@ -886,7 +948,6 @@
 
             const inputs = [nameInput, emailInput, messageTextarea];
 
-            // Fonction de validation individuelle d'un champ
             const validateField = (input) => {
                 const errorMessage = input.parentElement.querySelector('.error-message');
                 if (input.validity.valid) {
@@ -906,34 +967,28 @@
                 }
             };
 
-            // Écouteurs d'événements pour la validation en temps réel sur chaque champ
             inputs.forEach(input => {
                 input.addEventListener('input', () => validateField(input));
             });
 
-            // Écouteur d'événement pour la soumission du formulaire
             form.addEventListener('submit', (e) => {
-                e.preventDefault(); // Empêche l'envoi par défaut du formulaire
+                e.preventDefault();
                 let isFormValid = true;
 
                 inputs.forEach(input => {
-                    validateField(input); // Re-valide tous les champs avant de soumettre
+                    validateField(input);
                     if (!input.validity.valid) {
                         isFormValid = false;
                     }
                 });
 
                 if (isFormValid) {
-                    // Si le formulaire est valide, simule l'envoi et réinitialise
-                    console.log('Formulaire valide, envoi des données...');
                     alert('Votre message a été envoyé avec succès ! Merci de nous avoir contactés.');
                     form.reset();
-                    // Retirer les classes de validation visuelles après l'envoi réussi
                     inputs.forEach(input => {
                         input.classList.remove('valid', 'invalid');
                     });
                 } else {
-                    // Si invalide, scroll au premier champ invalide
                     const firstInvalid = document.querySelector('.contact-form .invalid');
                     if (firstInvalid) {
                         firstInvalid.focus();
@@ -947,14 +1002,14 @@
 
             galleryItems.forEach(item => {
                 item.addEventListener('keypress', (e) => {
-                    // Active les effets de survol/focus au "Enter" pour l'accessibilité
-                    if (e.key === 'Enter') {
-                        item.focus(); // Assure que l'élément est focusable
-                        item.classList.toggle('focused'); // Ajoute une classe pour gérer l'état
+                    if (e.key === 'Enter' || e.key === ' ') { // Ajout de la touche Espace
+                        e.preventDefault(); // Empêcher le défilement de la page si l'espace est pressé
+                        item.focus();
+                        item.classList.toggle('focused');
                     }
                 });
                 item.addEventListener('blur', () => {
-                    item.classList.remove('focused'); // Retire la classe au blur
+                    item.classList.remove('focused');
                 });
             });
 
@@ -966,12 +1021,12 @@
                     if (entry.isIntersecting) {
                         entry.target.style.opacity = '1';
                         entry.target.style.transform = 'translateY(0)';
-                        animateObserver.unobserve(entry.target); // Arrête d'observer une fois animé
+                        animateObserver.unobserve(entry.target);
                     }
                 });
             }, {
                 rootMargin: '0px',
-                threshold: 0.1 // Déclenche l'animation quand 10% de l'élément est visible
+                threshold: 0.1
             });
 
             animatedElements.forEach(el => animateObserver.observe(el));
