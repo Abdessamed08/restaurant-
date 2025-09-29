@@ -388,32 +388,6 @@
 
         /* --- 6. Galerie et Plats (Grille) --- */
         /* --- 6. Galerie et Plats (Grille) --- */
-        /* --- 1. VARIABLES & STYLES DE BASE --- */
-        :root {
-            --primary-color: #d4af7f; /* Or, couleur principale */
-            --secondary-color: #f4f4f4; /* Blanc cassé, texte clair */
-            --dark-color: #111; /* Noir très foncé, fond principal */
-            --darker-color: #080808; /* Noir absolu */
-            --text-color: #e0e0e0; /* Gris clair, texte secondaire */
-            --font-display: 'Playfair Display', serif;
-            --font-body: 'Montserrat', sans-serif;
-            --transition-duration: 0.5s;
-            --cubic-bezier: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        /* --- 2. Animations Globales --- */
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* --- 6. Galerie et Plats (Grille) --- */
         .gallery, .plats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -421,12 +395,12 @@
             justify-items: center;
             margin-top: 50px;
         }
-
         .gallery-item, .plat-item {
             position: relative;
             overflow: hidden;
             border-radius: 18px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            /* Transitions pour le zoom de l'élément au survol/clic */
             transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
             cursor: pointer;
             border: 2px solid transparent;
@@ -434,7 +408,6 @@
             transform: translateY(30px);
             animation: slideInUp 0.8s ease-out forwards;
         }
-
         /* Délai d'animation pour les éléments de la galerie */
         .gallery-item:nth-child(1), .plat-item:nth-child(1) { animation-delay: 0.2s; }
         .gallery-item:nth-child(2), .plat-item:nth-child(2) { animation-delay: 0.3s; }
@@ -445,24 +418,26 @@
         .gallery-item:nth-child(7), .plat-item:nth-child(7) { animation-delay: 0.8s; }
         .gallery-item:nth-child(8), .plat-item:nth-child(8) { animation-delay: 0.9s; }
 
+        /* Effet au survol (PC) et au clic/tapotement (PC & Mobile) */
         .gallery-item:hover, .plat-item:hover,
-        .gallery-item:focus, .plat-item:focus {
-            transform: scale(1.07);
+        .gallery-item:focus, .plat-item:focus,
+        .gallery-item:active, .plat-item:active {
+            transform: scale(1.07); /* Zoom léger de l'élément */
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
             border: 2px solid var(--primary-color);
             outline: none;
         }
-
         .gallery-item img, .plat-item img {
             width: 100%;
-            height: 250px;
-            object-fit: cover;
+            height: auto; /* Permet aux images de garder leur ratio */
+            object-fit: unset;
             display: block;
             transition: transform 0.6s ease;
         }
-        
+        /* Zoom de l'image à l'intérieur de l'élément */
         .gallery-item:hover img, .plat-item:hover img,
-        .gallery-item:focus img, .plat-item:focus img {
+        .gallery-item:focus img, .plat-item:focus img,
+        .gallery-item:active img {
             transform: scale(1.15);
         }
 
@@ -475,7 +450,8 @@
             color: var(--secondary-color);
             padding: 12px;
             font-size: 1rem;
-            transform: translateY(100%);
+            /* Cache la légende en bas de l'élément par défaut */
+            transform: translateY(100%); 
             transition: transform var(--transition-duration) ease;
             text-align: center;
             font-weight: 600;
@@ -484,16 +460,26 @@
             justify-content: space-between;
             align-items: center;
         }
-
+        @media (max-width: 768px) {
+            /* Mise en page de la légende sur mobile - RETOUR À LA VERSION PRÉCÉDENTE */
+            .item-caption {
+                /* La légende est masquée par défaut (via translateY(100%) ci-dessus) 
+                et apparaît uniquement au tapotement grâce à :focus/:active ci-dessous. */
+                padding: 15px;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
         .plat-price {
             font-family: var(--font-display);
             color: var(--primary-color);
             font-size: 1.1rem;
             font-weight: bold;
         }
-
+        /* Affichage de la légende au survol/clic/tapotement */
         .gallery-item:hover .item-caption, .plat-item:hover .item-caption,
-        .gallery-item:focus .item-caption, .plat-item:focus .item-caption {
+        .gallery-item:focus .item-caption, .plat-item:focus .item-caption,
+        .gallery-item:active .item-caption {
             transform: translateY(0);
         }
         /* --- 7. Formulaire de Contact --- */
