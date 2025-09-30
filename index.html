@@ -72,28 +72,48 @@
             overflow: hidden;
             z-index: 1;
         }
+
+        /* Style de l'arrière-plan par défaut (PC) */
         .hero-background {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 110%; /* Plus grand pour l'effet de parallax */
+            height: 110%;
+            /* Image en haute résolution pour les grands écrans (PC) */
             background-image: url('images/image1.webp');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Parallax effect */
+            background-attachment: fixed; /* L'effet Parallax */
             z-index: 1;
             filter: brightness(0.6) blur(3px);
             transition: filter 1.5s ease-in-out;
         }
-        .hero-background.loaded { filter: brightness(0.6) blur(0); }
+
+        /* Version optimisée pour les téléphones (768px ou moins) */
+        @media (max-width: 768px) {
+            .hero-background {
+                /*
+                Chargement de l'image optimisée (Squoosh)
+                Ceci remplace 'image1.webp' pour les petits écrans.
+                */
+                background-image: url('images/image1-mobile.webp');
+                background-attachment: scroll; /* L'image défile normalement */
+            }
+        }
+
+        .hero-background.loaded {
+            filter: brightness(0.6) blur(0);
+        }
+
+        /* --- Le reste de votre code est déjà correct et complet pour cette section --- */
         .hero-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.6), var(--dark-color) 70%);
+            background: linear-gradient(rgba(0, 0, 0, 0.6), var(--dark-color) 70%);
             z-index: 2;
         }
         .hero-content {
@@ -142,7 +162,6 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
             animation: glowing-border 1s infinite alternate;
         }
-
         /* --- 3. Navigation (Mobile-first) --- */
         nav {
             position: sticky;
@@ -616,8 +635,7 @@
 </head>
 <body>
     <header class="hero-section" role="banner">
-        <div class="hero-background" style="background-image: url('images/image1.webp');"></div>
-        <div class="hero-overlay"></div>
+        <div class="hero-background"></div> <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1>miro.restaurant</h1>
             <p>Art, Chic & Luxe – Une expérience gastronomique unique</p>
@@ -788,16 +806,16 @@
             <h2 id="map-heading" class="section-title">Notre Emplacement</h2>
             <p class="section-description">Trouvez-nous facilement sur la carte pour planifier votre visite.</p>
             <div class="map-container">
-                 <iframe
-                    src="http://googleusercontent.com/maps.google.com/3"
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1599.9822452285517!2d3.064505187123953!3d36.75822606541575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128df2b947c452e9%3A0xc665b16e45f56a52!2sBois%20des%20Arcades!5e0!3m2!1sfr!2sdz!4v1695758254247!5m2!1sfr!2sdz"
                     width="600"
                     height="450"
                     style="border:0;"
                     allowfullscreen=""
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"
-                    title="Carte de localisation du Miro Restaurant, Bois des arcades, Alger"
-                ></iframe>
+                    title="Carte de localisation du Miro Restaurant, Bois des arcades, Alger">
+                </iframe>
             </div>
         </section>
 
