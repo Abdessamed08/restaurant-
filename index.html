@@ -61,6 +61,7 @@
         }
 
         /* --- 2. Header - Section d'introduction --- */
+        /* Styles de base qui s'appliquent partout (PC et Mobile) */
         .hero-section {
             position: relative;
             height: 100vh;
@@ -70,58 +71,59 @@
             text-align: center;
             color: var(--secondary-color);
             overflow: hidden;
+            background-color: var(--dark-color);
             z-index: 1;
-        }
-
-        /* Style de l'arrière-plan par défaut (PC) */
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 110%;
-            /* Image en haute résolution pour les grands écrans (PC) */
-            background-image: url('images/image1.webp');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* L'effet Parallax */
-            z-index: 1;
-            filter: brightness(0.6) blur(3px);
+            filter: brightness(0.9) blur(0.5px);
             transition: filter 1.5s ease-in-out;
         }
 
-        /* Version optimisée pour les téléphones (768px ou moins) */
-        @media (max-width: 768px) {
-            .hero-background {
-                /*
-                Chargement de l'image optimisée (Squoosh)
-                Ceci remplace 'image1.webp' pour les petits écrans.
-                */
-                background-image: url('images/image1-mobile.webp');
-                background-attachment: scroll; /* L'image défile normalement */
-            }
-        }
-
-        .hero-background.loaded {
-            filter: brightness(0.6) blur(0);
-        }
-
-        /* --- Le reste de votre code est déjà correct et complet pour cette section --- */
-        .hero-overlay {
+        /* Pseudo-élément pour l'overlay (s'applique partout) */
+        .hero-section::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), var(--dark-color) 70%);
-            z-index: 2;
+            background: linear-gradient(rgba(0, 0, 0, 0.2), var(--dark-color) 80%);
+            z-index: 0;
         }
+
+        /* Règles pour les ordinateurs (à partir de 769px) */
+        @media (min-width: 769px) {
+            .hero-section {
+                background-image: url('images/image1.webp');
+                background-size: cover;
+                background-position: center; /* La position centrale est idéale sur les grands écrans */
+                background-attachment: fixed;
+            }
+        }
+
+        /* Règles pour les téléphones (768px et moins) */
+        @media (max-width: 768px) {
+            .hero-section {
+                background-image: url('images/image1-mobiletest.webp');
+                background-size: cover;
+                /* La correction est ici : positionnement à gauche */
+                background-position: left; 
+                background-attachment: scroll;
+            }
+        }
+
+        /* Enlever le filtre quand le chargement est terminé */
+        .hero-section.loaded {
+            filter: brightness(1) blur(0);
+        }
+
         .hero-content {
             position: relative;
-            z-index: 3;
+            z-index: 2;
             padding: 20px;
             animation: fadeIn 2s ease-out forwards;
+            background-color: transparent;
         }
+        /* ... le reste de votre code est inchangé ... */
+        /* ... le reste des styles est inchangé ... */
         .hero-content h1 {
             font-size: clamp(2.8rem, 9vw, 6rem);
             font-weight: 700;
@@ -635,7 +637,6 @@
 </head>
 <body>
     <header class="hero-section" role="banner">
-        <div class="hero-background"></div> <div class="hero-overlay"></div>
         <div class="hero-content">
             <h1>miro.restaurant</h1>
             <p>Art, Chic & Luxe – Une expérience gastronomique unique</p>
