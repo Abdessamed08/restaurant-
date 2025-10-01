@@ -657,6 +657,34 @@
             opacity: 0;
             animation: fadeIn 1s ease-out 1s forwards;
         }
+
+        /* Style du bouton "Retour en haut" */
+        #scroll-to-top {
+            position: fixed; /* Reste visible même en défilant */
+            bottom: 20px; /* À 20px du bas de l'écran */
+            right: 20px; /* À 20px de la droite de l'écran */
+            z-index: 999; /* Toujours au-dessus des autres éléments */
+            display: none; /* Caché par défaut */
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: var(--darker-color);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+
+        #scroll-to-top:hover {
+            transform: scale(1.1);
+            background-color: var(--some-other-color); /* Exemple: couleur différente au survol */
+        }
+
+        html {
+        scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body>
@@ -870,6 +898,10 @@
         </section>
     </main>
 
+    <a id="scroll-to-top" class="scroll-btn" href="#accueil" aria-label="Retourner en haut de la page">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
     <div class="lightbox" aria-hidden="true" role="dialog">
         <button class="lightbox-close" aria-label="Fermer la galerie"> × </button>
         <button class="lightbox-nav prev" aria-label="Image précédente"> < </button>
@@ -882,13 +914,14 @@
         <p>© 2025 miro.restaurant – Tous droits réservés. Design et développement par [Votre nom]</p>
     </footer>
 
+    
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Script de gestion du menu hamburger
             const hamburger = document.querySelector('.hamburger');
             const navUl = document.querySelector('nav ul');
             const heroBackground = document.querySelector('.hero-background');
-            const mainContent = document.querySelector('main');
 
             hamburger.addEventListener('click', () => {
                 navUl.classList.toggle('active');
@@ -1062,6 +1095,25 @@
                     const firstInvalid = document.querySelector('.contact-form .invalid');
                     if (firstInvalid) { firstInvalid.focus(); }
                 }
+            });
+
+            // NOUVEAU : Script pour le bouton "Retour en haut"
+            const scrollToTopBtn = document.getElementById("scroll-to-top");
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    scrollToTopBtn.style.display = "block";
+                } else {
+                    scrollToTopBtn.style.display = "none";
+                }
+            });
+
+            scrollToTopBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
             });
         });
     </script>
