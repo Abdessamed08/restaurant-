@@ -105,7 +105,7 @@
             .hero-section {
                 background-image: url('images/image1-mobiletest.webp');
                 background-size: cover; /* La propriété "cover" est nécessaire pour que l'image s'affiche en grand */
-                background-position: center;
+                background-position: left;
                 background-attachment: scroll; /* Le scroll normal, sans conflit */
             }
         }
@@ -183,31 +183,37 @@
             color: var(--primary-color);
             padding: 10px 0;
         }
-
-        /* Nouveau style de l'icône hamburger */
+        /* Nouveau style pour l'icône hamburger avec du texte */
         .hamburger {
             background: none;
             border: none;
             cursor: pointer;
             padding: 10px;
             display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            width: 30px; 
+            flex-direction: row; /* Alignement horizontal */
+            align-items: center; /* Centrage vertical */
+            justify-content: center;
+            width: auto; /* La largeur s'adapte au contenu */
             height: 24px; 
             position: relative;
             z-index: 200;
         }
         .hamburger .bar {
             display: block;
-            width: 100%;
+            width: 25px; /* Largeur de l'icône seule */
             height: 2px;
             background-color: var(--primary-color);
             border-radius: 2px;
             transition: all 0.3s ease-in-out;
         }
-
-        /* Animations de l'icône pour l'état ouvert (le menu est visible) */
+        .hamburger .menu-label {
+            margin-left: 10px; /* Espace entre l'icône et le texte */
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-transform: uppercase;
+        }
+        /* Animation de l'icône pour l'état ouvert (le menu est visible) */
         .hamburger[aria-expanded="true"] .bar:nth-child(1) {
             transform: translateY(11px) rotate(45deg);
         }
@@ -235,7 +241,11 @@
             opacity: 0;
             visibility: hidden;
         }
-        nav ul.active { transform: translateX(0); opacity: 1; visibility: visible; }
+        nav ul.active { 
+            transform: translateX(0); 
+            opacity: 1; 
+            visibility: visible; 
+        }
         nav ul li { margin: 25px 0; }
         nav a {
             font-weight: 600;
@@ -664,6 +674,7 @@
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
+            <span class="menu-label">Menu</span>
         </button>
         <ul id="main-nav-list">
             <li><a href="#about" aria-current="page">À propos</a></li>
