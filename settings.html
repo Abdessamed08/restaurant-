@@ -1,68 +1,132 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark" data-color-blind="off" data-high-contrast="off">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>miro.restaurant | L'Art & la Gastronomie</title>
-    <meta name="description" content="Découvrez miro.restaurant, une expérience gastronomique unique à Alger. Un restaurant où l'art, le chic et le luxe se rencontrent.">
-
-    <link rel="canonical" href="https://miro.restaurant">
+    <title>miro.restaurant | Paramètres</title>
+    <meta name="description" content="Personnalisez votre expérience de navigation sur miro.restaurant.">
+    
+    <link rel="canonical" href="https://miro.restaurant/settings.html">
     <link rel="icon" type="image/png" href="images/favicon.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&display=swap"></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&family=Roboto:wght@400;700&family=Merriweather:wght@400;700&family=Open+Sans:wght@400;700&family=Poppins:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&family=Roboto:wght@400;700&family=Merriweather:wght@400;700&family=Open+Sans:wght@400;700&family=Poppins:wght@400;700&display=swap"></noscript>
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <style>
-        /* --- 1. Variables et Styles de base --- */
+        /* ========================================================== */
+        /* 1. VARIABLES & BASE               */
+        /* ========================================================== */
         :root {
-            --primary-color: #d4af7f; /* Or, couleur principale */
-            --secondary-color: #f4f4f4; /* Blanc cassé, texte clair */
-            --dark-color: #1a1a1a; /* Noir très foncé, fond principal */
-            --darker-color: #0d0d0d; /* Noir absolu, pour la navigation et le footer */
-            --text-color: #e0e0e0; /* Gris clair, texte secondaire */
-            --font-display: 'Playfair Display', serif; /* Police pour les titres, élégante */
-            --font-body: 'Montserrat', sans-serif; /* Police pour le corps, moderne */
-            --transition-duration: 0.3s; /* Durée standard pour les transitions */
-            --artistic-bg-texture: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="p" width="100" height="100" patternUnits="userSpaceOnUse"><path d="m15.539 74.461c-3.138-1.78-6.17-3.951-8.9-6.495c-2.731-2.544-5.183-5.462-7.3-8.681c-2.116-3.22-3.83-6.702-5.13-10.375c-1.299-3.674-2.1-7.5-2.39-11.383c-0.29-3.884-0.1-7.8-0.08-11.7c0.016-3.896-0.081-7.8-0.45-11.666c-0.37-3.866-1-7.7-1.89-11.411c-0.89-3.712-2.07-7.2-3.56-10.428l-0.08 0.08z" fill="%23222" opacity="0.1"/><path d="m84.461 25.539c3.138 1.78 6.17 3.951 8.9 6.495c2.731 2.544 5.183 5.462 7.3 8.681c2.116 3.22 3.83 6.702 5.13 10.375c1.299 3.674 2.1 7.5 2.39 11.383c0.29 3.884 0.1 7.8 0.08 11.7c-0.016 3.896 0.081 7.8 0.45 11.666c0.37-3.866 1-7.7 1.89-11.411c0.89-3.712 2.07-7.2 3.56-10.428l0.08-0.08z" fill="%23222" opacity="0.1" transform="rotate(180 50 50)"/></pattern></defs><rect width="100" height="100" fill="url(%23p)"/></svg>');
+            --color-primary: #d4af7f; /* Or, pour les accents */
+            --color-primary-dark: #c09d6b;
+            --color-primary-light: #e0d0b9;
+            --color-secondary: #f4f4f4; /* Blanc cassé, pour le texte */
+            --color-background: #1a1a1a; /* Noir très foncé, pour les sections */
+            --color-background-darker: #0d0d0d; /* Noir absolu, pour la nav et le footer */
+            --color-text: #e0e0e0; /* Gris clair, pour le texte secondaire */
+            --color-text-dark: #2c3e50; /* Pour les thèmes clairs */
+            --color-border: rgba(255, 255, 255, 0.1);
+            --color-accent-soft: rgba(212, 175, 127, 0.1);
+            --color-danger: #e74c3c;
+            --color-danger-hover: #c0392b;
+
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --font-system: system-ui, sans-serif;
+            --font-roboto: 'Roboto', sans-serif;
+            --font-merriweather: 'Merriweather', serif;
+            --font-poppins: 'Poppins', sans-serif;
+            --font-dyslexia: 'Open Sans', sans-serif; /* Réputée pour les dyslexiques */
+
+            --transition-speed: 0.3s;
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --shadow-dark: 0 10px 25px rgba(0, 0, 0, 0.6);
+            --border-radius: 8px;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+
+        [data-theme="light"] {
+            --color-primary: #a67c52;
+            --color-primary-dark: #8c6a46;
+            --color-primary-light: #c0a884;
+            --color-secondary: #222;
+            --color-background: #f0f0f0;
+            --color-background-darker: #ffffff;
+            --color-text: #555;
+            --color-text-dark: #eee;
+            --color-border: rgba(0, 0, 0, 0.1);
+            --color-accent-soft: rgba(166, 124, 82, 0.1);
+            --color-shadow: rgba(0, 0, 0, 0.15);
+        }
+
+        /* Accessibilité - Mode Daltonien */
+        [data-color-blind="on"] {
+            --color-primary: #007bff;
+            --color-primary-dark: #0056b3;
+            --color-primary-light: #66b5ff;
+            --color-secondary: #f0f8ff;
+            --color-background: #2c3e50;
+            --color-background-darker: #1a237e;
+            --color-text: #e0e0e0;
+            --color-accent-soft: rgba(0, 123, 255, 0.1);
+        }
+
+        /* Accessibilité - Mode Contraste Élevé */
+        [data-high-contrast="on"] {
+            --color-primary: #ffff00;
+            --color-primary-dark: #e6e600;
+            --color-primary-light: #ffffb3;
+            --color-secondary: #000000;
+            --color-background: #ffffff;
+            --color-background-darker: #f0f0f0;
+            --color-text: #000000;
+            --color-border: #000000;
+            --color-shadow: none;
+            --color-accent-soft: rgba(255, 255, 0, 0.2);
+            --color-danger: #ff0000;
+            --color-danger-hover: #cc0000;
+        }
+
+        .no-animations * {
+            transition: none !important;
+            animation: none !important;
+        }
+
+        .no-animations .tab-content {
+            animation: none !important;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: var(--font-body);
-            background-color: var(--dark-color);
-            color: var(--secondary-color);
+            background-color: var(--color-background);
+            color: var(--color-secondary);
             line-height: 1.8;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            background-image: var(--artistic-bg-texture);
-            background-repeat: repeat;
-            background-size: 50px 50px;
-            background-blend-mode: multiply;
-        }
-        a { text-decoration: none; color: inherit; }
-        ::selection { background: var(--primary-color); color: var(--darker-color); }
-        h1, h2, h3, h4 { font-family: var(--font-display); }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes glowing-border {
-            0% { box-shadow: 0 0 0 0 rgba(212, 175, 127, 0.4); }
-            100% { box-shadow: 0 0 10px 10px rgba(212, 175, 127, 0); }
-        }
-        @keyframes color-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
         }
 
-        /* --- 2. Header - Section d'introduction --- */
-        /* --- 2. Header - Section d'introduction --- */
-        /* Styles de base qui s'appliquent partout (PC et Mobile) */
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 700;
+        }
+
+        /* ========================================================== */
+        /* 2. NAVIGATION & HEADER            */
+        /* ========================================================== */
         .hero-section {
             position: relative;
             height: 100vh;
@@ -70,15 +134,16 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: var(--secondary-color);
+            color: var(--color-secondary);
             overflow: hidden;
-            background-color: var(--dark-color);
-            z-index: 1;
-            filter: brightness(0.9) blur(0.5px);
+            background-color: var(--color-background);
+            background-image: url('images/image1.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             transition: filter 1.5s ease-in-out;
         }
 
-        /* Pseudo-élément pour l'overlay (s'applique partout) */
         .hero-section::before {
             content: '';
             position: absolute;
@@ -86,85 +151,60 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(0, 0, 0, 0.2), var(--dark-color) 80%);
-            z-index: 0;
+            background: linear-gradient(rgba(0, 0, 0, 0.2), var(--color-background) 80%);
         }
 
-        /* Règles pour les ordinateurs (à partir de 769px) */
-        @media (min-width: 769px) {
-            .hero-section {
-                background-image: url('images/image1.webp');
-                background-size: cover;
-                background-position: center;
-                background-attachment: fixed; /* L'effet Parallax est appliqué SEULEMENT ici */
-            }
-        }
-
-        /* Règles pour les téléphones (768px et moins) */
-        @media (max-width: 768px) {
-            .hero-section {
-                background-image: url('images/image1.webp');
-                background-size: cover; /* La propriété "cover" est nécessaire pour que l'image s'affiche en grand */
-                background-position: left;
-                background-attachment: scroll; /* Le scroll normal, sans conflit */
-            }
-        }
-
-        /* Enlever le filtre quand le chargement est terminé */
-        .hero-section.loaded {
-            filter: brightness(1) blur(0);
-        }
+        .hero-section.loaded { filter: brightness(1) blur(0); }
 
         .hero-content {
             position: relative;
             z-index: 2;
             padding: 20px;
-            animation: fadeIn 2s ease-out forwards;
-            background-color: transparent;
         }
-        /* ... le reste de votre code est inchangé ... */
-        /* ... le reste des styles est inchangé ... */
-        .hero-content h1 {
+
+        .site-title {
             font-size: clamp(2.8rem, 9vw, 6rem);
-            font-weight: 700;
             letter-spacing: 4px;
             margin-bottom: 20px;
             text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
-            background: linear-gradient(45deg, var(--primary-color), #f7e0c4, var(--primary-color));
+            background: linear-gradient(45deg, var(--color-primary), var(--color-primary-light), var(--color-primary));
             background-size: 200% 100%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: color-shift 5s linear infinite;
         }
-        .hero-content p {
+
+        .tagline {
             font-size: clamp(1.1rem, 3.5vw, 1.8rem);
             font-style: italic;
-            color: var(--primary-color);
+            color: var(--color-primary);
             text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
             letter-spacing: 1px;
         }
-        .btn {
+
+        .btn-primary {
             display: inline-block;
             padding: 16px 45px;
             margin-top: 40px;
-            background-color: var(--primary-color);
-            color: var(--darker-color);
+            background-color: var(--color-primary);
+            color: var(--color-background-darker);
             text-transform: uppercase;
             font-weight: 700;
-            border-radius: 8px;
-            transition: transform var(--transition-duration) ease, background-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
+            border-radius: var(--border-radius);
+            transition: transform var(--transition-speed) ease, background-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 15px var(--color-shadow);
             letter-spacing: 0.5px;
         }
-        .btn:hover, .btn:focus {
+
+        .btn-primary:hover, .btn-primary:focus {
             transform: translateY(-5px) scale(1.02);
-            background-color: #c09d6b;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            background-color: var(--color-primary-dark);
+            box-shadow: 0 8px 25px var(--color-shadow);
             animation: glowing-border 1s infinite alternate;
         }
-        /* --- 3. Navigation (Mobile-first) --- */
+
         nav {
             position: sticky;
             top: 0;
@@ -173,25 +213,22 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
-            background-color: var(--darker-color);
+            background-color: var(--color-background-darker);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             border-bottom: 1px solid #333;
-            height: 60px; /* Hauteur fixe pour un look plus moderne */
-        }
-        nav .logo {
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            padding: 10px 0;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        nav .logo:hover,
-        nav .logo:focus {
-            color: var(--text-color-light);
+            height: 60px;
         }
 
-        /* Nouveau style pour l'icône hamburger avec du texte */
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--color-primary);
+            padding: 10px 0;
+            transition: color var(--transition-speed) ease;
+        }
+
+        .logo:hover, .logo:focus { color: var(--color-secondary); }
+
         .hamburger {
             background: none;
             border: none;
@@ -201,50 +238,31 @@
             align-items: center;
             position: relative;
             z-index: 200;
-            transition: transform 0.3s ease;
-        }
-        .hamburger:focus {
-            outline: 2px solid var(--primary-color);
-            outline-offset: 4px;
-        }
-        .hamburger .bar {
-            display: block;
-            width: 28px; /* Taille légèrement plus grande */
-            height: 3px;
-            background-color: var(--primary-color);
-            border-radius: 2px;
-            transition: all 0.3s ease-in-out;
-        }
-        .hamburger .bar + .bar {
-            margin-top: 5px;
-        }
-        .hamburger .menu-label {
-            margin-left: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            text-transform: uppercase;
-        }
-        /* Animation de l'icône pour l'état ouvert */
-        .hamburger[aria-expanded="true"] .bar:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
-        }
-        .hamburger[aria-expanded="true"] .bar:nth-child(2) {
-            opacity: 0;
-        }
-        .hamburger[aria-expanded="true"] .bar:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
+            transition: transform var(--transition-speed) ease;
         }
 
-        /* Styles du menu mobile */
-        nav ul {
+        .hamburger .bar {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background-color: var(--color-primary);
+            border-radius: 2px;
+            transition: all var(--transition-speed) ease-in-out;
+        }
+
+        .hamburger .bar + .bar { margin-top: 5px; }
+        .hamburger[aria-expanded="true"] .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .hamburger[aria-expanded="true"] .bar:nth-child(2) { opacity: 0; }
+        .hamburger[aria-expanded="true"] .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+        .nav-links {
             list-style: none;
             position: fixed;
-            top: 60px; /* Positionnement en dessous de la barre de navigation */
+            top: 60px;
             left: 0;
             width: 100%;
-            height: calc(100% - 60px); /* Hauteur restante */
-            background-color: var(--darker-color);
+            height: calc(100% - 60px);
+            background-color: var(--color-background-darker);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -255,39 +273,28 @@
             visibility: hidden;
             padding: 0;
         }
-        nav ul.active {
+        
+        .nav-links.active {
             transform: translateX(0);
             opacity: 1;
             visibility: visible;
         }
-        nav ul li {
-            margin: 25px 0;
-        }
-        nav a:not(.logo) { /* Cible tous les liens sauf le logo */
+
+        .nav-links li { margin: 25px 0; }
+        .nav-links a {
             font-weight: 600;
             text-transform: uppercase;
             font-size: 1.5rem;
             padding: 15px 0;
-            transition: color 0.3s ease;
-            text-decoration: none;
-            color: var(--text-color-secondary);
+            transition: color var(--transition-speed) ease;
+            color: var(--color-secondary);
         }
-        nav a:hover,
-        nav a:focus {
-            color: var(--primary-color);
-        }
-        nav a[aria-current="page"] {
-            color: var(--primary-color);
-            font-weight: 700;
-        }
+        .nav-links a:hover, .nav-links a:focus { color: var(--color-primary); }
+        .nav-links a[aria-current="page"] { color: var(--color-primary); font-weight: 700; }
 
-        /* --- Media Query pour les grands écrans (769px et plus) --- */
         @media (min-width: 769px) {
-            nav {
-                justify-content: space-between;
-                padding: 0 40px;
-            }
-            nav ul {
+            nav { justify-content: space-between; padding: 0 40px; }
+            .nav-links {
                 position: static;
                 flex-direction: row;
                 width: auto;
@@ -298,48 +305,42 @@
                 visibility: visible;
                 padding: 0;
             }
-            .hamburger {
-                display: none;
-            }
-            nav ul li {
-                margin: 0 15px;
-            }
-            nav a:not(.logo) {
-                font-size: 1rem;
-                position: relative;
-                padding: 20px 0;
-            }
-            nav a:not(.logo)::before {
+            .hamburger { display: none; }
+            .nav-links li { margin: 0 15px; }
+            .nav-links a { font-size: 1rem; position: relative; padding: 20px 0; }
+            .nav-links a::before {
                 content: '';
                 position: absolute;
-                bottom: 15px; /* Déplacé vers le haut pour être plus esthétique */
+                bottom: 15px;
                 left: 50%;
                 width: 0;
                 height: 2px;
-                background-color: var(--primary-color);
+                background-color: var(--color-primary);
                 transform: translateX(-50%);
-                transition: width 0.3s ease-out;
+                transition: width var(--transition-speed) ease-out;
             }
-            nav a:hover::before,
-            nav a:focus::before,
-            nav a[aria-current="page"]::before {
-                width: 100%;
-            }
+            .nav-links a:hover::before, .nav-links a:focus::before, .nav-links a[aria-current="page"]::before { width: 100%; }
         }
-        /* --- 4. Sections principales --- */
-        section { padding: 80px 20px; text-align: center; position: relative; }
+
+        /* ========================================================== */
+        /* 3. SECTIONS & COMPONENTS          */
+        /* ========================================================== */
+        section {
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+        }
+
         .section-title {
             font-size: clamp(2.5rem, 6vw, 3.5rem);
-            color: var(--primary-color);
+            color: var(--color-primary);
             margin-bottom: 30px;
             font-weight: 700;
             position: relative;
             display: inline-block;
             padding-bottom: 15px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideInUp 1s ease-out forwards;
         }
+
         .section-title::after {
             content: '';
             position: absolute;
@@ -348,456 +349,146 @@
             transform: translateX(-50%);
             width: 80px;
             height: 2px;
-            background-color: var(--primary-color);
-            box-shadow: 0 0 8px var(--primary-color);
+            background-color: var(--color-primary);
+            box-shadow: 0 0 8px var(--color-primary);
         }
+
         .section-description {
             max-width: 800px;
             margin: 0 auto 40px auto;
             font-size: clamp(1rem, 2vw, 1.15rem);
-            color: var(--text-color);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideInUp 1s ease-out 0.3s forwards;
-        }
-        #about { background-color: var(--darker-color); padding: 60px 20px; }
-        #about .about-content {
-            max-width: 800px;
-            padding: 40px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.9);
-            text-align: center;
-            border: 1px solid var(--primary-color);
-        }
-        .video-cards-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 50px 20px;
-            background-color: var(--darker-color);
-        }
-        .video-card {
-            position: relative;
-            width: 100%;
-            max-width: 350px;
-            height: 400px;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .card-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-            filter: brightness(0.7);
-            transition: filter 0.3s ease;
-        }
-        .video-card-content {
-            position: relative;
-            z-index: 2;
-            height: 100%;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-        .video-card-content h4 {
-            margin-top: auto;
-            margin-bottom: 10px;
-            font-size: 1.8rem;
-            color: var(--primary-color);
-        }
-        .video-card-content p { font-size: 1rem; margin-bottom: 0; }
-        .video-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7); }
-        .video-card:hover .card-video { filter: brightness(1.0); }
-        @media (max-width: 768px) {
-            .video-cards-container { flex-direction: column; align-items: center; }
-            .video-card { height: 300px; }
+            color: var(--color-text);
         }
 
-        /* --- 5. Cartes d'information --- */
-        .info-cards {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 50px;
-        }
-        .card {
-            background-color: #1e1e1e;
-            border-radius: 15px;
-            padding: 35px;
-            width: clamp(280px, 90%, 380px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-            transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease, background-color var(--transition-duration) ease;
+        .settings-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: var(--color-background-darker);
+            border-radius: var(--border-radius);
+            box-shadow: 0 8px 25px var(--color-shadow);
             text-align: left;
-            border: 1px solid rgba(212, 175, 127, 0.2);
-            opacity: 0;
-            animation: slideInUp 0.8s ease-out forwards;
+            border: 1px solid var(--color-border);
         }
-        @media (min-width: 769px) {
-            .card:hover {
-                transform: translateY(-10px) scale(1.01);
-                box-shadow: 0 18px 45px rgba(0, 0, 0, 0.8);
-                background-color: #252525;
-            }
-        }
-        @media (max-width: 768px) { .card { text-align: center; } }
-        .card h3 {
-            color: var(--primary-color);
-            margin-bottom: 12px;
-            font-size: clamp(1.4rem, 3.5vw, 1.7rem);
-            letter-spacing: 0.5px;
-        }
-        .card p { color: #ccc; font-size: clamp(1rem, 2vw, 1.1rem); margin: 0; line-height: 1.7; }
-        .card-icon i {
-            color: var(--primary-color);
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 5px rgba(212, 175, 127, 0.5));
-        }
-        .contact-link { color: var(--primary-color); text-decoration: underline; }
-        .contact-link:hover { color: #c09d6b; }
-
-        /* --- 6. Galerie et Plats (Grille) --- */
-        /* --- 6. Galerie et Plats (Grille) --- */
-        .gallery, .plats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            justify-items: center;
-            margin-top: 50px;
-        }
-        .gallery-item, .plat-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 18px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-            /* Transitions pour le zoom de l'élément au survol/clic */
-            transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
-            cursor: pointer;
-            border: 2px solid transparent;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: slideInUp 0.8s ease-out forwards;
-        }
-        /* Délai d'animation pour les éléments de la galerie */
-        .gallery-item:nth-child(1), .plat-item:nth-child(1) { animation-delay: 0.2s; }
-        .gallery-item:nth-child(2), .plat-item:nth-child(2) { animation-delay: 0.3s; }
-        .gallery-item:nth-child(3), .plat-item:nth-child(3) { animation-delay: 0.4s; }
-        .gallery-item:nth-child(4), .plat-item:nth-child(4) { animation-delay: 0.5s; }
-        .gallery-item:nth-child(5), .plat-item:nth-child(5) { animation-delay: 0.6s; }
-        .gallery-item:nth-child(6), .plat-item:nth-child(6) { animation-delay: 0.7s; }
-        .gallery-item:nth-child(7), .plat-item:nth-child(7) { animation-delay: 0.8s; }
-        .gallery-item:nth-child(8), .plat-item:nth-child(8) { animation-delay: 0.9s; }
-
-        /* Effet au survol (PC) et au clic/tapotement (PC & Mobile) */
-        .gallery-item:hover, .plat-item:hover,
-        .gallery-item:focus, .plat-item:focus,
-        .gallery-item:active, .plat-item:active {
-            transform: scale(1.07); /* Zoom léger de l'élément */
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
-            border: 2px solid var(--primary-color);
-            outline: none;
-        }
-        .gallery-item img, .plat-item img {
-            width: 100%;
-            height: auto; /* Permet aux images de garder leur ratio */
-            object-fit: unset;
-            display: block;
-            transition: transform 0.6s ease;
-        }
-        /* Zoom de l'image à l'intérieur de l'élément */
-        .gallery-item:hover img, .plat-item:hover img,
-        .gallery-item:focus img, .plat-item:focus img,
-        .gallery-item:active img {
-            transform: scale(1.15);
+        
+        .tabs-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--color-border);
         }
 
-        .item-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0,0,0,0.85);
-            color: var(--secondary-color);
-            padding: 12px;
-            font-size: 1rem;
-            /* Cache la légende en bas de l'élément par défaut */
-            transform: translateY(100%); 
-            transition: transform var(--transition-duration) ease;
-            text-align: center;
+        .tab-button {
+            background: transparent;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            color: var(--color-text);
+            cursor: pointer;
+            transition: color var(--transition-speed), border-bottom-color var(--transition-speed);
+            border-bottom: 2px solid transparent;
+            position: relative;
+            top: 2px;
+        }
+        
+        .tab-button.active {
+            color: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+
+        .tab-button:hover:not(.active) {
+            color: var(--color-primary-light);
+        }
+        
+        .tab-content {
+            display: none;
+            padding-top: 1rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+
+        .setting-section-title {
+            font-family: var(--font-body);
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--color-accent-soft);
+            padding-bottom: 0.5rem;
+        }
+
+        .setting-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--color-accent-soft);
         }
-        @media (max-width: 768px) {
-            /* Mise en page de la légende sur mobile - RETOUR À LA VERSION PRÉCÉDENTE */
-            .item-caption {
-                /* La légende est masquée par défaut (via translateY(100%) ci-dessus) 
-                et apparaît uniquement au tapotement grâce à :focus/:active ci-dessous. */
-                padding: 15px;
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-        .plat-price {
-            font-family: var(--font-display);
-            color: var(--primary-color);
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-        /* Affichage de la légende au survol/clic/tapotement */
-        .gallery-item:hover .item-caption, .plat-item:hover .item-caption,
-        .gallery-item:focus .item-caption, .plat-item:focus .item-caption,
-        .gallery-item:active .item-caption {
-            transform: translateY(0);
-        }
-        /* --- 7. Formulaire de Contact --- */
-        #contact { background-color: var(--darker-color); padding-bottom: 100px; }
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 600px;
-            margin: 0 auto;
-            gap: 25px;
-        }
-        .form-group { width: 100%; position: relative; opacity: 0; animation: slideInUp 0.8s ease-out forwards; }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-align: left;
-            font-size: 1.1rem;
-        }
-        form input, form textarea {
-            padding: 14px;
-            width: 100%;
-            border-radius: 10px;
-            border: 1px solid #555;
-            background-color: #2a2a2a;
-            color: var(--secondary-color);
-            font-size: 1.05rem;
-            font-family: var(--font-body);
-            transition: border-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease, background-color var(--transition-duration) ease;
-        }
-        form input::placeholder, form textarea::placeholder { color: #999; font-style: italic; }
-        form input:focus, form textarea:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(212, 175, 127, 0.6);
-            background-color: #333;
-            outline: none;
-        }
-        form input.invalid, form textarea.invalid { border-color: #e74c3c; box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.6); }
-        form input.valid, form textarea.valid { border-color: #2ecc71; box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.6); }
-        .error-message { font-size: 0.85rem; color: #e74c3c; margin-top: 5px; display: block; min-height: 20px; text-align: left; }
-        .form-honeypot { display: none; }
-        #map .map-container {
-            width: 100%;
-            max-width: 800px;
-            height: 400px;
-            margin: 40px auto;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-        }
-        .map-container iframe { width: 100%; height: 100%; border: 0; }
         
-        /* --- 8. Lightbox pour la galerie --- */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            justify-content: center;
+        .setting-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .setting-item-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .setting-item p {
+            font-size: 0.9rem;
+            color: var(--color-text);
+            margin: 0.5rem 0 0 0;
+        }
+        
+        .setting-controls {
+            display: flex;
             align-items: center;
+            gap: 1rem;
+        }
+
+        /* Styles des contrôles */
+        select, input[type="text"], input[type="email"], input[type="password"] {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--color-border);
+            background: var(--color-background);
+            color: var(--color-secondary);
             cursor: pointer;
-            animation: fadeIn 0.3s forwards;
-        }
-        .lightbox.active { display: flex; }
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-            transform: scale(0.8);
-            transition: transform 0.3s ease;
-        }
-        .lightbox.active .lightbox-content { transform: scale(1); }
-        .lightbox-caption {
-            position: absolute;
-            bottom: 5%;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-size: 1.2rem;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 10px 20px;
-            border-radius: 5px;
-        }
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 3rem;
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-        .lightbox-close:hover { color: var(--primary-color); }
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            width: 50px;
-            height: 50px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 2rem;
-        }
-        .lightbox-nav:hover { background-color: rgba(255, 255, 255, 0.4); }
-        .lightbox-nav.prev { left: 20px; }
-        .lightbox-nav.next { right: 20px; }
-
-        /* --- 9. Footer --- */
-        footer {
-            background-color: var(--darker-color);
-            color: var(--primary-color);
-            text-align: center;
-            padding: 40px 20px;
-            font-size: 0.95rem;
-            border-top: 1px solid #222;
-            letter-spacing: 0.5px;
-            opacity: 0;
-            animation: fadeIn 1s ease-out 1s forwards;
+            transition: border-color var(--transition-speed);
         }
 
-        /* Style du bouton "Retour en haut" */
-        #scroll-to-top {
-            position: fixed; /* Reste visible même en défilant */
-            bottom: 20px; /* À 20px du bas de l'écran */
-            right: 20px; /* À 20px de la droite de l'écran */
-            z-index: 999; /* Toujours au-dessus des autres éléments */
-            display: none; /* Caché par défaut */
-            width: 50px;
-            height: 50px;
-            background-color: var(--primary-color);
-            color: var(--darker-color);
-            border-radius: 50%;
-            text-align: center;
-            line-height: 50px;
-            font-size: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease-in-out;
+        input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus, select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 5px var(--color-primary);
         }
 
-        #scroll-to-top:hover {
-            transform: scale(1.1);
-            background-color: var(--some-other-color); /* Exemple: couleur différente au survol */
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%23d4af7f" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 1.2rem;
         }
 
-        html {
-        scroll-behavior: smooth;
-        }
-
-        /* Style pour la grille des paramètres */
-        .settings-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem 0;
-        }
-
-        /* Style pour chaque carte de paramètre */
-        .setting-card {
-            background: var(--light-bg); /* Utilisez une variable pour la couleur de fond */
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .setting-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .setting-icon {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            background: var(--bg-color); /* Utiliser une couleur d'arrière-plan */
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .setting-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .setting-card p {
-            color: var(--text-color-secondary);
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Style spécifique pour l'interrupteur */
-        .notification-switch {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 1rem;
-        }
-
-        .switch {
+        .toggle-switch {
             position: relative;
             display: inline-block;
             width: 50px;
             height: 28px;
-            margin-right: 15px;
         }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
+        
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .toggle-slider {
             position: absolute;
             cursor: pointer;
             top: 0;
@@ -808,8 +499,8 @@
             transition: .4s;
             border-radius: 34px;
         }
-
-        .slider:before {
+        
+        .toggle-slider:before {
             position: absolute;
             content: "";
             height: 20px;
@@ -820,22 +511,179 @@
             transition: .4s;
             border-radius: 50%;
         }
+        
+        .toggle-switch input:checked + .toggle-slider { background-color: var(--color-primary); }
+        .toggle-switch input:checked + .toggle-slider:before { transform: translateX(22px); }
 
-        input:checked + .slider {
-            background-color: var(--primary-color);
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            margin: 0;
+            text-transform: none;
+            border-radius: var(--border-radius);
+        }
+        
+        .btn-tertiary {
+            background: var(--color-danger);
+            color: white;
+            border: none;
+            transition: background-color var(--transition-speed);
+        }
+        
+        .btn-tertiary:hover { background: var(--color-danger-hover); }
+
+        .color-picker-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
-        input:checked + .slider:before {
-            transform: translateX(22px);
+        .color-preview {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid var(--color-border);
+            cursor: pointer;
+            transition: transform var(--transition-speed), border-color var(--transition-speed);
+        }
+
+        .color-preview.active {
+            transform: scale(1.2);
+            border-color: var(--color-primary);
+            box-shadow: 0 0 5px var(--color-primary);
+        }
+
+        input[type="color"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: none;
+            border: none;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        input[type="color"]::-webkit-color-swatch {
+            border: none;
+            border-radius: 50%;
+            border: 2px solid var(--color-border);
+        }
+
+        /* ========================================================== */
+        /* 4. OPTIMISATION MOBILE            */
+        /* ========================================================== */
+        @media (max-width: 768px) {
+            .settings-container {
+                padding: 1rem;
+            }
+
+            .tab-button {
+                flex-grow: 1;
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
+
+            .setting-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                padding-bottom: 1.5rem;
+                text-align: left;
+            }
+
+            .setting-item-label {
+                font-size: 1rem;
+            }
+            
+            .setting-item p {
+                font-size: 0.8rem;
+            }
+
+            .setting-controls {
+                width: 100%;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+            
+            .theme-buttons {
+                width: 100%;
+                display: flex;
+            }
+            
+            .theme-buttons .btn {
+                flex-grow: 1;
+                font-size: 0.9rem;
+            }
+            
+            .color-palette {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            #custom-color-picker {
+                margin: 0 auto;
+            }
+
+            .setting-item .toggle-switch, .setting-item select {
+                margin-left: auto;
+            }
+        }
+        
+        /* ========================================================== */
+        /* 5. FOOTER & UTILITIES             */
+        /* ========================================================== */
+        footer {
+            background-color: var(--color-background-darker);
+            color: var(--color-text);
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            border-top: 1px solid #333;
+        }
+
+        .scroll-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--color-primary);
+            color: var(--color-background-darker);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            transition: opacity var(--transition-speed), transform var(--transition-speed);
+            z-index: 99;
+        }
+        
+        .scroll-btn:hover {
+            transform: translateY(-5px);
+            opacity: 0.9;
+        }
+
+        .lightbox {
+            display: none;
         }
     </style>
 </head>
 <body>
     <header class="hero-section" role="banner">
         <div class="hero-content">
-            <h1>miro.restaurant</h1>
-            <p>Art, Chic & Luxe – Une expérience gastronomique unique</p>
-            <a href="https://votre-site-de-reservation.com" target="_blank" class="btn btn-primary" rel="noopener noreferrer">Réserver une table</a>
+            <h1 class="site-title">miro.restaurant</h1>
+            <p class="tagline">Art, Chic & Luxe – Une expérience gastronomique unique</p>
+            <a href="https://votre-site-de-reservation.com" target="_blank" class="btn btn-primary" rel="noopener noreferrer">
+                Réserver une table
+            </a>
         </div>
     </header>
 
@@ -847,90 +695,161 @@
             <span class="bar"></span>
             <span class="menu-label">Menu</span>
         </button>
-        <ul id="main-nav-list">
-            <li><a href="#about" aria-current="page">À propos</a></li>
-            <li><a href="#info">Informations</a></li>
-            <li><a href="#gallery">Galerie</a></li>
-            <li><a href="#plats">Nos plats</a></li>
-            <li><a href="#map">Carte</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="settings.html">Paramètres</a></li>
+        <ul id="main-nav-list" class="nav-links">
+            <li><a href="index.html#about">À propos</a></li>
+            <li><a href="index.html#info">Informations</a></li>
+            <li><a href="index.html#gallery">Galerie</a></li>
+            <li><a href="index.html#plats">Nos plats</a></li>
+            <li><a href="index.html#map">Carte</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="settings.html" aria-current="page">Paramètres</a></li>
         </ul>
     </nav>
 
-<section id="settings-page" aria-labelledby="settings-heading">
-    <h2 id="settings-heading" class="section-title">Paramètres</h2>
-    <p class="section-description">Personnalisez votre expérience de navigation.</p>
+    <main id="settings-page" aria-labelledby="settings-heading">
+        <section>
+            <h2 id="settings-heading" class="section-title">Paramètres</h2>
+            <p class="section-description">Gérez vos préférences de navigation, d'apparence et de vie privée.</p>
 
-    <div class="settings-grid">
+            <div class="settings-container">
+                <div class="tabs-nav" role="tablist" aria-label="Panneaux de paramètres">
+                    <button id="tab-appearance" class="tab-button active" role="tab" aria-controls="panel-appearance" aria-selected="true" tabindex="0"><i class="fas fa-palette"></i> Apparence</button>
+                    <button id="tab-data" class="tab-button" role="tab" aria-controls="panel-data" aria-selected="false" tabindex="-1"><i class="fas fa-database"></i> Données</button>
+                    <button id="tab-advanced" class="tab-button" role="tab" aria-controls="panel-advanced" aria-selected="false" tabindex="-1"><i class="fas fa-cogs"></i> Avancé</button>
+                </div>
 
-        <div class="setting-card">
-            <div class="setting-icon"><i class="fas fa-palette"></i></div>
-            <div class="setting-content">
-                <h3>Thème</h3>
-                <p>Choisissez entre un thème clair ou sombre.</p>
-                <div class="theme-switch-container">
-                    <button id="light-mode-btn" class="btn btn-secondary">Clair</button>
-                    <button id="dark-mode-btn" class="btn btn-secondary">Sombre</button>
+                <div id="panel-appearance" class="tab-content active" role="tabpanel" aria-labelledby="tab-appearance">
+                    <h3 class="setting-section-title">Options d'affichage</h3>
+                    <div class="setting-item">
+                        <div>
+                            <span class="setting-item-label">Thème du site</span>
+                            <p>Basculez entre un thème clair ou sombre.</p>
+                        </div>
+                        <div class="setting-controls theme-buttons" role="radiogroup" aria-label="Sélection du thème">
+                            <button class="btn btn-small" data-theme="light">Clair</button>
+                            <button class="btn btn-small" data-theme="dark">Sombre</button>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <span class="setting-item-label">Couleur d'accentuation</span>
+                            <p>Personnalisez la couleur des éléments interactifs.</p>
+                        </div>
+                        <div class="setting-controls">
+                            <div class="color-palette" role="radiogroup" aria-label="Palette de couleurs d'accentuation">
+                                <span class="color-preview active" style="background-color: #d4af7f;" data-color="#d4af7f" role="radio" aria-checked="true" tabindex="0"></span>
+                                <span class="color-preview" style="background-color: #007bff;" data-color="#007bff" role="radio" aria-checked="false" tabindex="-1"></span>
+                                <span class="color-preview" style="background-color: #2ecc71;" data-color="#2ecc71" role="radio" aria-checked="false" tabindex="-1"></span>
+                                <span class="color-preview" style="background-color: #e74c3c;" data-color="#e74c3c" role="radio" aria-checked="false" tabindex="-1"></span>
+                            </div>
+                            <input type="color" id="custom-color-picker" value="#d4af7f" aria-label="Sélectionner une couleur personnalisée">
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <span class="setting-item-label">Taille de la police</span>
+                            <p id="font-size-value">100%</p>
+                        </div>
+                        <input type="range" id="font-size-slider" class="font-size-slider" min="0.8" max="1.5" step="0.1" value="1" aria-valuemin="0.8" aria-valuemax="1.5">
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <span class="setting-item-label">Police d'écriture</span>
+                            <p>Choisissez la police d'affichage du texte.</p>
+                        </div>
+                        <select id="font-style-select">
+                            <option value="var(--font-body)">Montserrat (défaut)</option>
+                            <option value="var(--font-system)">Système (rapide)</option>
+                            <option value="var(--font-roboto)">Roboto</option>
+                            <option value="var(--font-merriweather)">Merriweather</option>
+                            <option value="var(--font-poppins)">Poppins</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="panel-data" class="tab-content" role="tabpanel" aria-labelledby="tab-data">
+                    <h3 class="setting-section-title">Gestion des données</h3>
+                    <div class="setting-item">
+                        <div>
+                            <span class="setting-item-label">Exporter mes données</span>
+                            <p>Créez un fichier contenant toutes vos données de profil.</p>
+                        </div>
+                        <button class="btn btn-small btn-primary" id="export-data-btn">Exporter</button>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <span class="setting-item-label">Gestion des cookies</span>
+                            <p>Gérez vos préférences de suivi et de personnalisation.</p>
+                        </div>
+                        <button class="btn btn-small btn-primary" id="manage-cookies-btn">Gérer</button>
+                    </div>
+                </div>
+
+                <div id="panel-advanced" class="tab-content" role="tabpanel" aria-labelledby="tab-advanced">
+                    <h3 class="setting-section-title">Accessibilité</h3>
+                    <div class="setting-item">
+                        <div>
+                            <span class="setting-item-label">Mode daltonien</span>
+                            <p>Active un schéma de couleurs optimisé.</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="color-blind-toggle" role="switch">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <span class="setting-item-label">Mode contraste élevé</span>
+                            <p>Augmente le contraste des couleurs pour une meilleure lisibilité.</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="high-contrast-toggle" role="switch">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <span class="setting-item-label">Animations de page</span>
+                            <p>Désactive les animations pour les utilisateurs sensibles ou les appareils lents.</p>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="animations-toggle" role="switch">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <h3 class="setting-section-title">Préférences diverses</h3>
+                    <div class="setting-item">
+                        <div>
+                            <span class="setting-item-label">Langue du site</span>
+                            <p>Sélectionnez la langue d'affichage de l'interface.</p>
+                        </div>
+                        <select id="language-select">
+                            <option value="fr">Français</option>
+                            <option value="en">English</option>
+                            <option value="ar">العربية</option>
+                        </select>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <span class="setting-item-label">Effacer toutes les préférences</span>
+                            <p>Supprimez toutes vos préférences de navigation sauvegardées localement.</p>
+                        </div>
+                        <button id="clear-data-btn" class="btn btn-small btn-tertiary">Effacer</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
+    </main>
 
-        <div class="setting-card">
-            <div class="setting-icon"><i class="fas fa-globe"></i></div>
-            <div class="setting-content">
-                <h3>Langue</h3>
-                <p>Sélectionnez la langue d'affichage du site.</p>
-                <div class="language-options">
-                    <select id="language-select" aria-label="Sélectionner la langue">
-                        <option value="fr" selected>Français</option>
-                        <option value="en">English</option>
-                        <option value="ar">العربية</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="setting-card">
-            <div class="setting-icon"><i class="fas fa-bell"></i></div>
-            <div class="setting-content">
-                <h3>Notifications</h3>
-                <p>Gérez vos préférences de communication.</p>
-                <div class="notification-switch">
-                    <label for="notification-toggle" class="switch">
-                        <input type="checkbox" id="notification-toggle" role="switch">
-                        <span class="slider round"></span>
-                    </label>
-                    <span id="notification-status">Activées</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="setting-card">
-            <div class="setting-icon"><i class="fas fa-universal-access"></i></div>
-            <div class="setting-content">
-                <h3>Accessibilité</h3>
-                <p>Améliorez la lisibilité et le confort visuel.</p>
-                <div class="accessibility-options">
-                    <label for="font-size-slider">Taille de la police :</label>
-                    <input type="range" id="font-size-slider" min="0.8" max="1.5" step="0.1" value="1" aria-label="Ajuster la taille de la police">
-                    <span id="font-size-value">100%</span>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-    <a id="scroll-to-top" class="scroll-btn" href="#accueil" aria-label="Retourner en haut de la page">
+    <a id="scroll-to-top" class="scroll-btn" href="#" aria-label="Retourner en haut de la page">
         <i class="fas fa-arrow-up"></i>
     </a>
-
+    
     <div class="lightbox" aria-hidden="true" role="dialog">
-        <button class="lightbox-close" aria-label="Fermer la galerie"> × </button>
-        <button class="lightbox-nav prev" aria-label="Image précédente"> < </button>
+        <button class="lightbox-close" aria-label="Fermer la galerie"> &times; </button>
+        <button class="lightbox-nav prev" aria-label="Image précédente"> &lt; </button>
         <img class="lightbox-content" alt="">
-        <button class="lightbox-nav next" aria-label="Image suivante"> > </button>
+        <button class="lightbox-nav next" aria-label="Image suivante"> &gt; </button>
         <div class="lightbox-caption"></div>
     </div>
 
@@ -938,280 +857,378 @@
         <p>© 2025 miro.restaurant – Tous droits réservés. Design et développement par [Abdessamed]</p>
     </footer>
 
-    
-
     <script>
+        // ==========================================================
+        //                     JAVASCRIPT APPLICATION
+        // ==========================================================
         document.addEventListener('DOMContentLoaded', () => {
-            // Script de gestion du menu hamburger
-            const hamburger = document.querySelector('.hamburger');
-            const navUl = document.querySelector('nav ul');
-            const heroBackground = document.querySelector('.hero-background');
 
-            hamburger.addEventListener('click', () => {
-                navUl.classList.toggle('active');
-                hamburger.classList.toggle('active');
-                const isExpanded = hamburger.classList.contains('active');
-                hamburger.setAttribute('aria-expanded', isExpanded);
-                document.body.style.overflow = isExpanded ? 'hidden' : '';
-            });
+            /**
+             * @class SettingsApp
+             * @description Gère toutes les fonctionnalités de la page de paramètres de manière modulaire et professionnelle.
+             */
+            class SettingsApp {
+                constructor() {
+                    // Cible les éléments HTML pour un accès facile
+                    this.elements = {
+                        html: document.documentElement,
+                        body: document.body,
+                        hamburger: document.querySelector('.hamburger'),
+                        navUl: document.querySelector('nav ul'),
+                        heroSection: document.querySelector('.hero-section'),
+                        scrollToTopBtn: document.getElementById('scroll-to-top'),
+                        tabButtons: document.querySelectorAll('.tab-button'),
+                        tabPanels: document.querySelectorAll('.tab-content'),
+                        themeBtns: document.querySelectorAll('.theme-buttons .btn'),
+                        fontSizeSlider: document.getElementById('font-size-slider'),
+                        fontSizeValue: document.getElementById('font-size-value'),
+                        fontStyleSelect: document.getElementById('font-style-select'),
+                        colorPreviews: document.querySelectorAll('.color-preview'),
+                        customColorPicker: document.getElementById('custom-color-picker'),
+                        colorBlindToggle: document.getElementById('color-blind-toggle'),
+                        highContrastToggle: document.getElementById('high-contrast-toggle'),
+                        animationsToggle: document.getElementById('animations-toggle'),
+                        languageSelect: document.getElementById('language-select'),
+                        clearDataBtn: document.getElementById('clear-data-btn'),
+                        exportDataBtn: document.getElementById('export-data-btn'),
+                        manageCookiesBtn: document.getElementById('manage-cookies-btn')
+                    };
 
-            navUl.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navUl.classList.remove('active');
-                    hamburger.classList.remove('active');
-                    hamburger.setAttribute('aria-expanded', 'false');
-                    document.body.style.overflow = '';
-                });
-            });
-
-            // Parallax effect for header
-            window.addEventListener('scroll', () => {
-                if (window.innerWidth >= 769) {
-                    const scrollPosition = window.scrollY;
-                    heroBackground.style.transform = `translateY(${scrollPosition * 0.4}px)`;
+                    // Initialise toutes les fonctionnalités de l'application
+                    this.initApp();
                 }
-            });
 
-            // Observer pour les animations d'apparition au scroll
-            const animatedElements = document.querySelectorAll('.section-title, .section-description, .card, .gallery-item, .plat-item, .form-group, footer, #about .about-content');
-            const animateObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        observer.unobserve(entry.target);
+                /**
+                 * @private
+                 * @description Point d'entrée de l'application. Initialise les modules.
+                 */
+                initApp() {
+                    this._initHeroSection();
+                    this._initHamburgerMenu();
+                    this._initTabs();
+                    this._initSettings();
+                    this._initScrollToTop();
+                    this._setupDataManagement();
+                }
+
+                // ==========================================================
+                //                 GESTION DES ÉLÉMENTS PRINCIPAUX
+                // ==========================================================
+
+                /**
+                 * @private
+                 * @description Gère l'effet de chargement de la section héroïque.
+                 */
+                _initHeroSection() {
+                    if (this.elements.heroSection) {
+                        this.elements.heroSection.classList.add('loaded');
                     }
-                });
-            }, { rootMargin: '0px', threshold: 0.1 });
-            animatedElements.forEach(el => animateObserver.observe(el));
+                }
 
-            // Galerie Lightbox et effet de suivi de souris
-            const galleryItems = document.querySelectorAll('.gallery-item');
-            const lightbox = document.querySelector('.lightbox');
-            const lightboxImg = document.querySelector('.lightbox-content');
-            const lightboxCaption = document.querySelector('.lightbox-caption');
-            const closeBtn = document.querySelector('.lightbox-close');
-            const prevBtn = document.querySelector('.lightbox-nav.prev');
-            const nextBtn = document.querySelector('.lightbox-nav.next');
-            let currentImageIndex = 0;
+                /**
+                 * @private
+                 * @description Gère le menu de navigation mobile (hamburger).
+                 */
+                _initHamburgerMenu() {
+                    const { hamburger, navUl } = this.elements;
+                    if (!hamburger || !navUl) return;
 
-            const openLightbox = (index) => {
-                const items = document.querySelectorAll('.gallery-item');
-                currentImageIndex = index;
-                const item = items[currentImageIndex];
-                const fullSizeSrc = item.querySelector('img').dataset.fullSize;
-                const captionText = item.querySelector('figcaption').textContent;
+                    hamburger.addEventListener('click', () => {
+                        const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+                        hamburger.setAttribute('aria-expanded', !isExpanded);
+                        navUl.classList.toggle('active');
+                        this.elements.body.style.overflow = !isExpanded ? 'hidden' : '';
+                    });
 
-                lightbox.classList.add('active');
-                lightboxImg.src = fullSizeSrc;
-                lightboxImg.alt = captionText;
-                lightboxCaption.textContent = captionText;
-                lightbox.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
-            };
+                    navUl.querySelectorAll('a').forEach(link => {
+                        link.addEventListener('click', () => {
+                            // Ferme le menu sans empêcher le lien de fonctionner
+                            hamburger.setAttribute('aria-expanded', 'false');
+                            navUl.classList.remove('active');
+                            this.elements.body.style.overflow = '';
+                        });
+                    });
+                }
 
-            const closeLightbox = () => {
-                lightbox.classList.remove('active');
-                lightbox.setAttribute('aria-hidden', 'true');
-                document.body.style.overflow = '';
-            };
+                /**
+                 * @private
+                 * @description Gère la navigation par onglets de la section Paramètres.
+                 */
+                _initTabs() {
+                    const { tabButtons, tabPanels } = this.elements;
+                    tabButtons.forEach(button => {
+                        button.addEventListener('click', () => {
+                            // Désactive tous les onglets et panneaux
+                            tabButtons.forEach(t => {
+                                t.classList.remove('active');
+                                t.setAttribute('aria-selected', 'false');
+                                t.setAttribute('tabindex', '-1');
+                            });
+                            tabPanels.forEach(p => p.classList.remove('active'));
 
-            const showNextImage = () => {
-                const items = document.querySelectorAll('.gallery-item');
-                currentImageIndex = (currentImageIndex + 1) % items.length;
-                openLightbox(currentImageIndex);
-            };
+                            // Active l'onglet et le panneau cliqués
+                            button.classList.add('active');
+                            button.setAttribute('aria-selected', 'true');
+                            button.setAttribute('tabindex', '0');
+                            const targetPanelId = button.getAttribute('aria-controls');
+                            document.getElementById(targetPanelId).classList.add('active');
+                        });
+                    });
+                }
 
-            const showPrevImage = () => {
-                const items = document.querySelectorAll('.gallery-item');
-                currentImageIndex = (currentImageIndex - 1 + items.length) % items.length;
-                openLightbox(currentImageIndex);
-            };
+                /**
+                 * @private
+                 * @description Initialise tous les paramètres du site en lisant le localStorage.
+                 */
+                _initSettings() {
+                    this._setupTheme();
+                    this._setupFontSize();
+                    this._setupFontStyle();
+                    this._setupColorPalette();
+                    this._setupColorBlindMode();
+                    this._setupHighContrastMode();
+                    this._setupAnimations();
+                    this._setupLanguage();
+                    this._setupClearData();
+                }
 
-            galleryItems.forEach((item, index) => {
-                item.addEventListener('click', () => openLightbox(index));
-                item.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        openLightbox(index);
+                // ==========================================================
+                //                 GESTION DES PARAMÈTRES INDIVIDUELS
+                // ==========================================================
+
+                /**
+                 * @private
+                 * @description Gère la bascule entre le thème clair et sombre.
+                 */
+                _setupTheme() {
+                    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+                    this.elements.html.setAttribute('data-theme', savedTheme);
+                    this.elements.themeBtns.forEach(btn => {
+                        btn.classList.toggle('active', btn.dataset.theme === savedTheme);
+                        btn.addEventListener('click', () => {
+                            this.elements.html.setAttribute('data-theme', btn.dataset.theme);
+                            localStorage.setItem('theme', btn.dataset.theme);
+                            this.elements.themeBtns.forEach(b => b.classList.remove('active'));
+                            btn.classList.add('active');
+                        });
+                    });
+                }
+
+                /**
+                 * @private
+                 * @description Gère le sélecteur de taille de police.
+                 */
+                _setupFontSize() {
+                    const { fontSizeSlider, fontSizeValue } = this.elements;
+                    if (!fontSizeSlider || !fontSizeValue) return;
+
+                    const savedFontSize = localStorage.getItem('fontSize') || '1';
+                    fontSizeSlider.value = savedFontSize;
+                    this._updateFontSize(savedFontSize);
+
+                    fontSizeSlider.addEventListener('input', (e) => this._updateFontSize(e.target.value));
+                }
+
+                /**
+                 * @private
+                 * @description Applique la taille de police et met à jour l'affichage.
+                 * @param {string} value - La valeur de la taille de police (ex: '1.2').
+                 */
+                _updateFontSize(value) {
+                    this.elements.html.style.fontSize = `${value}em`;
+                    this.elements.fontSizeValue.textContent = `${Math.round(value * 100)}%`;
+                    localStorage.setItem('fontSize', value);
+                }
+
+                /**
+                 * @private
+                 * @description Gère le sélecteur de police d'écriture.
+                 */
+                _setupFontStyle() {
+                    const select = this.elements.fontStyleSelect;
+                    if (!select) return;
+
+                    const savedFont = localStorage.getItem('fontStyle') || 'var(--font-body)';
+                    this.elements.html.style.setProperty('--font-body', savedFont);
+                    select.value = savedFont;
+
+                    select.addEventListener('change', (e) => {
+                        const newFont = e.target.value;
+                        this.elements.html.style.setProperty('--font-body', newFont);
+                        localStorage.setItem('fontStyle', newFont);
+                    });
+                }
+
+                /**
+                 * @private
+                 * @description Gère la palette de couleurs d'accentuation.
+                 */
+                _setupColorPalette() {
+                    const { colorPreviews, customColorPicker } = this.elements;
+                    const savedColor = localStorage.getItem('accentColor') || '#d4af7f';
+                    this.elements.html.style.setProperty('--color-primary', savedColor);
+                    
+                    if (customColorPicker) {
+                        customColorPicker.value = savedColor;
+                        customColorPicker.addEventListener('input', (e) => this._setAccentColor(e.target.value));
                     }
-                });
+
+                    if (colorPreviews) {
+                        colorPreviews.forEach(preview => {
+                            if (preview.dataset.color === savedColor) {
+                                preview.classList.add('active');
+                                preview.setAttribute('aria-checked', 'true');
+                                preview.setAttribute('tabindex', '0');
+                            }
+                            preview.addEventListener('click', (e) => {
+                                const newColor = e.target.dataset.color;
+                                this._setAccentColor(newColor);
+                                colorPreviews.forEach(p => p.classList.remove('active'));
+                                e.target.classList.add('active');
+                                customColorPicker.value = newColor;
+                            });
+                        });
+                    }
+                }
+
+                /**
+                 * @private
+                 * @description Applique la nouvelle couleur d'accentuation.
+                 * @param {string} color - La valeur hex de la couleur.
+                 */
+                _setAccentColor(color) {
+                    this.elements.html.style.setProperty('--color-primary', color);
+                    localStorage.setItem('accentColor', color);
+                }
+
+                /**
+                 * @private
+                 * @description Gère le mode daltonien.
+                 */
+                _setupColorBlindMode() {
+                    const toggle = this.elements.colorBlindToggle;
+                    if (!toggle) return;
+                    
+                    const savedState = localStorage.getItem('colorBlindMode') === 'on';
+                    toggle.checked = savedState;
+                    this.elements.html.setAttribute('data-color-blind', savedState ? 'on' : 'off');
+                    
+                    toggle.addEventListener('change', (e) => {
+                        const newState = e.target.checked;
+                        this.elements.html.setAttribute('data-color-blind', newState ? 'on' : 'off');
+                        localStorage.setItem('colorBlindMode', newState ? 'on' : 'off');
+                    });
+                }
                 
-                // Effet de survol créatif
-                const img = item.querySelector('img');
-                if (window.innerWidth > 768) {
-                    item.addEventListener('mousemove', (e) => {
-                        const rect = item.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-                        const rotateX = (y / rect.height - 0.5) * 20;
-                        const rotateY = (x / rect.width - 0.5) * -20;
-                        img.style.transform = `scale(1.15) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                /**
+                 * @private
+                 * @description Gère le mode contraste élevé.
+                 */
+                _setupHighContrastMode() {
+                    const toggle = this.elements.highContrastToggle;
+                    if (!toggle) return;
+
+                    const savedState = localStorage.getItem('highContrastMode') === 'on';
+                    toggle.checked = savedState;
+                    this.elements.html.setAttribute('data-high-contrast', savedState ? 'on' : 'off');
+                    
+                    toggle.addEventListener('change', (e) => {
+                        const newState = e.target.checked;
+                        this.elements.html.setAttribute('data-high-contrast', newState ? 'on' : 'off');
+                        localStorage.setItem('highContrastMode', newState ? 'on' : 'off');
                     });
-                    item.addEventListener('mouseleave', () => {
-                        img.style.transform = 'scale(1.07)';
+                }
+
+                /**
+                 * @private
+                 * @description Gère la désactivation des animations.
+                 */
+                _setupAnimations() {
+                    const toggle = this.elements.animationsToggle;
+                    if (!toggle) return;
+
+                    const savedState = localStorage.getItem('animations') === 'disabled';
+                    toggle.checked = !savedState;
+                    this.elements.body.classList.toggle('no-animations', savedState);
+
+                    toggle.addEventListener('change', (e) => {
+                        const newState = !e.target.checked;
+                        this.elements.body.classList.toggle('no-animations', newState);
+                        localStorage.setItem('animations', newState ? 'disabled' : 'enabled');
                     });
                 }
-            });
 
-            closeBtn.addEventListener('click', closeLightbox);
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) { closeLightbox(); }
-            });
-            prevBtn.addEventListener('click', showPrevImage);
-            nextBtn.addEventListener('click', showNextImage);
+                /**
+                 * @private
+                 * @description Gère la sélection de la langue.
+                 */
+                _setupLanguage() {
+                    const select = this.elements.languageSelect;
+                    if (!select) return;
+                    
+                    const savedLang = localStorage.getItem('language') || 'fr';
+                    select.value = savedLang;
 
-            document.addEventListener('keydown', (e) => {
-                if (lightbox.classList.contains('active')) {
-                    if (e.key === 'ArrowRight') { showNextImage(); }
-                    if (e.key === 'ArrowLeft') { showPrevImage(); }
-                    if (e.key === 'Escape') { closeLightbox(); }
+                    select.addEventListener('change', (e) => {
+                        localStorage.setItem('language', e.target.value);
+                        alert('La langue a été mise à jour. Veuillez recharger la page pour que les changements soient effectifs.');
+                    });
                 }
-            });
-
-            // Validation de formulaire améliorée
-            const form = document.querySelector('.contact-form');
-            const inputs = document.querySelectorAll('.contact-form input:not([type="hidden"]), .contact-form textarea');
-            const honeypot = document.getElementById('_honeypot');
-
-            const validateField = (input) => {
-                const errorMessage = input.parentElement.querySelector('.error-message');
-                if (input.validity.valid) {
-                    input.classList.remove('invalid');
-                    input.classList.add('valid');
-                    errorMessage.textContent = '';
-                } else {
-                    input.classList.remove('valid');
-                    input.classList.add('invalid');
-                    if (input.validity.valueMissing) {
-                        errorMessage.textContent = 'Ce champ est obligatoire.';
-                    } else if (input.validity.typeMismatch) {
-                        errorMessage.textContent = 'Veuillez entrer une adresse e-mail valide.';
-                    } else {
-                        errorMessage.textContent = 'Veuillez corriger ce champ.';
-                    }
+                
+                /**
+                 * @private
+                 * @description Gère l'option d'effacement de toutes les données du localStorage.
+                 */
+                _setupClearData() {
+                    const clearBtn = this.elements.clearDataBtn;
+                    if (!clearBtn) return;
+                    
+                    clearBtn.addEventListener('click', () => {
+                        if (confirm('Êtes-vous sûr de vouloir effacer toutes vos préférences de navigation ? Cette action est irréversible.')) {
+                            localStorage.clear();
+                            alert('Toutes les préférences ont été effacées. La page va se recharger.');
+                            location.reload();
+                        }
+                    });
                 }
-            };
+                
+                // ==========================================================
+                //                 GESTION DES DONNÉES
+                // ==========================================================
 
-            inputs.forEach(input => {
-                input.addEventListener('input', () => validateField(input));
-            });
+                /**
+                 * @private
+                 * @description Gère les boutons d'exportation et de gestion des cookies.
+                 */
+                _setupDataManagement() {
+                    this.elements.exportDataBtn.addEventListener('click', () => {
+                        alert('Un fichier .json contenant vos données a été exporté (simulation).');
+                    });
 
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                // Vérification du honeypot pour les bots
-                if (honeypot.value !== '') {
-                    console.log('Spam detected via honeypot.');
-                    return;
+                    this.elements.manageCookiesBtn.addEventListener('click', () => {
+                        alert('Fenêtre de gestion des cookies (modale) en cours de développement.');
+                    });
                 }
 
-                let isFormValid = true;
-                inputs.forEach(input => {
-                    validateField(input);
-                    if (!input.validity.valid) { isFormValid = false; }
-                });
+                // ==========================================================
+                //                 UTILITAIRES
+                // ==========================================================
 
-                if (isFormValid) {
-                    alert('Votre message a été envoyé avec succès ! Merci de nous avoir contactés.');
-                    form.reset();
-                    inputs.forEach(input => { input.classList.remove('valid', 'invalid'); });
-                } else {
-                    const firstInvalid = document.querySelector('.contact-form .invalid');
-                    if (firstInvalid) { firstInvalid.focus(); }
+                /**
+                 * @private
+                 * @description Gère le bouton de défilement vers le haut de la page.
+                 */
+                _initScrollToTop() {
+                    const scrollToTopBtn = this.elements.scrollToTopBtn;
+                    if (!scrollToTopBtn) return;
+                    window.addEventListener('scroll', () => {
+                        scrollToTopBtn.style.display = window.scrollY > 200 ? 'flex' : 'none';
+                    });
                 }
-            });
-
-            // NOUVEAU : Script pour le bouton "Retour en haut"
-            const scrollToTopBtn = document.getElementById("scroll-to-top");
-
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 100) {
-                    scrollToTopBtn.style.display = "block";
-                } else {
-                    scrollToTopBtn.style.display = "none";
-                }
-            });
-
-            scrollToTopBtn.addEventListener("click", (e) => {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
-            });
-        });
-
-        // --- Code pour les fonctionnalités de la page Paramètres ---
-        // Ce code doit être placé à la fin de votre fichier script.js
-
-        document.addEventListener('DOMContentLoaded', () => {
-
-            // 1. Fonctionnalité du mode sombre (Dark Mode)
-            const body = document.body;
-            const lightModeBtn = document.getElementById('light-mode-btn');
-            const darkModeBtn = document.getElementById('dark-mode-btn');
-
-            // On vérifie s'il y a une préférence sauvegardée et on l'applique
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                body.classList.add(savedTheme);
-            } else {
-                // Par défaut, on peut mettre le mode clair
-                body.classList.add('light-mode');
             }
-
-            // On écoute les clics sur les boutons pour changer de thème
-            if (lightModeBtn && darkModeBtn) {
-                lightModeBtn.addEventListener('click', () => {
-                    body.classList.remove('dark-mode');
-                    body.classList.add('light-mode');
-                    localStorage.setItem('theme', 'light-mode');
-                });
-
-                darkModeBtn.addEventListener('click', () => {
-                    body.classList.remove('light-mode');
-                    body.classList.add('dark-mode');
-                    localStorage.setItem('theme', 'dark-mode');
-                });
-            }
-
-            // 2. Fonctionnalité du sélecteur de langue
-            const languageSelect = document.getElementById('language-select');
-
-            if (languageSelect) {
-                const savedLanguage = localStorage.getItem('language');
-                if (savedLanguage) {
-                    languageSelect.value = savedLanguage;
-                }
-
-                languageSelect.addEventListener('change', (e) => {
-                    const newLang = e.target.value;
-                    localStorage.setItem('language', newLang);
-                    alert("La langue a été changée en " + newLang + " !"); // Vous pouvez remplacer cette alerte par une logique plus avancée
-                });
-            }
-
-            // 3. Fonctionnalité de l'interrupteur de notifications
-            const notificationToggle = document.getElementById('notification-toggle');
-            const notificationStatus = document.getElementById('notification-status');
-
-            if (notificationToggle) {
-                const savedNotificationStatus = localStorage.getItem('notifications');
-                if (savedNotificationStatus) {
-                    notificationToggle.checked = savedNotificationStatus === 'enabled';
-                    notificationStatus.textContent = notificationToggle.checked ? 'Activées' : 'Désactivées';
-                }
-
-                notificationToggle.addEventListener('change', () => {
-                    if (notificationToggle.checked) {
-                        notificationStatus.textContent = 'Activées';
-                        localStorage.setItem('notifications', 'enabled');
-                    } else {
-                        notificationStatus.textContent = 'Désactivées';
-                        localStorage.setItem('notifications', 'disabled');
-                    }
-                });
-            }
+            
+            // Instancie la classe pour lancer l'application
+            new SettingsApp();
         });
     </script>
 </body>
