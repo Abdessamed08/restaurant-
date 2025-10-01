@@ -3,730 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>miro.restaurant | L'Art & la Gastronomie</title>
-    <meta name="description" content="Découvrez miro.restaurant, une expérience gastronomique unique à Alger. Un restaurant où l'art, le chic et le luxe se rencontrent.">
-
-    <link rel="canonical" href="https://miro.restaurant">
-    <link rel="icon" type="image/png" href="images/favicon.png">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&display=swap"></noscript>
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-
-    <style>
-        /* --- 1. Variables et Styles de base --- */
-        :root {
-            --primary-color: #d4af7f; /* Or, couleur principale */
-            --secondary-color: #f4f4f4; /* Blanc cassé, texte clair */
-            --dark-color: #1a1a1a; /* Noir très foncé, fond principal */
-            --darker-color: #0d0d0d; /* Noir absolu, pour la navigation et le footer */
-            --text-color: #e0e0e0; /* Gris clair, texte secondaire */
-            --font-display: 'Playfair Display', serif; /* Police pour les titres, élégante */
-            --font-body: 'Montserrat', sans-serif; /* Police pour le corps, moderne */
-            --transition-duration: 0.3s; /* Durée standard pour les transitions */
-            --artistic-bg-texture: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><pattern id="p" width="100" height="100" patternUnits="userSpaceOnUse"><path d="m15.539 74.461c-3.138-1.78-6.17-3.951-8.9-6.495c-2.731-2.544-5.183-5.462-7.3-8.681c-2.116-3.22-3.83-6.702-5.13-10.375c-1.299-3.674-2.1-7.5-2.39-11.383c-0.29-3.884-0.1-7.8-0.08-11.7c0.016-3.896-0.081-7.8-0.45-11.666c-0.37-3.866-1-7.7-1.89-11.411c-0.89-3.712-2.07-7.2-3.56-10.428l-0.08 0.08z" fill="%23222" opacity="0.1"/><path d="m84.461 25.539c3.138 1.78 6.17 3.951 8.9 6.495c2.731 2.544 5.183 5.462 7.3 8.681c2.116 3.22 3.83 6.702 5.13 10.375c1.299 3.674 2.1 7.5 2.39 11.383c0.29 3.884 0.1 7.8 0.08 11.7c-0.016 3.896 0.081 7.8 0.45 11.666c0.37-3.866 1-7.7 1.89-11.411c0.89-3.712 2.07-7.2 3.56-10.428l0.08-0.08z" fill="%23222" opacity="0.1" transform="rotate(180 50 50)"/></pattern></defs><rect width="100" height="100" fill="url(%23p)"/></svg>');
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: var(--font-body);
-            background-color: var(--dark-color);
-            color: var(--secondary-color);
-            line-height: 1.8;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            background-image: var(--artistic-bg-texture);
-            background-repeat: repeat;
-            background-size: 50px 50px;
-            background-blend-mode: multiply;
-        }
-        a { text-decoration: none; color: inherit; }
-        ::selection { background: var(--primary-color); color: var(--darker-color); }
-        h1, h2, h3, h4 { font-family: var(--font-display); }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes glowing-border {
-            0% { box-shadow: 0 0 0 0 rgba(212, 175, 127, 0.4); }
-            100% { box-shadow: 0 0 10px 10px rgba(212, 175, 127, 0); }
-        }
-        @keyframes color-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* --- 2. Header - Section d'introduction --- */
-        /* --- 2. Header - Section d'introduction --- */
-        /* Styles de base qui s'appliquent partout (PC et Mobile) */
-        .hero-section {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--secondary-color);
-            overflow: hidden;
-            background-color: var(--dark-color);
-            z-index: 1;
-            filter: brightness(0.9) blur(0.5px);
-            transition: filter 1.5s ease-in-out;
-        }
-
-        /* Pseudo-élément pour l'overlay (s'applique partout) */
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0, 0, 0, 0.2), var(--dark-color) 80%);
-            z-index: 0;
-        }
-
-        /* Règles pour les ordinateurs (à partir de 769px) */
-        @media (min-width: 769px) {
-            .hero-section {
-                background-image: url('images/image1.webp');
-                background-size: cover;
-                background-position: center;
-                background-attachment: fixed; /* L'effet Parallax est appliqué SEULEMENT ici */
-            }
-        }
-
-        /* Règles pour les téléphones (768px et moins) */
-        @media (max-width: 768px) {
-            .hero-section {
-                background-image: url('images/image1.webp');
-                background-size: cover; /* La propriété "cover" est nécessaire pour que l'image s'affiche en grand */
-                background-position: left;
-                background-attachment: scroll; /* Le scroll normal, sans conflit */
-            }
-        }
-
-        /* Enlever le filtre quand le chargement est terminé */
-        .hero-section.loaded {
-            filter: brightness(1) blur(0);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            padding: 20px;
-            animation: fadeIn 2s ease-out forwards;
-            background-color: transparent;
-        }
-        /* ... le reste de votre code est inchangé ... */
-        /* ... le reste des styles est inchangé ... */
-        .hero-content h1 {
-            font-size: clamp(2.8rem, 9vw, 6rem);
-            font-weight: 700;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
-            background: linear-gradient(45deg, var(--primary-color), #f7e0c4, var(--primary-color));
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: color-shift 5s linear infinite;
-        }
-        .hero-content p {
-            font-size: clamp(1.1rem, 3.5vw, 1.8rem);
-            font-style: italic;
-            color: var(--primary-color);
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
-            letter-spacing: 1px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 16px 45px;
-            margin-top: 40px;
-            background-color: var(--primary-color);
-            color: var(--darker-color);
-            text-transform: uppercase;
-            font-weight: 700;
-            border-radius: 8px;
-            transition: transform var(--transition-duration) ease, background-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            letter-spacing: 0.5px;
-        }
-        .btn:hover, .btn:focus {
-            transform: translateY(-5px) scale(1.02);
-            background-color: #c09d6b;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-            animation: glowing-border 1s infinite alternate;
-        }
-        /* --- 3. Navigation (Mobile-first) --- */
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            background-color: var(--darker-color);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            border-bottom: 1px solid #333;
-            height: 60px; /* Hauteur fixe pour un look plus moderne */
-        }
-        nav .logo {
-            font-family: var(--font-display);
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            padding: 10px 0;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        nav .logo:hover,
-        nav .logo:focus {
-            color: var(--text-color-light);
-        }
-
-        /* Nouveau style pour l'icône hamburger avec du texte */
-        .hamburger {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            position: relative;
-            z-index: 200;
-            transition: transform 0.3s ease;
-        }
-        .hamburger:focus {
-            outline: 2px solid var(--primary-color);
-            outline-offset: 4px;
-        }
-        .hamburger .bar {
-            display: block;
-            width: 28px; /* Taille légèrement plus grande */
-            height: 3px;
-            background-color: var(--primary-color);
-            border-radius: 2px;
-            transition: all 0.3s ease-in-out;
-        }
-        .hamburger .bar + .bar {
-            margin-top: 5px;
-        }
-        .hamburger .menu-label {
-            margin-left: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            text-transform: uppercase;
-        }
-        /* Animation de l'icône pour l'état ouvert */
-        .hamburger[aria-expanded="true"] .bar:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
-        }
-        .hamburger[aria-expanded="true"] .bar:nth-child(2) {
-            opacity: 0;
-        }
-        .hamburger[aria-expanded="true"] .bar:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
-        }
-
-        /* Styles du menu mobile */
-        nav ul {
-            list-style: none;
-            position: fixed;
-            top: 60px; /* Positionnement en dessous de la barre de navigation */
-            left: 0;
-            width: 100%;
-            height: calc(100% - 60px); /* Hauteur restante */
-            background-color: var(--darker-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transform: translateX(-100%);
-            transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
-            opacity: 0;
-            visibility: hidden;
-            padding: 0;
-        }
-        nav ul.active {
-            transform: translateX(0);
-            opacity: 1;
-            visibility: visible;
-        }
-        nav ul li {
-            margin: 25px 0;
-        }
-        nav a:not(.logo) { /* Cible tous les liens sauf le logo */
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 1.5rem;
-            padding: 15px 0;
-            transition: color 0.3s ease;
-            text-decoration: none;
-            color: var(--text-color-secondary);
-        }
-        nav a:hover,
-        nav a:focus {
-            color: var(--primary-color);
-        }
-        nav a[aria-current="page"] {
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-
-        /* --- Media Query pour les grands écrans (769px et plus) --- */
-        @media (min-width: 769px) {
-            nav {
-                justify-content: space-between;
-                padding: 0 40px;
-            }
-            nav ul {
-                position: static;
-                flex-direction: row;
-                width: auto;
-                height: auto;
-                transform: translateX(0);
-                background: none;
-                opacity: 1;
-                visibility: visible;
-                padding: 0;
-            }
-            .hamburger {
-                display: none;
-            }
-            nav ul li {
-                margin: 0 15px;
-            }
-            nav a:not(.logo) {
-                font-size: 1rem;
-                position: relative;
-                padding: 20px 0;
-            }
-            nav a:not(.logo)::before {
-                content: '';
-                position: absolute;
-                bottom: 15px; /* Déplacé vers le haut pour être plus esthétique */
-                left: 50%;
-                width: 0;
-                height: 2px;
-                background-color: var(--primary-color);
-                transform: translateX(-50%);
-                transition: width 0.3s ease-out;
-            }
-            nav a:hover::before,
-            nav a:focus::before,
-            nav a[aria-current="page"]::before {
-                width: 100%;
-            }
-        }
-        /* --- 4. Sections principales --- */
-        section { padding: 80px 20px; text-align: center; position: relative; }
-        .section-title {
-            font-size: clamp(2.5rem, 6vw, 3.5rem);
-            color: var(--primary-color);
-            margin-bottom: 30px;
-            font-weight: 700;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 15px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideInUp 1s ease-out forwards;
-        }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: 0;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 2px;
-            background-color: var(--primary-color);
-            box-shadow: 0 0 8px var(--primary-color);
-        }
-        .section-description {
-            max-width: 800px;
-            margin: 0 auto 40px auto;
-            font-size: clamp(1rem, 2vw, 1.15rem);
-            color: var(--text-color);
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideInUp 1s ease-out 0.3s forwards;
-        }
-        #about { background-color: var(--darker-color); padding: 60px 20px; }
-        #about .about-content {
-            max-width: 800px;
-            padding: 40px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.9);
-            text-align: center;
-            border: 1px solid var(--primary-color);
-        }
-        .video-cards-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 50px 20px;
-            background-color: var(--darker-color);
-        }
-        .video-card {
-            position: relative;
-            width: 100%;
-            max-width: 350px;
-            height: 400px;
-            overflow: hidden;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .card-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-            filter: brightness(0.7);
-            transition: filter 0.3s ease;
-        }
-        .video-card-content {
-            position: relative;
-            z-index: 2;
-            height: 100%;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-        .video-card-content h4 {
-            margin-top: auto;
-            margin-bottom: 10px;
-            font-size: 1.8rem;
-            color: var(--primary-color);
-        }
-        .video-card-content p { font-size: 1rem; margin-bottom: 0; }
-        .video-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7); }
-        .video-card:hover .card-video { filter: brightness(1.0); }
-        @media (max-width: 768px) {
-            .video-cards-container { flex-direction: column; align-items: center; }
-            .video-card { height: 300px; }
-        }
-
-        /* --- 5. Cartes d'information --- */
-        .info-cards {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 50px;
-        }
-        .card {
-            background-color: #1e1e1e;
-            border-radius: 15px;
-            padding: 35px;
-            width: clamp(280px, 90%, 380px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-            transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease, background-color var(--transition-duration) ease;
-            text-align: left;
-            border: 1px solid rgba(212, 175, 127, 0.2);
-            opacity: 0;
-            animation: slideInUp 0.8s ease-out forwards;
-        }
-        @media (min-width: 769px) {
-            .card:hover {
-                transform: translateY(-10px) scale(1.01);
-                box-shadow: 0 18px 45px rgba(0, 0, 0, 0.8);
-                background-color: #252525;
-            }
-        }
-        @media (max-width: 768px) { .card { text-align: center; } }
-        .card h3 {
-            color: var(--primary-color);
-            margin-bottom: 12px;
-            font-size: clamp(1.4rem, 3.5vw, 1.7rem);
-            letter-spacing: 0.5px;
-        }
-        .card p { color: #ccc; font-size: clamp(1rem, 2vw, 1.1rem); margin: 0; line-height: 1.7; }
-        .card-icon i {
-            color: var(--primary-color);
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 5px rgba(212, 175, 127, 0.5));
-        }
-        .contact-link { color: var(--primary-color); text-decoration: underline; }
-        .contact-link:hover { color: #c09d6b; }
-
-        /* --- 6. Galerie et Plats (Grille) --- */
-        /* --- 6. Galerie et Plats (Grille) --- */
-        .gallery, .plats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            justify-items: center;
-            margin-top: 50px;
-        }
-        .gallery-item, .plat-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 18px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-            /* Transitions pour le zoom de l'élément au survol/clic */
-            transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
-            cursor: pointer;
-            border: 2px solid transparent;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: slideInUp 0.8s ease-out forwards;
-        }
-        /* Délai d'animation pour les éléments de la galerie */
-        .gallery-item:nth-child(1), .plat-item:nth-child(1) { animation-delay: 0.2s; }
-        .gallery-item:nth-child(2), .plat-item:nth-child(2) { animation-delay: 0.3s; }
-        .gallery-item:nth-child(3), .plat-item:nth-child(3) { animation-delay: 0.4s; }
-        .gallery-item:nth-child(4), .plat-item:nth-child(4) { animation-delay: 0.5s; }
-        .gallery-item:nth-child(5), .plat-item:nth-child(5) { animation-delay: 0.6s; }
-        .gallery-item:nth-child(6), .plat-item:nth-child(6) { animation-delay: 0.7s; }
-        .gallery-item:nth-child(7), .plat-item:nth-child(7) { animation-delay: 0.8s; }
-        .gallery-item:nth-child(8), .plat-item:nth-child(8) { animation-delay: 0.9s; }
-
-        /* Effet au survol (PC) et au clic/tapotement (PC & Mobile) */
-        .gallery-item:hover, .plat-item:hover,
-        .gallery-item:focus, .plat-item:focus,
-        .gallery-item:active, .plat-item:active {
-            transform: scale(1.07); /* Zoom léger de l'élément */
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
-            border: 2px solid var(--primary-color);
-            outline: none;
-        }
-        .gallery-item img, .plat-item img {
-            width: 100%;
-            height: auto; /* Permet aux images de garder leur ratio */
-            object-fit: unset;
-            display: block;
-            transition: transform 0.6s ease;
-        }
-        /* Zoom de l'image à l'intérieur de l'élément */
-        .gallery-item:hover img, .plat-item:hover img,
-        .gallery-item:focus img, .plat-item:focus img,
-        .gallery-item:active img {
-            transform: scale(1.15);
-        }
-
-        .item-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0,0,0,0.85);
-            color: var(--secondary-color);
-            padding: 12px;
-            font-size: 1rem;
-            /* Cache la légende en bas de l'élément par défaut */
-            transform: translateY(100%); 
-            transition: transform var(--transition-duration) ease;
-            text-align: center;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        @media (max-width: 768px) {
-            /* Mise en page de la légende sur mobile - RETOUR À LA VERSION PRÉCÉDENTE */
-            .item-caption {
-                /* La légende est masquée par défaut (via translateY(100%) ci-dessus) 
-                et apparaît uniquement au tapotement grâce à :focus/:active ci-dessous. */
-                padding: 15px;
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-        .plat-price {
-            font-family: var(--font-display);
-            color: var(--primary-color);
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-        /* Affichage de la légende au survol/clic/tapotement */
-        .gallery-item:hover .item-caption, .plat-item:hover .item-caption,
-        .gallery-item:focus .item-caption, .plat-item:focus .item-caption,
-        .gallery-item:active .item-caption {
-            transform: translateY(0);
-        }
-        /* --- 7. Formulaire de Contact --- */
-        #contact { background-color: var(--darker-color); padding-bottom: 100px; }
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            max-width: 600px;
-            margin: 0 auto;
-            gap: 25px;
-        }
-        .form-group { width: 100%; position: relative; opacity: 0; animation: slideInUp 0.8s ease-out forwards; }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-align: left;
-            font-size: 1.1rem;
-        }
-        form input, form textarea {
-            padding: 14px;
-            width: 100%;
-            border-radius: 10px;
-            border: 1px solid #555;
-            background-color: #2a2a2a;
-            color: var(--secondary-color);
-            font-size: 1.05rem;
-            font-family: var(--font-body);
-            transition: border-color var(--transition-duration) ease, box-shadow var(--transition-duration) ease, background-color var(--transition-duration) ease;
-        }
-        form input::placeholder, form textarea::placeholder { color: #999; font-style: italic; }
-        form input:focus, form textarea:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(212, 175, 127, 0.6);
-            background-color: #333;
-            outline: none;
-        }
-        form input.invalid, form textarea.invalid { border-color: #e74c3c; box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.6); }
-        form input.valid, form textarea.valid { border-color: #2ecc71; box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.6); }
-        .error-message { font-size: 0.85rem; color: #e74c3c; margin-top: 5px; display: block; min-height: 20px; text-align: left; }
-        .form-honeypot { display: none; }
-        #map .map-container {
-            width: 100%;
-            max-width: 800px;
-            height: 400px;
-            margin: 40px auto;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-        }
-        .map-container iframe { width: 100%; height: 100%; border: 0; }
-        
-        /* --- 8. Lightbox pour la galerie --- */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            animation: fadeIn 0.3s forwards;
-        }
-        .lightbox.active { display: flex; }
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-            transform: scale(0.8);
-            transition: transform 0.3s ease;
-        }
-        .lightbox.active .lightbox-content { transform: scale(1); }
-        .lightbox-caption {
-            position: absolute;
-            bottom: 5%;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-size: 1.2rem;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 10px 20px;
-            border-radius: 5px;
-        }
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: white;
-            font-size: 3rem;
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-        .lightbox-close:hover { color: var(--primary-color); }
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            width: 50px;
-            height: 50px;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 2rem;
-        }
-        .lightbox-nav:hover { background-color: rgba(255, 255, 255, 0.4); }
-        .lightbox-nav.prev { left: 20px; }
-        .lightbox-nav.next { right: 20px; }
-
-        /* --- 9. Footer --- */
-        footer {
-            background-color: var(--darker-color);
-            color: var(--primary-color);
-            text-align: center;
-            padding: 40px 20px;
-            font-size: 0.95rem;
-            border-top: 1px solid #222;
-            letter-spacing: 0.5px;
-            opacity: 0;
-            animation: fadeIn 1s ease-out 1s forwards;
-        }
-
-        /* Style du bouton "Retour en haut" */
-        #scroll-to-top {
-            position: fixed; /* Reste visible même en défilant */
-            bottom: 20px; /* À 20px du bas de l'écran */
-            right: 20px; /* À 20px de la droite de l'écran */
-            z-index: 999; /* Toujours au-dessus des autres éléments */
-            display: none; /* Caché par défaut */
-            width: 50px;
-            height: 50px;
-            background-color: var(--primary-color);
-            color: var(--darker-color);
-            border-radius: 50%;
-            text-align: center;
-            line-height: 50px;
-            font-size: 1.5rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease-in-out;
-        }
-
-        #scroll-to-top:hover {
-            transform: scale(1.1);
-            background-color: var(--some-other-color); /* Exemple: couleur différente au survol */
-        }
-
-        html {
-        scroll-behavior: smooth;
-        }
-    </style>
+    <title>miro.restaurant</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header class="hero-section" role="banner">
+        <div class="hero-background"></div>
         <div class="hero-content">
             <h1>miro.restaurant</h1>
             <p>Art, Chic & Luxe – Une expérience gastronomique unique</p>
@@ -753,190 +37,116 @@
         </ul>
     </nav>
 
-    <main role="main">
-        <section id="about" aria-labelledby="about-heading">
+    <main>
+        <section id="about" class="section">
+            <h2 class="section-title">À propos de nous</h2>
+            <p class="section-description">Où la gastronomie rencontre l'art.</p>
             <div class="about-content">
-                <h2 id="about-heading" class="section-title">À propos de nous</h2>
-                <p class="section-description">Bienvenue chez miro.restaurant, un lieu où le luxe rencontre l'art culinaire. Profitez de nos espaces élégants : salle, bar, jardin, lounge et rooftop, pour un moment inoubliable en famille ou entre amis.</p>
-            </div>
-        </section>
-
-        <section class="video-cards-container">
-            <div class="video-card">
-                <video class="card-video" id="video1" autoplay muted loop playsinline>
-                    <source src="images/video1.mp4" type="video/mp4">
-                    Votre navigateur ne supporte pas les vidéos HTML5.
-                </video>
-                <div class="video-card-content">
-                    <h4>La salle</h4>
-                    <p>Découvrez notre espace principal pour une expérience culinaire raffinée.</p>
+                <div class="about-text card">
+                    <p>Fondé en 2025, Miro.restaurant est l'aboutissement d'une passion pour la haute cuisine et le design. Notre chef primé marie des saveurs audacieuses avec une présentation artistique pour créer des plats qui sont de véritables œuvres d'art.</p>
+                    <p>Chaque ingrédient est soigneusement sélectionné auprès de producteurs locaux, garantissant une fraîcheur et une qualité inégalées. Notre atmosphère intime et élégante est conçue pour une expérience immersive, loin de l'agitation de la vie quotidienne.</p>
                 </div>
-            </div>
-
-            <div class="video-card">
-                <video class="card-video" id="video2" autoplay muted loop playsinline>
-                    <source src="images/video2.mp4" type="video/mp4">
-                    Votre navigateur ne supporte pas les vidéos HTML5.
-                </video>
-                <div class="video-card-content">
-                    <h4>Le Bar & Lounge</h4>
-                    <p>L'endroit idéal pour déguster un cocktail dans une ambiance décontractée.</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <video class="card-video" id="video3" autoplay muted loop playsinline>
-                    <source src="images/video4.mp4" type="video/mp4">
-                    Votre navigateur ne supporte pas les vidéos HTML5.
-                </video>
-                <div class="video-card-content">
-                    <h4>Le Jardin & Rooftop</h4>
-                    <p>Un havre de paix en plein air pour des moments magiques sous le ciel.</p>
+                <div class="about-image">
+                    <img src="https://picsum.photos/600/400?random=1" alt="L'intérieur élégant du restaurant" loading="lazy">
                 </div>
             </div>
         </section>
 
-        <section id="info" aria-labelledby="info-heading">
-            <h2 id="info-heading" class="section-title">Informations Pratiques</h2>
-            <p class="section-description">Découvrez nos horaires et comment nous trouver pour une expérience sans accroc.</p>
-            <div class="info-cards">
-                <div class="card card-icon">
-                    <i class="fas fa-utensils"></i>
-                    <h3>Déjeuner</h3>
-                    <p>12H - 15H (sauf le Vendredi)</p>
+        <section id="info" class="section">
+            <h2 class="section-title">Informations</h2>
+            <p class="section-description">Horaires, adresse et contact.</p>
+            <div class="info-grid">
+                <div class="card">
+                    <h3>Horaires</h3>
+                    <p>Mardi - Dimanche : 18h00 - 23h00</p>
+                    <p>Fermé le Lundi</p>
                 </div>
-                <div class="card card-icon">
-                    <i class="fas fa-moon"></i>
-                    <h3>Dîner</h3>
-                    <p>19H - 02H</p>
-                </div>
-                <div class="card card-icon">
-                    <i class="fas fa-phone-alt"></i>
-                    <h3>Contact</h3>
-                    <p><a href="tel:0560800700" class="contact-link">0560-800-700</a></p>
-                </div>
-                <div class="card card-icon">
-                    <i class="fas fa-map-marker-alt"></i>
+                <div class="card">
                     <h3>Adresse</h3>
-                    <p>Bois des arcades, Alger</p>
-                    <p><a href="#map" class="contact-link">Voir sur la carte</a></p>
+                    <p>123, Rue de l'Épicure</p>
+                    <p>75000 Paris, France</p>
                 </div>
-                <div class="card card-icon">
-                    <i class="fas fa-glass-cheers"></i>
-                    <h3>Espaces</h3>
-                    <p>Salle, Bar, Jardin, Lounge, Rooftop</p>
+                <div class="card">
+                    <h3>Contact</h3>
+                    <p>Téléphone : +33 1 23 45 67 89</p>
+                    <p>Email : contact@miro.restaurant</p>
                 </div>
             </div>
         </section>
 
-        <section id="gallery" aria-labelledby="gallery-heading">
-            <h2 id="gallery-heading" class="section-title">Notre Galerie</h2>
-            <p class="section-description">Explorez les images de notre restaurant et découvrez l'ambiance unique qui vous y attend.</p>
-            <div class="gallery">
+        <section id="gallery" class="section">
+            <h2 class="section-title">Galerie</h2>
+            <p class="section-description">Un aperçu de notre monde visuel.</p>
+            <div class="gallery-grid">
                 <figure class="gallery-item" tabindex="0">
-                    <img src="images/image1.webp" alt="Intérieur du restaurant avec de larges baies vitrées" loading="lazy" data-full-size="images/image1.webp">
-                    <figcaption class="item-caption">Intérieur du restaurant</figcaption>
+                    <img src="https://picsum.photos/400/300?random=2" alt="Entrée gastronomique" loading="lazy" data-full-size="https://picsum.photos/1200/900?random=2">
+                    <figcaption>Ceviche de Saint-Jacques</figcaption>
                 </figure>
                 <figure class="gallery-item" tabindex="0">
-                    <img src="images/image2.webp" alt="Notre bar élégant, prêt à accueillir les clients" loading="lazy" data-full-size="images/image2.webp">
-                    <figcaption class="item-caption">Notre bar élégant</figcaption>
+                    <img src="https://picsum.photos/400/300?random=3" alt="Cocktail artisanal" loading="lazy" data-full-size="https://picsum.photos/1200/900?random=3">
+                    <figcaption>Cocktail maison</figcaption>
                 </figure>
                 <figure class="gallery-item" tabindex="0">
-                    <img src="images/image3.webp" alt="Vue du jardin extérieur et de la terrasse" loading="lazy" data-full-size="images/image3.webp">
-                    <figcaption class="item-caption">Vue du jardin</figcaption>
-                </figure>
-                <figure class="gallery-item" tabindex="0">
-                    <img src="images/image4.webp" alt="Terrasse sur le toit offrant une vue panoramique" loading="lazy" data-full-size="images/image4.webp">
-                    <figcaption class="item-caption">Terrasse sur le toit</figcaption>
-                </figure>
-                <figure class="gallery-item" tabindex="0">
-                    <img src="images/image5.webp" alt="Salle à manger privée pour les événements spéciaux" loading="lazy" data-full-size="images/image5.webp">
-                    <figcaption class="item-caption">Salle à manger privée</figcaption>
+                    <img src="https://picsum.photos/400/300?random=4" alt="Intérieur du restaurant" loading="lazy" data-full-size="https://picsum.photos/1200/900?random=4">
+                    <figcaption>Ambiance chaleureuse</figcaption>
                 </figure>
             </div>
         </section>
-
-        <section id="plats" aria-labelledby="plats-heading">
-            <h2 id="plats-heading" class="section-title">Nos Plats Signature</h2>
-            <p class="section-description">Découvrez une sélection de nos créations culinaires, préparées avec passion et des ingrédients de première qualité.</p>
-            <div class="plats">
-                <figure class="plat-item" tabindex="0">
-                    <img src="images/plat1.webp" alt="Salade fraîche et colorée" loading="lazy">
-                    <figcaption class="item-caption">Salade fraîche <span class="plat-price">2200 DA</span></figcaption>
-                </figure>
-                <figure class="plat-item" tabindex="0">
-                    <img src="images/plat2.webp" alt="Pâtes aux fruits de mer" loading="lazy">
-                    <figcaption class="item-caption">Pâtes aux fruits de mer <span class="plat-price">3500 DA</span></figcaption>
-                </figure>
-                <figure class="plat-item" tabindex="0">
-                    <img src="images/plat3.webp" alt="Viande grillée avec accompagnement" loading="lazy">
-                    <figcaption class="item-caption">Viande grillée <span class="plat-price">4800 DA</span></figcaption>
-                </figure>
-                <figure class="plat-item" tabindex="0">
-                    <img src="images/plat4.webp" alt="Dessert au chocolat fondu" loading="lazy">
-                    <figcaption class="item-caption">Dessert au chocolat <span class="plat-price">1800 DA</span></figcaption>
-                </figure>
-                <figure class="plat-item" tabindex="0">
-                    <img src="images/plat5.webp" alt="Plat de poisson savoureux" loading="lazy">
-                    <figcaption class="item-caption">Plat de poisson <span class="plat-price">4200 DA</span></figcaption>
-                </figure>
-                <figure class="plat-item" tabindex="0">
-                    <img src="images/plat6.webp" alt="Cocktail fruité et rafraîchissant" loading="lazy">
-                    <figcaption class="item-caption">Cocktail signature <span class="plat-price">1500 DA</span></figcaption>
-                </figure>
-                <figure class="plat-item" tabindex="0">
-                    <img src="images/plat7.webp" alt="Crème brûlée avec sucre caramélisé" loading="lazy">
-                    <figcaption class="item-caption">Crème brûlée <span class="plat-price">1700 DA</span></figcaption>
-                </figure>
-                <figure class="plat-item" tabindex="0">
-                    <img src="images/plat8.webp" alt="Planche de fromages variés" loading="lazy">
-                    <figcaption class="item-caption">Planche de fromages <span class="plat-price">2900 DA</span></figcaption>
-                </figure>
+        
+        <section id="plats" class="section">
+            <h2 class="section-title">Nos plats</h2>
+            <p class="section-description">Une symphonie de saveurs.</p>
+            <div class="plats-grid">
+                <div class="plat-item card">
+                    <img src="https://picsum.photos/400/300?random=5" alt="Plat de poisson gastronomique" loading="lazy">
+                    <h3>Le Saumon Confit</h3>
+                    <p>Saumon mi-cuit, réduction de betterave et espuma de coriandre.</p>
+                </div>
+                <div class="plat-item card">
+                    <img src="https://picsum.photos/400/300?random=6" alt="Plat de viande gastronomique" loading="lazy">
+                    <h3>Le Bœuf Wagyu</h3>
+                    <p>Bœuf Wagyu maturé, purée de panais et sauce aux truffes noires.</p>
+                </div>
+                <div class="plat-item card">
+                    <img src="https://picsum.photos/400/300?random=7" alt="Dessert gastronomique" loading="lazy">
+                    <h3>La Sphère de Chocolat</h3>
+                    <p>Sphère de chocolat noir, cœur coulant de framboise et glace vanille.</p>
+                </div>
             </div>
         </section>
 
-        <section id="map" aria-labelledby="map-heading">
-            <h2 id="map-heading" class="section-title">Notre Emplacement</h2>
-            <p class="section-description">Trouvez-nous facilement sur la carte pour planifier votre visite.</p>
-            <div class="map-container">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1599.9822452285517!2d3.064505187123953!3d36.75822606541575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128df2b947c452e9%3A0xc665b16e45f56a52!2sBois%20des%20Arcades!5e0!3m2!1sfr!2sdz!4v1695758254247!5m2!1sfr!2sdz"
-                    width="600"
-                    height="450"
-                    style="border:0;"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    title="Carte de localisation du Miro Restaurant, Bois des arcades, Alger">
-                </iframe>
+        <section id="map" class="section">
+            <h2 class="section-title">Où nous trouver</h2>
+            <p class="section-description">Localisation et itinéraire.</p>
+            <div class="map-container card">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.991629853314!2d2.29229261567406!3d48.85837007928734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964b4c107%3A0x6b8a8b1a3e6f9621!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1645000000000!5m2!1sfr!2sfr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Carte de localisation du restaurant"></iframe>
             </div>
         </section>
 
-        <section id="contact" aria-labelledby="contact-heading">
-            <h2 id="contact-heading" class="section-title">Contactez-nous</h2>
-            <p class="section-description">Envoyez-nous un message et nous vous répondrons rapidement. Pour une réservation, merci d'utiliser le lien ci-dessus.</p>
-            <form action="#" method="POST" class="contact-form" novalidate>
+        <section id="contact" class="section">
+            <h2 class="section-title">Contactez-nous</h2>
+            <p class="section-description">Nous serons ravis de vous aider.</p>
+            <form class="contact-form card" action="https://formspree.io/f/your-form-id" method="POST">
                 <div class="form-group">
-                    <label for="name">Votre nom</label>
-                    <input type="text" id="name" name="name" placeholder="John Doe" required>
-                    <span class="error-message"></span>
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" name="name" required>
+                    <span class="error-message" aria-live="polite"></span>
                 </div>
                 <div class="form-group">
-                    <label for="email">Votre email</label>
-                    <input type="email" id="email" name="email" placeholder="john.doe@exemple.com" required>
-                    <span class="error-message"></span>
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required>
+                    <span class="error-message" aria-live="polite"></span>
                 </div>
-                <input type="text" name="_honeypot" id="_honeypot" class="form-honeypot" tabindex="-1" autocomplete="off">
                 <div class="form-group">
-                    <label for="message">Votre message</label>
-                    <textarea id="message" name="message" placeholder="Votre message..." rows="5" required></textarea>
-                    <span class="error-message"></span>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                    <span class="error-message" aria-live="polite"></span>
                 </div>
+                <input type="text" name="_honeypot" id="_honeypot" style="display:none;">
                 <button type="submit" class="btn btn-primary">Envoyer le message</button>
             </form>
         </section>
     </main>
-    
 
     <a id="scroll-to-top" class="scroll-btn" href="#accueil" aria-label="Retourner en haut de la page">
         <i class="fas fa-arrow-up"></i>
@@ -954,208 +164,6 @@
         <p>© 2025 miro.restaurant – Tous droits réservés. Design et développement par [Abdessamed]</p>
     </footer>
 
-    
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Script de gestion du menu hamburger
-            const hamburger = document.querySelector('.hamburger');
-            const navUl = document.querySelector('nav ul');
-            const heroBackground = document.querySelector('.hero-background');
-
-            hamburger.addEventListener('click', () => {
-                navUl.classList.toggle('active');
-                hamburger.classList.toggle('active');
-                const isExpanded = hamburger.classList.contains('active');
-                hamburger.setAttribute('aria-expanded', isExpanded);
-                document.body.style.overflow = isExpanded ? 'hidden' : '';
-            });
-
-            navUl.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navUl.classList.remove('active');
-                    hamburger.classList.remove('active');
-                    hamburger.setAttribute('aria-expanded', 'false');
-                    document.body.style.overflow = '';
-                });
-            });
-
-            // Parallax effect for header
-            window.addEventListener('scroll', () => {
-                if (window.innerWidth >= 769) {
-                    const scrollPosition = window.scrollY;
-                    heroBackground.style.transform = `translateY(${scrollPosition * 0.4}px)`;
-                }
-            });
-
-            // Observer pour les animations d'apparition au scroll
-            const animatedElements = document.querySelectorAll('.section-title, .section-description, .card, .gallery-item, .plat-item, .form-group, footer, #about .about-content');
-            const animateObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { rootMargin: '0px', threshold: 0.1 });
-            animatedElements.forEach(el => animateObserver.observe(el));
-
-            // Galerie Lightbox et effet de suivi de souris
-            const galleryItems = document.querySelectorAll('.gallery-item');
-            const lightbox = document.querySelector('.lightbox');
-            const lightboxImg = document.querySelector('.lightbox-content');
-            const lightboxCaption = document.querySelector('.lightbox-caption');
-            const closeBtn = document.querySelector('.lightbox-close');
-            const prevBtn = document.querySelector('.lightbox-nav.prev');
-            const nextBtn = document.querySelector('.lightbox-nav.next');
-            let currentImageIndex = 0;
-
-            const openLightbox = (index) => {
-                const items = document.querySelectorAll('.gallery-item');
-                currentImageIndex = index;
-                const item = items[currentImageIndex];
-                const fullSizeSrc = item.querySelector('img').dataset.fullSize;
-                const captionText = item.querySelector('figcaption').textContent;
-
-                lightbox.classList.add('active');
-                lightboxImg.src = fullSizeSrc;
-                lightboxImg.alt = captionText;
-                lightboxCaption.textContent = captionText;
-                lightbox.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
-            };
-
-            const closeLightbox = () => {
-                lightbox.classList.remove('active');
-                lightbox.setAttribute('aria-hidden', 'true');
-                document.body.style.overflow = '';
-            };
-
-            const showNextImage = () => {
-                const items = document.querySelectorAll('.gallery-item');
-                currentImageIndex = (currentImageIndex + 1) % items.length;
-                openLightbox(currentImageIndex);
-            };
-
-            const showPrevImage = () => {
-                const items = document.querySelectorAll('.gallery-item');
-                currentImageIndex = (currentImageIndex - 1 + items.length) % items.length;
-                openLightbox(currentImageIndex);
-            };
-
-            galleryItems.forEach((item, index) => {
-                item.addEventListener('click', () => openLightbox(index));
-                item.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        openLightbox(index);
-                    }
-                });
-                
-                // Effet de survol créatif
-                const img = item.querySelector('img');
-                if (window.innerWidth > 768) {
-                    item.addEventListener('mousemove', (e) => {
-                        const rect = item.getBoundingClientRect();
-                        const x = e.clientX - rect.left;
-                        const y = e.clientY - rect.top;
-                        const rotateX = (y / rect.height - 0.5) * 20;
-                        const rotateY = (x / rect.width - 0.5) * -20;
-                        img.style.transform = `scale(1.15) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-                    });
-                    item.addEventListener('mouseleave', () => {
-                        img.style.transform = 'scale(1.07)';
-                    });
-                }
-            });
-
-            closeBtn.addEventListener('click', closeLightbox);
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) { closeLightbox(); }
-            });
-            prevBtn.addEventListener('click', showPrevImage);
-            nextBtn.addEventListener('click', showNextImage);
-
-            document.addEventListener('keydown', (e) => {
-                if (lightbox.classList.contains('active')) {
-                    if (e.key === 'ArrowRight') { showNextImage(); }
-                    if (e.key === 'ArrowLeft') { showPrevImage(); }
-                    if (e.key === 'Escape') { closeLightbox(); }
-                }
-            });
-
-            // Validation de formulaire améliorée
-            const form = document.querySelector('.contact-form');
-            const inputs = document.querySelectorAll('.contact-form input:not([type="hidden"]), .contact-form textarea');
-            const honeypot = document.getElementById('_honeypot');
-
-            const validateField = (input) => {
-                const errorMessage = input.parentElement.querySelector('.error-message');
-                if (input.validity.valid) {
-                    input.classList.remove('invalid');
-                    input.classList.add('valid');
-                    errorMessage.textContent = '';
-                } else {
-                    input.classList.remove('valid');
-                    input.classList.add('invalid');
-                    if (input.validity.valueMissing) {
-                        errorMessage.textContent = 'Ce champ est obligatoire.';
-                    } else if (input.validity.typeMismatch) {
-                        errorMessage.textContent = 'Veuillez entrer une adresse e-mail valide.';
-                    } else {
-                        errorMessage.textContent = 'Veuillez corriger ce champ.';
-                    }
-                }
-            };
-
-            inputs.forEach(input => {
-                input.addEventListener('input', () => validateField(input));
-            });
-
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                // Vérification du honeypot pour les bots
-                if (honeypot.value !== '') {
-                    console.log('Spam detected via honeypot.');
-                    return;
-                }
-
-                let isFormValid = true;
-                inputs.forEach(input => {
-                    validateField(input);
-                    if (!input.validity.valid) { isFormValid = false; }
-                });
-
-                if (isFormValid) {
-                    alert('Votre message a été envoyé avec succès ! Merci de nous avoir contactés.');
-                    form.reset();
-                    inputs.forEach(input => { input.classList.remove('valid', 'invalid'); });
-                } else {
-                    const firstInvalid = document.querySelector('.contact-form .invalid');
-                    if (firstInvalid) { firstInvalid.focus(); }
-                }
-            });
-
-            // NOUVEAU : Script pour le bouton "Retour en haut"
-            const scrollToTopBtn = document.getElementById("scroll-to-top");
-
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 100) {
-                    scrollToTopBtn.style.display = "block";
-                } else {
-                    scrollToTopBtn.style.display = "none";
-                }
-            });
-
-            scrollToTopBtn.addEventListener("click", (e) => {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
