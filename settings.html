@@ -176,21 +176,13 @@
             background-color: var(--darker-color);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             border-bottom: 1px solid #333;
-            height: 60px; /* Hauteur fixe pour un look plus moderne */
         }
         nav .logo {
             font-family: var(--font-display);
             font-size: 1.8rem;
             color: var(--primary-color);
             padding: 10px 0;
-            text-decoration: none;
-            transition: color 0.3s ease;
         }
-        nav .logo:hover,
-        nav .logo:focus {
-            color: var(--text-color-light);
-        }
-
         /* Nouveau style pour l'icône hamburger avec du texte */
         .hamburger {
             background: none;
@@ -198,133 +190,103 @@
             cursor: pointer;
             padding: 10px;
             display: flex;
-            align-items: center;
+            flex-direction: row; /* Alignement horizontal */
+            align-items: center; /* Centrage vertical */
+            justify-content: center;
+            width: auto; /* La largeur s'adapte au contenu */
+            height: 24px; 
             position: relative;
             z-index: 200;
-            transition: transform 0.3s ease;
-        }
-        .hamburger:focus {
-            outline: 2px solid var(--primary-color);
-            outline-offset: 4px;
         }
         .hamburger .bar {
             display: block;
-            width: 28px; /* Taille légèrement plus grande */
-            height: 3px;
+            width: 25px; /* Largeur de l'icône seule */
+            height: 2px;
             background-color: var(--primary-color);
             border-radius: 2px;
             transition: all 0.3s ease-in-out;
         }
-        .hamburger .bar + .bar {
-            margin-top: 5px;
-        }
         .hamburger .menu-label {
-            margin-left: 10px;
+            margin-left: 10px; /* Espace entre l'icône et le texte */
             font-size: 1rem;
             font-weight: 600;
             color: var(--primary-color);
             text-transform: uppercase;
         }
-        /* Animation de l'icône pour l'état ouvert */
+        /* Animation de l'icône pour l'état ouvert (le menu est visible) */
         .hamburger[aria-expanded="true"] .bar:nth-child(1) {
-            transform: translateY(8px) rotate(45deg);
+            transform: translateY(11px) rotate(45deg);
         }
         .hamburger[aria-expanded="true"] .bar:nth-child(2) {
             opacity: 0;
         }
         .hamburger[aria-expanded="true"] .bar:nth-child(3) {
-            transform: translateY(-8px) rotate(-45deg);
+            transform: translateY(-11px) rotate(-45deg);
         }
-
-        /* Styles du menu mobile */
         nav ul {
             list-style: none;
             position: fixed;
-            top: 60px; /* Positionnement en dessous de la barre de navigation */
+            top: 0;
             left: 0;
             width: 100%;
-            height: calc(100% - 60px); /* Hauteur restante */
+            height: 100%;
             background-color: var(--darker-color);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             transform: translateX(-100%);
-            transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+            transition: transform 0.5s ease-in-out;
+            padding-top: 60px;
             opacity: 0;
             visibility: hidden;
-            padding: 0;
         }
-        nav ul.active {
-            transform: translateX(0);
-            opacity: 1;
-            visibility: visible;
+        nav ul.active { 
+            transform: translateX(0); 
+            opacity: 1; 
+            visibility: visible; 
         }
-        nav ul li {
-            margin: 25px 0;
-        }
-        nav a:not(.logo) { /* Cible tous les liens sauf le logo */
+        nav ul li { margin: 25px 0; }
+        nav a {
             font-weight: 600;
             text-transform: uppercase;
             font-size: 1.5rem;
             padding: 15px 0;
-            transition: color 0.3s ease;
-            text-decoration: none;
-            color: var(--text-color-secondary);
+            transition: color var(--transition-duration) ease;
         }
-        nav a:hover,
-        nav a:focus {
-            color: var(--primary-color);
-        }
-        nav a[aria-current="page"] {
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-
-        /* --- Media Query pour les grands écrans (769px et plus) --- */
+        nav a:hover, nav a:focus, nav a.active { color: var(--primary-color); }
         @media (min-width: 769px) {
-            nav {
-                justify-content: space-between;
-                padding: 0 40px;
-            }
+            nav { justify-content: center; }
+            .hamburger { display: none; }
             nav ul {
                 position: static;
                 flex-direction: row;
-                width: auto;
                 height: auto;
                 transform: translateX(0);
                 background: none;
                 opacity: 1;
                 visibility: visible;
-                padding: 0;
+                padding-top: 0;
             }
-            .hamburger {
-                display: none;
-            }
-            nav ul li {
-                margin: 0 15px;
-            }
-            nav a:not(.logo) {
+            nav ul li { margin: 0 15px; }
+            nav a {
+                padding: 20px 30px;
                 font-size: 1rem;
                 position: relative;
-                padding: 20px 0;
             }
-            nav a:not(.logo)::before {
+            nav a::before {
                 content: '';
                 position: absolute;
-                bottom: 15px; /* Déplacé vers le haut pour être plus esthétique */
-                left: 50%;
-                width: 0;
-                height: 2px;
-                background-color: var(--primary-color);
-                transform: translateX(-50%);
-                transition: width 0.3s ease-out;
-            }
-            nav a:hover::before,
-            nav a:focus::before,
-            nav a[aria-current="page"]::before {
+                bottom: 0;
+                left: 0;
                 width: 100%;
+                height: 3px;
+                background-color: var(--primary-color);
+                transform: scaleX(0);
+                transform-origin: left;
+                transition: transform 0.3s ease-out;
             }
+            nav a:hover::before, nav a:focus::before, nav a.active::before { transform: scaleX(1); }
         }
         /* --- 4. Sections principales --- */
         section { padding: 80px 20px; text-align: center; position: relative; }
@@ -723,6 +685,111 @@
         html {
         scroll-behavior: smooth;
         }
+
+        /* Style pour la grille des paramètres */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        /* Style pour chaque carte de paramètre */
+        .setting-card {
+            background: var(--light-bg); /* Utilisez une variable pour la couleur de fond */
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .setting-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .setting-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            background: var(--bg-color); /* Utiliser une couleur d'arrière-plan */
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .setting-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .setting-card p {
+            color: var(--text-color-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Style spécifique pour l'interrupteur */
+        .notification-switch {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 28px;
+            margin-right: 15px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(22px);
+        }
     </style>
 </head>
 <body>
@@ -753,190 +820,69 @@
         </ul>
     </nav>
 
-    <main role="main">
-        <section id="about" aria-labelledby="about-heading">
-            <div class="about-content">
-                <h2 id="about-heading" class="section-title">À propos de nous</h2>
-                <p class="section-description">Bienvenue chez miro.restaurant, un lieu où le luxe rencontre l'art culinaire. Profitez de nos espaces élégants : salle, bar, jardin, lounge et rooftop, pour un moment inoubliable en famille ou entre amis.</p>
-            </div>
-        </section>
+<section id="settings-page" aria-labelledby="settings-heading">
+    <h2 id="settings-heading" class="section-title">Paramètres</h2>
+    <p class="section-description">Personnalisez votre expérience de navigation.</p>
 
-        <section class="video-cards-container">
-            <div class="video-card">
-                <video class="card-video" id="video1" autoplay muted loop playsinline>
-                    <source src="images/video1.mp4" type="video/mp4">
-                    Votre navigateur ne supporte pas les vidéos HTML5.
-                </video>
-                <div class="video-card-content">
-                    <h4>La salle</h4>
-                    <p>Découvrez notre espace principal pour une expérience culinaire raffinée.</p>
+    <div class="settings-grid">
+
+        <div class="setting-card">
+            <div class="setting-icon"><i class="fas fa-palette"></i></div>
+            <div class="setting-content">
+                <h3>Thème</h3>
+                <p>Choisissez entre un thème clair ou sombre.</p>
+                <div class="theme-switch-container">
+                    <button id="light-mode-btn" class="btn btn-secondary">Clair</button>
+                    <button id="dark-mode-btn" class="btn btn-secondary">Sombre</button>
                 </div>
             </div>
+        </div>
 
-            <div class="video-card">
-                <video class="card-video" id="video2" autoplay muted loop playsinline>
-                    <source src="images/video2.mp4" type="video/mp4">
-                    Votre navigateur ne supporte pas les vidéos HTML5.
-                </video>
-                <div class="video-card-content">
-                    <h4>Le Bar & Lounge</h4>
-                    <p>L'endroit idéal pour déguster un cocktail dans une ambiance décontractée.</p>
+        <div class="setting-card">
+            <div class="setting-icon"><i class="fas fa-globe"></i></div>
+            <div class="setting-content">
+                <h3>Langue</h3>
+                <p>Sélectionnez la langue d'affichage du site.</p>
+                <div class="language-options">
+                    <select id="language-select" aria-label="Sélectionner la langue">
+                        <option value="fr" selected>Français</option>
+                        <option value="en">English</option>
+                        <option value="ar">العربية</option>
+                    </select>
                 </div>
             </div>
+        </div>
 
-            <div class="video-card">
-                <video class="card-video" id="video3" autoplay muted loop playsinline>
-                    <source src="images/video4.mp4" type="video/mp4">
-                    Votre navigateur ne supporte pas les vidéos HTML5.
-                </video>
-                <div class="video-card-content">
-                    <h4>Le Jardin & Rooftop</h4>
-                    <p>Un havre de paix en plein air pour des moments magiques sous le ciel.</p>
+        <div class="setting-card">
+            <div class="setting-icon"><i class="fas fa-bell"></i></div>
+            <div class="setting-content">
+                <h3>Notifications</h3>
+                <p>Gérez vos préférences de communication.</p>
+                <div class="notification-switch">
+                    <label for="notification-toggle" class="switch">
+                        <input type="checkbox" id="notification-toggle" role="switch">
+                        <span class="slider round"></span>
+                    </label>
+                    <span id="notification-status">Activées</span>
                 </div>
             </div>
-        </section>
-
-        <section id="info" aria-labelledby="info-heading">
-            <h2 id="info-heading" class="section-title">Informations Pratiques</h2>
-            <p class="section-description">Découvrez nos horaires et comment nous trouver pour une expérience sans accroc.</p>
-            <div class="info-cards">
-                <div class="card card-icon">
-                    <i class="fas fa-utensils"></i>
-                    <h3>Déjeuner</h3>
-                    <p>12H - 15H (sauf le Vendredi)</p>
-                </div>
-                <div class="card card-icon">
-                    <i class="fas fa-moon"></i>
-                    <h3>Dîner</h3>
-                    <p>19H - 02H</p>
-                </div>
-                <div class="card card-icon">
-                    <i class="fas fa-phone-alt"></i>
-                    <h3>Contact</h3>
-                    <p><a href="tel:0560800700" class="contact-link">0560-800-700</a></p>
-                </div>
-                <div class="card card-icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>Adresse</h3>
-                    <p>Bois des arcades, Alger</p>
-                    <p><a href="#map" class="contact-link">Voir sur la carte</a></p>
-                </div>
-                <div class="card card-icon">
-                    <i class="fas fa-glass-cheers"></i>
-                    <h3>Espaces</h3>
-                    <p>Salle, Bar, Jardin, Lounge, Rooftop</p>
+        </div>
+        
+        <div class="setting-card">
+            <div class="setting-icon"><i class="fas fa-universal-access"></i></div>
+            <div class="setting-content">
+                <h3>Accessibilité</h3>
+                <p>Améliorez la lisibilité et le confort visuel.</p>
+                <div class="accessibility-options">
+                    <label for="font-size-slider">Taille de la police :</label>
+                    <input type="range" id="font-size-slider" min="0.8" max="1.5" step="0.1" value="1" aria-label="Ajuster la taille de la police">
+                    <span id="font-size-value">100%</span>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section id="gallery" aria-labelledby="gallery-heading">
-            <h2 id="gallery-heading" class="section-title">Notre Galerie</h2>
-            <p class="section-description">Explorez les images de notre restaurant et découvrez l'ambiance unique qui vous y attend.</p>
-            <div class="gallery">
-                <figure class="gallery-item" tabindex="0">
-                    <img src="images/image1.webp" alt="Intérieur du restaurant avec de larges baies vitrées" loading="lazy" data-full-size="images/image1.webp">
-                    <figcaption class="item-caption">Intérieur du restaurant</figcaption>
-                </figure>
-                <figure class="gallery-item" tabindex="0">
-                    <img src="images/image2.webp" alt="Notre bar élégant, prêt à accueillir les clients" loading="lazy" data-full-size="images/image2.webp">
-                    <figcaption class="item-caption">Notre bar élégant</figcaption>
-                </figure>
-                <figure class="gallery-item" tabindex="0">
-                    <img src="images/image3.webp" alt="Vue du jardin extérieur et de la terrasse" loading="lazy" data-full-size="images/image3.webp">
-                    <figcaption class="item-caption">Vue du jardin</figcaption>
-                </figure>
-                <figure class="gallery-item" tabindex="0">
-                    <img src="images/image4.webp" alt="Terrasse sur le toit offrant une vue panoramique" loading="lazy" data-full-size="images/image4.webp">
-                    <figcaption class="item-caption">Terrasse sur le toit</figcaption>
-                </figure>
-                <figure class="gallery-item" tabindex="0">
-                    <img src="images/image5.webp" alt="Salle à manger privée pour les événements spéciaux" loading="lazy" data-full-size="images/image5.webp">
-                    <figcaption class="item-caption">Salle à manger privée</figcaption>
-                </figure>
-            </div>
-        </section>
-
-        <section id="plats" aria-labelledby="plats-heading">
-            <h2 id="plats-heading" class="section-title">Nos Plats Signature</h2>
-            <p class="section-description">Découvrez une sélection de nos créations culinaires, préparées avec passion et des ingrédients de première qualité.</p>
-            <div class="plats">
-                <figure class="plat-item" tabindex="0">
-                    <img src="images/plat1.webp" alt="Salade fraîche et colorée" loading="lazy">
-                    <figcaption class="item-caption">Salade fraîche <span class="plat-price">2200 DA</span></figcaption>
-                </figure>
-                <figure class="plat-item" tabindex="0">
-                    <img src="images/plat2.webp" alt="Pâtes aux fruits de mer" loading="lazy">
-                    <figcaption class="item-caption">Pâtes aux fruits de mer <span class="plat-price">3500 DA</span></figcaption>
-                </figure>
-                <figure class="plat-item" tabindex="0">
-                    <img src="images/plat3.webp" alt="Viande grillée avec accompagnement" loading="lazy">
-                    <figcaption class="item-caption">Viande grillée <span class="plat-price">4800 DA</span></figcaption>
-                </figure>
-                <figure class="plat-item" tabindex="0">
-                    <img src="images/plat4.webp" alt="Dessert au chocolat fondu" loading="lazy">
-                    <figcaption class="item-caption">Dessert au chocolat <span class="plat-price">1800 DA</span></figcaption>
-                </figure>
-                <figure class="plat-item" tabindex="0">
-                    <img src="images/plat5.webp" alt="Plat de poisson savoureux" loading="lazy">
-                    <figcaption class="item-caption">Plat de poisson <span class="plat-price">4200 DA</span></figcaption>
-                </figure>
-                <figure class="plat-item" tabindex="0">
-                    <img src="images/plat6.webp" alt="Cocktail fruité et rafraîchissant" loading="lazy">
-                    <figcaption class="item-caption">Cocktail signature <span class="plat-price">1500 DA</span></figcaption>
-                </figure>
-                <figure class="plat-item" tabindex="0">
-                    <img src="images/plat7.webp" alt="Crème brûlée avec sucre caramélisé" loading="lazy">
-                    <figcaption class="item-caption">Crème brûlée <span class="plat-price">1700 DA</span></figcaption>
-                </figure>
-                <figure class="plat-item" tabindex="0">
-                    <img src="images/plat8.webp" alt="Planche de fromages variés" loading="lazy">
-                    <figcaption class="item-caption">Planche de fromages <span class="plat-price">2900 DA</span></figcaption>
-                </figure>
-            </div>
-        </section>
-
-        <section id="map" aria-labelledby="map-heading">
-            <h2 id="map-heading" class="section-title">Notre Emplacement</h2>
-            <p class="section-description">Trouvez-nous facilement sur la carte pour planifier votre visite.</p>
-            <div class="map-container">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1599.9822452285517!2d3.064505187123953!3d36.75822606541575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128df2b947c452e9%3A0xc665b16e45f56a52!2sBois%20des%20Arcades!5e0!3m2!1sfr!2sdz!4v1695758254247!5m2!1sfr!2sdz"
-                    width="600"
-                    height="450"
-                    style="border:0;"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    title="Carte de localisation du Miro Restaurant, Bois des arcades, Alger">
-                </iframe>
-            </div>
-        </section>
-
-        <section id="contact" aria-labelledby="contact-heading">
-            <h2 id="contact-heading" class="section-title">Contactez-nous</h2>
-            <p class="section-description">Envoyez-nous un message et nous vous répondrons rapidement. Pour une réservation, merci d'utiliser le lien ci-dessus.</p>
-            <form action="#" method="POST" class="contact-form" novalidate>
-                <div class="form-group">
-                    <label for="name">Votre nom</label>
-                    <input type="text" id="name" name="name" placeholder="John Doe" required>
-                    <span class="error-message"></span>
-                </div>
-                <div class="form-group">
-                    <label for="email">Votre email</label>
-                    <input type="email" id="email" name="email" placeholder="john.doe@exemple.com" required>
-                    <span class="error-message"></span>
-                </div>
-                <input type="text" name="_honeypot" id="_honeypot" class="form-honeypot" tabindex="-1" autocomplete="off">
-                <div class="form-group">
-                    <label for="message">Votre message</label>
-                    <textarea id="message" name="message" placeholder="Votre message..." rows="5" required></textarea>
-                    <span class="error-message"></span>
-                </div>
-                <button type="submit" class="btn btn-primary">Envoyer le message</button>
-            </form>
-        </section>
-    </main>
-    
+    </div>
+</section>
 
     <a id="scroll-to-top" class="scroll-btn" href="#accueil" aria-label="Retourner en haut de la page">
         <i class="fas fa-arrow-up"></i>
