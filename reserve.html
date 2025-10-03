@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIRO - Réservation Instantanée</title>
+    <style>
+        /* Variables et Réinitialisation de base */
+        :root {
+            --color-primary: #a08c5c; /* Gold/Ochre */
+            --color-secondary: #5c6265; /* Dark Gray */
+            --color-background-dark: #1e1e1e;
+            --color-background-light: #f5f5f5;
+            --color-text-dark: #f5f5f5;
+            --color-text-light: #1e1e1e;
+            --color-border: #333333;
+            --color-shadow: rgba(0, 0, 0, 0.4);
+            --color-error: #e74c3c;
+            --transition-speed: 0.3s;
+            --progress-width: 0%;
+        }
+
+        /* --- AMÉLIORATION DU BACKGROUND ET DU BODY --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--color-text-dark);
+            background-color: var(--color-background-dark);
+            transition: color var(--transition-speed), background-color var(--transition-speed);
+            
+            /* Styles pour l'image de fond */
+            background-image: url('images/couverture.png');
+            background-size: cover;
+            background-attachment: fixed; 
+            background-position: center center;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 0;
+            position: relative; 
+            z-index: 0;
+        }
+
+        /* 1. Overlay (Filtre Sombre) sur l'image de fond pour améliorer le contraste */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.3); 
+            z-index: -1; 
+            transition: background-color var(--transition-speed);
+        }
+        
+        /* 2. Mode Clair - Ajustement de l'overlay */
+        body.light-mode {
+            color: var(--color-text-light);
+            background-color: var(--color-background-light);
+        }
+
+        body.light-mode::before {
+            background-color: rgba(255, 255, 255, 0.1); 
+        }
+        
+        /* 3. Conteneur principal (La "carte") - TRÈS TRANSPARENT */
+        .reservation-container {
+            display: flex;
+            max-width: 1200px;
+            width: 90%;
+            margin: auto;
+            /* FOND PRINCIPAL TRÈS TRANSPARENT (30% d'opacité) */
+            background-color: rgba(30, 30, 30, 0.7); 
+            box-shadow: 0 10px 30px var(--color-shadow);
+            border-radius: 12px;
+            overflow: hidden;
+            min-height: 700px;
+            z-index: 1; 
+            /* Ajout pour la transition de masquage/affichage */
+            transition: all 0.5s ease-in-out; 
+        }
+
+        body.light-mode .reservation-container {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* --- NOUVEAU : GESTION DE LA VISIBILITÉ DE LA SIDEBAR --- */
+        .sidebar {
+            flex: 1;
+            background-color: rgba(0, 0, 0, 0.5); 
+            color: white;
+            padding: 40px;
+            /* Rendre la sidebar visible par défaut sur grand écran */
+            transition: transform 0.5s, opacity 0.5s;
+        }
+        
+        /* Lorsque la barre latérale est cachée */
+        .sidebar-hidden .sidebar {
+            /* Masquer complètement la sidebar */
+            display: none; 
+            /* On peut aussi utiliser opacity: 0; flex: 0; pour une transition plus fluide si on ne veut pas display: none; */
+        }
+        
+        .sidebar-toggle-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--color-primary);
+            color: var(--color-text-dark);
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 1.5em;
+            line-height: 1;
+            cursor: pointer;
+            z-index: 10;
+            display: none; /* Caché par défaut sur grand écran */
+            transition: background-color 0.2s;
+        }
+
+        .sidebar-hidden .sidebar-toggle-btn.open-btn {
+            display: block;
+        }
+
+        .sidebar-toggle-btn.close-btn {
+            display: block;
+            right: 40px; /* Aligné dans la barre latérale ouverte */
+            top: 40px;
+        }
+        .sidebar-hidden .sidebar-toggle-btn.close-btn {
+            display: none;
+        }
+        /* --- FIN NOUVEAU --- */
+
+
+        /* Zone de formulaire */
+        .form-area {
+            flex: 2;
+            padding: 40px;
+            position: relative; /* Pour positionner le bouton d'ouverture */
+        }
+        
+        .main-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .main-header h1 {
+            color: var(--color-primary);
+            font-size: 2.5em;
+            margin: 0;
+        }
+        
+        .main-header p {
+            font-style: italic;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        /* Barre de progression */
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 40px;
+            padding-bottom: 10px;
+        }
+        
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 0;
+            height: 3px;
+            width: 100%;
+            background-color: var(--color-border);
+            z-index: 0;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 0;
+            height: 3px;
+            width: var(--progress-width);
+            background-color: var(--color-primary);
+            z-index: 1;
+            transition: width var(--transition-speed) ease-in-out;
+        }
+        
+        .step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 33%;
+            cursor: pointer;
+        }
+        
+        .step::before {
+            content: '';
+            display: block;
+            width: 14px;
+            height: 14px;
+            background-color: var(--color-border);
+            border-radius: 50%;
+            margin: 0 auto 5px;
+            transition: background-color 0.2s;
+            border: 2px solid var(--color-border);
+        }
+        
+        .step.active::before {
+            background-color: var(--color-primary);
+            border-color: var(--color-primary);
+        }
+        
+        .step.done::before {
+            background-color: var(--color-secondary);
+            border-color: var(--color-secondary);
+        }
+        
+        .step-label {
+            font-size: 0.85em;
+            color: var(--color-secondary);
+        }
+
+        .step.active .step-label, .step.done .step-label {
+             color: var(--color-text-dark); 
+        }
+        
+        body.light-mode .step.active .step-label, body.light-mode .step.done .step-label {
+             color: var(--color-text-light);
+        }
+        
+        /* Formulaires par étape */
+        .step-form {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .step-form.active {
+            display: block;
+            opacity: 1;
+        }
+        
+        .step-form h2 {
+            color: var(--color-primary);
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        /* Groupes de formulaire et mise en page */
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        /* CHAMPS DE FORMULAIRE (Inputs, Selects, Textareas) - TRÈS TRANSPARENTS */
+        input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--color-border);
+            border-radius: 5px;
+            box-sizing: border-box;
+            /* Fond d'input très transparent par défaut */
+            background-color: rgba(0, 0, 0, 0.4); 
+            color: var(--color-text-dark);
+            transition: border-color 0.2s, background-color 0.2s;
+            appearance: none; 
+        }
+        
+        /* DIMINUTION DE LA TRANSPARENCE (AUGMENTATION OPACITÉ) au FOCUS/HOVER */
+        input:focus, select:focus, textarea:focus {
+            /* Diminuer la transparence à 60% d'opacité */
+            background-color: rgba(0, 0, 0, 0.6); 
+            border-color: var(--color-primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(160, 140, 92, 0.3);
+        }
+        input:hover:not(:focus), select:hover:not(:focus), textarea:hover:not(:focus) {
+             /* Diminuer la transparence au survol */
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        body.light-mode input[type="text"], body.light-mode input[type="email"], body.light-mode input[type="tel"], body.light-mode input[type="date"], body.light-mode select, body.light-mode textarea {
+            background-color: rgba(255, 255, 255, 0.4); 
+            color: var(--color-text-light);
+            border: 1px solid #ccc;
+        }
+        body.light-mode input:focus, body.light-mode select:focus, body.light-mode textarea:focus {
+            background-color: rgba(255, 255, 255, 0.7); /* 70% d'opacité */
+        }
+        body.light-mode input:hover:not(:focus), body.light-mode select:hover:not(:focus), body.light-mode textarea:hover:not(:focus) {
+            background-color: rgba(255, 255, 255, 0.5); /* 50% d'opacité */
+        }
+        
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        /* Messages d'erreur */
+        .error-message {
+            color: var(--color-error);
+            font-size: 0.8em;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        /* Validation visuelle */
+        input.invalid {
+            border-color: var(--color-error) !important;
+            box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.3);
+        }
+        
+        input.valid {
+            border-color: #2ecc71 !important;
+        }
+
+        .server-error {
+            background-color: var(--color-error);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none; 
+            font-weight: bold;
+        }
+        
+        /* Sélecteur d'Expérience (Radio Group) */
+        .experience-table {
+            border: 1px solid var(--color-border);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .experience-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--color-border);
+            transition: background-color 0.2s, border-color 0.2s;
+            position: relative;
+        }
+        
+        .experience-row:last-child {
+            border-bottom: none;
+        }
+        
+        /* DIMINUTION DE LA TRANSPARENCE (AUGMENTATION OPACITÉ) au HOVER sur la ligne */
+        .experience-row:hover, .experience-row:focus {
+            /* Devenir un peu plus opaque au survol (70% d'opacité) */
+            background-color: rgba(42, 42, 42, 0.7); 
+            outline: none;
+        }
+        
+        .experience-row.selected {
+            /* Garde la couleur primaire pour le statut sélectionné (opaque pour mieux contraster) */
+            background-color: var(--color-primary);
+            color: var(--color-text-dark);
+            border-color: var(--color-primary);
+        }
+
+        .experience-row.selected strong {
+            color: var(--color-text-dark);
+        }
+        
+        .experience-row strong {
+            display: block;
+            color: var(--color-primary);
+        }
+        
+        .experience-row span {
+            font-size: 0.9em;
+            color: #ccc;
+        }
+        
+        .experience-row.selected span {
+            color: #1e1e1e;
+        }
+        
+        .exp-price {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .exp-details {
+            flex-grow: 1;
+        }
+
+        /* Boutons de navigation */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .navigation-buttons button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.2s, opacity 0.2s;
+        }
+        
+        .btn-back {
+            background-color: #555;
+            color: white;
+        }
+        
+        .btn-next, .btn-submit {
+            background-color: var(--color-primary);
+            color: var(--color-text-dark);
+        }
+        
+        .btn-back:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn-next:hover:not(:disabled), .btn-submit:hover:not(:disabled) {
+            opacity: 0.8;
+        }
+
+        /* Validation Progress Bar */
+        .validation-progress {
+            position: absolute;
+            bottom: 25px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .validation-progress progress {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            height: 3px;
+            width: 100%;
+            border: none;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .validation-progress progress::-webkit-progress-bar {
+            background-color: #ccc;
+        }
+
+        .validation-progress progress::-webkit-progress-value {
+            background-color: #2ecc71; 
+            transition: width 0.3s;
+        }
+
+        .validation-progress progress::-moz-progress-bar {
+            background-color: #2ecc71;
+        }
+        
+        /* Étape 3 - Paiement */
+        .policy-box {
+            background-color: rgba(56, 56, 56, 0.7); 
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        body.light-mode .policy-box {
+            background-color: rgba(240, 240, 240, 0.7);
+            color: var(--color-text-light);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+        
+        .checkbox-group label {
+            font-weight: normal;
+            margin-bottom: 0;
+            line-height: 1.4;
+        }
+
+        /* Sidebar - Résumé (OPACITÉ MINIMALE) */
+        .summary-box {
+            padding: 20px; 
+            border-bottom: none; 
+            margin-bottom: 30px;
+            /* BLOC RÉSUMÉ TRÈS TRANSPARENT (80% de transparence) */
+            background-color: rgba(0, 0, 0, 0.2); 
+            border-radius: 8px; 
+        }
+        
+        .summary-box h4 {
+            font-size: 1.1em;
+            margin-top: 0;
+            color: #fff;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+        
+        .summary-item span:first-child {
+            color: #ddd;
+        }
+        
+        .summary-item span:last-child {
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        /* Sidebar - FAQ Accordéon */
+        .faq h3 {
+            font-size: 1.1em;
+            color: var(--color-primary);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .accordion-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            color: #fff;
+            transition: color 0.2s;
+            user-select: none;
+        }
+
+        .accordion-header:hover, .accordion-header:focus {
+            color: var(--color-primary);
+            outline: none;
+        }
+        
+        .accordion-header span {
+            font-size: 1.2em;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+            padding: 0 10px;
+        }
+        
+        .accordion-content p {
+            font-size: 0.85em;
+            color: #ccc;
+            padding-bottom: 10px;
+            margin: 0;
+        }
+
+        /* Thème */
+        .theme-switch {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 45px;
+          height: 25px;
+          margin-left: 10px;
+        }
+
+        .switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          transition: .4s;
+          border-radius: 25px;
+        }
+
+        .slider:before {
+          position: absolute;
+          content: "";
+          height: 17px;
+          width: 17px;
+          left: 4px;
+          bottom: 4px;
+          background-color: white;
+          transition: .4s;
+          border-radius: 50%;
+        }
+
+        input:checked + .slider {
+          background-color: var(--color-primary);
+        }
+
+        input:focus + .slider {
+          box-shadow: 0 0 1px var(--color-primary);
+        }
+
+        input:checked + .slider:before {
+          transform: translateX(20px);
+        }
+
+        /* --- MEDIA QUERIES pour le responsive et le bouton de toggle --- */
+        @media (max-width: 900px) {
+            .reservation-container {
+                flex-direction: column;
+                width: 95%;
+                /* La sidebar est masquée par défaut sur les petits écrans */
+                /* On utilise 'flex-basis: 0; width: 0' pour cacher la sidebar tout en gardant 'display: flex' */
+                /* Cependant, pour le masquage/affichage facile, on va plutôt utiliser display: none; sur .sidebar */
+            }
+            .form-area {
+                padding: 20px;
+            }
+            .sidebar {
+                padding: 20px;
+                order: -1; /* Placer la sidebar en haut sur mobile (optionnel) */
+                display: none; /* Masqué par défaut sur mobile/petit écran */
+            }
+            
+            /* Afficher le bouton d'ouverture sur les petits écrans */
+            .sidebar-toggle-btn {
+                display: block; 
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                z-index: 2; /* S'assurer qu'il est au-dessus du formulaire */
+            }
+            
+            /* Révéler la sidebar lorsque la classe .sidebar-hidden n'est pas là */
+            .reservation-container .sidebar {
+                display: none;
+            }
+            
+            .reservation-container:not(.sidebar-hidden) .sidebar {
+                display: block;
+                flex-basis: 100%; /* S'étale sur toute la largeur */
+                /* Ajouter une transition pour l'animation */
+                max-height: 800px; 
+                opacity: 1;
+            }
+            
+            /* Masquer le bouton de bascule quand la sidebar est affichée */
+             .reservation-container:not(.sidebar-hidden) .sidebar-toggle-btn.open-btn {
+                display: none;
+            }
+             .reservation-container:not(.sidebar-hidden) .sidebar-toggle-btn.close-btn {
+                display: none; /* Le bouton "close" sera dans la sidebar elle-même */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="reservation-container sidebar-hidden" aria-live="polite">
+        
+        <div class="form-area">
+            
+            <button id="sidebar-toggle-open" class="sidebar-toggle-btn open-btn" aria-label="Afficher le résumé de la commande">
+                ☰
+            </button>
+            
+            <header class="main-header">
+                <h1>MIRO</h1>
+                <p>Système de Réservation Instantanée - Votre table d'exception en 3 étapes.</p>
+            </header>
+            
+            <div class="progress-bar">
+                <div class="step active" data-step="1" role="tab" aria-controls="step-1-form">
+                    <div class="step-label">1. Expérience & Date</div>
+                </div>
+                <div class="step" data-step="2" role="tab" aria-controls="step-2-form">
+                    <div class="step-label">2. Vos Coordonnées</div>
+                </div>
+                <div class="step" data-step="3" role="tab" aria-controls="step-3-form">
+                    <div class="step-label">3. Garantie & Finalisation</div>
+                </div>
+            </div>
+
+            <div class="server-error" id="global-server-error">
+                ⚠️ **Erreur Serveur (Simulée) :** Le créneau horaire n'est plus disponible. Veuillez choisir une autre heure.
+            </div>
+
+            <form id="step-1-form" class="step-form active" aria-labelledby="step1-heading" role="tabpanel">
+                <h2 id="step1-heading">1/3 : Définissez votre visite</h2>
+
+                <section class="experience-selector">
+                    <h3>Sélectionnez votre Menu</h3>
+                    
+                    <div class="experience-table" role="radiogroup" aria-label="Choix du Menu">
+                        <div class="experience-row" data-id="sign" data-experience="Menu Dégustation Signature" data-price="180" tabindex="0" role="radio" aria-checked="false">
+                            <div class="exp-details">
+                                <strong>Menu Dégustation Signature</strong>
+                                <span>8 plats. Durée 2h30. La quintessence de Miro.</span>
+                            </div>
+                            <div class="exp-price">180 €</div>
+                        </div>
+                        <div class="experience-row" data-id="wine" data-experience="Menu avec Accord Mets & Vins" data-price="260" tabindex="0" role="radio" aria-checked="false">
+                            <div class="exp-details">
+                                <strong>Menu avec Accord Mets & Vins</strong>
+                                <span>Dégustation accompagnée par notre sommelier.</span>
+                            </div>
+                            <div class="exp-price">260 €</div>
+                        </div>
+                        <div class="experience-row" data-id="carte" data-experience="Menu à la Carte" data-price="100" tabindex="0" role="radio" aria-checked="false">
+                            <div class="exp-details">
+                                <strong>Menu à la Carte</strong>
+                                <span>Option courte. (Disponibilité limitée).</span>
+                            </div>
+                            <div class="exp-price">Dès 100 €</div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="margin-top: 30px;">
+                        <label for="selected_experience">Expérience Sélectionnée</label>
+                        <input type="text" id="selected_experience" name="experience" readonly required placeholder="Veuillez cliquer sur une option ci-dessus" aria-describedby="error-step1-experience">
+                        <input type="hidden" id="experience_price" name="price">
+                        <input type="hidden" id="experience_id" name="experience_id">
+                        <p class="error-message" id="error-step1-experience">Sélection requise.</p>
+                    </div>
+                </section>
+
+                <section class="datetime-selector">
+                    <h3>Date et Nombre de Convives</h3>
+                    
+                    <div class="grid-layout">
+                        <div class="form-group">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" name="date" required aria-required="true">
+                            <p class="error-message" id="error-step1-date">Date requise et valide.</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="time">Heure de Service</label>
+                            <select id="time" name="time" required aria-required="true">
+                                <option value="">-- Sélectionner --</option>
+                                <optgroup label="Dîner">
+                                    <option value="1930">19:30</option>
+                                    <option value="2000">20:00</option>
+                                    <option value="2030">20:30</option>
+                                </optgroup>
+                            </select>
+                            <p class="error-message" id="error-step1-time">Heure requise.</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="guests">Convives (1 à 8)</label>
+                            <select id="guests" name="guests" required aria-required="true">
+                                <option value="">-- Nb Pers. --</option>
+                                <option value="2">2</option><option value="4">4</option><option value="6">6</option>
+                            </select>
+                            <p class="error-message" id="error-step1-guests">Nombre de convives requis.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="navigation-buttons">
+                    <button type="button" class="btn-back" disabled aria-label="Retour à l'étape précédente">RETOUR</button>
+                    <button type="submit" class="btn-next" aria-label="Passer à l'étape 2">VÉRIFIER ET PASSER À L'ÉTAPE 2</button>
+                </div>
+            </form>
+
+            <form id="step-2-form" class="step-form" aria-labelledby="step2-heading" role="tabpanel">
+                <h2 id="step2-heading">2/3 : Vos Coordonnées et Besoins</h2>
+
+                <section class="client-info">
+                    <h3>Vos Informations de Contact</h3>
+                    
+                    <div class="grid-layout">
+                        <div class="form-group">
+                            <label for="lastname">Nom de Famille</label>
+                            <input type="text" id="lastname" name="lastname" required aria-required="true" placeholder="Ex: Dupont">
+                            <div class="validation-progress"><progress id="prog-lastname" value="0" max="100"></progress></div>
+                            <p class="error-message" id="error-step2-lastname">Nom requis (min. 2 caractères).</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Adresse E-mail</label>
+                            <input type="email" id="email" name="email" required aria-required="true" placeholder="contact@example.com">
+                            <div class="validation-progress"><progress id="prog-email" value="0" max="100"></progress></div>
+                            <p class="error-message" id="error-step2-email">Email requis et doit être valide.</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <input type="tel" id="phone" name="phone" required aria-required="true" placeholder="+33 6 XX XX XX XX">
+                            <div class="validation-progress"><progress id="prog-phone" value="0" max="100"></progress></div>
+                            <p class="error-message" id="error-step2-phone">Téléphone requis (10 chiffres recommandés).</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="special-requests">
+                    <h3>Notes pour le Chef et le Service</h3>
+                    
+                    <div class="form-group">
+                        <label for="special_requests">Allergies / Régimes Spéciaux / Demandes de Table (Optionnel)</label>
+                        <textarea id="special_requests" name="special_requests" rows="4" placeholder="Ex: Allergie aux crustacés, Végétarien (préavis 48h), demande de table tranquille."></textarea>
+                    </div>
+                </section>
+
+                <div class="navigation-buttons">
+                    <button type="button" class="btn-back" data-target="1" aria-label="Retour à l'étape 1">RETOUR À L'ÉTAPE 1</button>
+                    <button type="submit" class="btn-next" aria-label="Passer à l'étape 3">PASSER À L'ÉTAPE 3</button>
+                </div>
+            </form>
+
+            <form id="step-3-form" class="step-form" aria-labelledby="step3-heading" role="tabpanel">
+                <h2 id="step3-heading">3/3 : Garantie Bancaire et Finalisation</h2>
+
+                <section class="payment-guarantee">
+                    <h3>Garantie de Réservation Sécurisée</h3>
+                    
+                    <div class="policy-box" role="alert">
+                        <p>La **pré-autorisation de 50 € par convive** est requise. Vos données sont traitées via un système **PCI-DSS sécurisé**.</p>
+                    </div>
+                    
+                    <div class="grid-layout" style="margin-top:20px;">
+                        <div class="form-group">
+                            <label for="card_number">Numéro de Carte de Crédit</label>
+                            <input type="text" id="card_number" name="card_number" required aria-required="true" placeholder="XXXX XXXX XXXX XXXX" maxlength="16">
+                            <div class="validation-progress"><progress id="prog-card_number" value="0" max="100"></progress></div>
+                            <p class="error-message" id="error-step3-card">Numéro de carte requis (16 chiffres).</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="card_expiry">Expiration (MM/AA)</label>
+                            <input type="text" id="card_expiry" name="card_expiry" required aria-required="true" placeholder="MM/AA" maxlength="5">
+                            <p class="error-message" id="error-step3-expiry">Date d'expiration requise.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="card_cvc">CVC</label>
+                            <input type="text" id="card_cvc" name="card_cvc" required aria-required="true" placeholder="XXX" maxlength="4">
+                            <p class="error-message" id="error-step3-cvc">CVC requis.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="final-validation">
+                    <h3>Acceptation des Conditions de Service</h3>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms" name="terms_accepted" required aria-required="true">
+                        <label for="terms">J'ai lu et j'accepte l'intégralité des **conditions générales de réservation** du Restaurant MIRO.</label>
+                    </div>
+                    <p class="error-message" id="error-step3-terms" style="margin-left: 30px;">Veuillez accepter les termes et conditions.</p>
+                </section>
+
+                <div class="navigation-buttons">
+                    <button type="button" class="btn-back" data-target="2" aria-label="Retour à l'étape 2">RETOUR À L'ÉTAPE 2</button>
+                    <button type="submit" class="btn-submit" aria-label="Confirmer et finaliser la réservation">CONFIRMER MA RÉSERVATION</button>
+                </div>
+            </form>
+        </div>
+
+        <aside class="sidebar">
+            <button id="sidebar-toggle-close" class="sidebar-toggle-btn close-btn" aria-label="Masquer le résumé de la commande">
+                ✖
+            </button>
+            
+            <div class="theme-switch">
+                <label for="theme-toggle" style="font-size: 0.9em; text-transform: none;">Thème Clair ☀️</label>
+                <label class="switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div class="summary-box">
+                <h4>RÉSUMÉ DE LA COMMANDE</h4>
+                <div class="summary-item">
+                    <span>Expérience :</span>
+                    <span id="summary-experience">Non sélectionnée</span>
+                </div>
+                <div class="summary-item">
+                    <span>Date / Heure :</span>
+                    <span id="summary-datetime">-- / --</span>
+                </div>
+                <div class="summary-item">
+                    <span>Convives :</span>
+                    <span id="summary-guests">--</span>
+                </div>
+                <div class="summary-item">
+                    <span>Garantie (50€ x Pers.) :</span>
+                    <span id="summary-deposit-amount">0 €</span>
+                </div>
+                
+                <div class="summary-item" style="border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 15px; padding-top: 15px;">
+                    <span>Coût Estimé par Convive :</span>
+                    <span id="summary-price-per-guest">0 €</span>
+                </div>
+            </div>
+
+            <section class="faq">
+                <h3>FAQ - Questions Fréquentes</h3>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" tabindex="0" role="button" aria-expanded="false">
+                        Code Vestimentaire ?
+                        <span>+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Une tenue de ville élégante est exigée. Les vêtements de sport et les shorts ne sont pas acceptés pour le dîner.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" tabindex="0" role="button" aria-expanded="false">
+                        Modification / Annulation ?
+                        <span>+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Les modifications et annulations sont possibles via le lien dans l'e-mail de confirmation, jusqu'à 24h avant.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header" tabindex="0" role="button" aria-expanded="false">
+                        Politique Enfant ?
+                        <span>+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Nous accueillons les enfants mais recommandons la discrétion pour les moins de 7 ans durant le service du soir.</p>
+                    </div>
+                </div>
+            </section>
+        </aside>
+
+    </div>
+
+    <script>
+        // --- NOUVEAU : GESTION DU TOGGLE SIDEBAR ---
+        const sidebarToggle = () => {
+            const container = document.querySelector('.reservation-container');
+            // La classe .sidebar-hidden est ce qui masque la sidebar
+            container.classList.toggle('sidebar-hidden');
+            
+            // Mettre à jour l'accessibilité
+            const isHidden = container.classList.contains('sidebar-hidden');
+            document.querySelector('.sidebar').setAttribute('aria-hidden', isHidden);
+            document.getElementById('sidebar-toggle-open').setAttribute('aria-expanded', !isHidden);
+            document.getElementById('sidebar-toggle-close').setAttribute('aria-expanded', !isHidden);
+        };
+        
+        // Attacher les événements au DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('sidebar-toggle-open').addEventListener('click', sidebarToggle);
+            document.getElementById('sidebar-toggle-close').addEventListener('click', sidebarToggle);
+        });
+        // --- FIN NOUVEAU : GESTION DU TOGGLE SIDEBAR ---
+
+
+        // --- 1. GESTION DE L'ÉTAT GLOBAL (STATE MANAGEMENT SIMULÉ) ---
+        const RESERVATION_STATE = {
+            currentStep: 1,
+            experience: null, // {id: 'sign', name: '...', price: 180}
+            date: null,
+            time: null,
+            guests: 0,
+            lastname: null,
+            email: null,
+            isConfirmed: false
+        };
+
+        // --- 2. MODULE UI & NAVIGATION ---
+        const UIManager = (() => {
+            const elements = {
+                steps: document.querySelectorAll('.step-form'),
+                progressBarSteps: document.querySelectorAll('.progress-bar .step'),
+                progressBar: document.querySelector('.progress-bar'),
+                serverError: document.getElementById('global-server-error'),
+                toggle: document.getElementById('theme-toggle'),
+                body: document.body
+            };
+
+            function updateProgress(newStep) {
+                // Mise à jour visuelle des formulaires
+                elements.steps.forEach((form, index) => {
+                    form.classList.remove('active');
+                    form.setAttribute('aria-hidden', 'true');
+                    if (index + 1 === newStep) {
+                        form.classList.add('active');
+                        form.setAttribute('aria-hidden', 'false');
+                    }
+                });
+
+                // Mise à jour de la barre de progression
+                elements.progressBarSteps.forEach((stepEl, index) => {
+                    const stepNum = index + 1;
+                    stepEl.classList.toggle('active', stepNum === newStep);
+                    stepEl.classList.toggle('done', stepNum < newStep);
+                    stepEl.setAttribute('aria-current', stepNum === newStep ? 'step' : 'false');
+                });
+                
+                // Mise à jour de la barre de progression globale (CSS variable injection)
+                const progressWidth = ((newStep - 1) / (elements.steps.length - 1)) * 100;
+                elements.progressBar.style.setProperty('--progress-width', `${progressWidth}%`);
+
+                RESERVATION_STATE.currentStep = newStep;
+            }
+
+            function showServerError(message) {
+                elements.serverError.textContent = `⚠️ Erreur Serveur : ${message}`;
+                elements.serverError.style.display = 'block';
+                // Scroller vers le message d'erreur pour une meilleure UX
+                elements.serverError.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            function hideServerError() {
+                elements.serverError.style.display = 'none';
+            }
+            
+            function initThemeToggle() {
+                // Initialiser le thème par défaut (sombre)
+                elements.body.classList.remove('light-mode');
+                elements.toggle.checked = false; 
+
+                elements.toggle.addEventListener('change', () => {
+                    elements.body.classList.toggle('light-mode');
+                    // Mettre à jour le texte du label
+                    const label = elements.toggle.previousElementSibling;
+                    if (elements.body.classList.contains('light-mode')) {
+                        label.textContent = "Thème Sombre 🌙";
+                    } else {
+                        label.textContent = "Thème Clair ☀️";
+                    }
+                });
+            }
+
+            return {
+                updateProgress,
+                showServerError,
+                hideServerError,
+                initThemeToggle
+            };
+        })();
+
+        // --- 3. MODULE DE VALIDATION ET UX ---
+        const ValidationManager = (() => {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            function validateField(input) {
+                const errorElement = document.getElementById('error-' + input.id);
+                const progressElement = document.getElementById('prog-' + input.id);
+                // Utiliser la validation native, puis affiner
+                let isValid = input.value.trim() !== '' && input.checkValidity();
+                let progressValue = 0;
+
+                // Logique de validation détaillée
+                if (input.type === 'email') {
+                    isValid = isValid && emailRegex.test(input.value);
+                    progressValue = input.value.length > 0 ? (emailRegex.test(input.value) ? 100 : 50) : 0;
+                } else if (input.id === 'card_number') {
+                     // Supprimer les espaces avant de vérifier la longueur
+                     const len = input.value.replace(/\s/g, "").length;
+                     isValid = isValid && len === 16;
+                     progressValue = (len / 16) * 100;
+                } else if (input.id === 'lastname') {
+                    const len = input.value.trim().length;
+                    isValid = isValid && len >= 2;
+                    progressValue = Math.min(len * 20, 100);
+                } else if (input.id === 'phone') {
+                    // Validation simple pour le téléphone (au moins 10 chiffres)
+                    const len = input.value.replace(/[^0-9]/g, "").length;
+                    isValid = isValid && len >= 10;
+                    progressValue = Math.min(len * 10, 100);
+                } else if (input.id === 'terms') {
+                    isValid = input.checked;
+                    progressValue = isValid ? 100 : 0;
+                } else if (input.type !== 'select-one') {
+                    progressValue = input.value.length > 0 ? 100 : 0;
+                }
+                
+                // Gestion des champs Select (simplement si une option a été choisie)
+                 if (input.tagName === 'SELECT') {
+                    isValid = input.value.trim() !== '';
+                    progressValue = isValid ? 100 : 0;
+                }
+
+                // Affichage du feedback visuel
+                const isComplete = progressValue === 100;
+                input.classList.toggle('valid', isValid && isComplete);
+                // Ne marquer comme 'invalid' que si l'utilisateur a entré quelque chose mais que c'est faux
+                input.classList.toggle('invalid', !isValid && input.value.length > 0);
+                
+                if (errorElement) {
+                    errorElement.style.display = isValid ? 'none' : 'block';
+                    input.setAttribute('aria-invalid', !isValid);
+                }
+                
+                if (progressElement) {
+                    // Afficher la barre de progression seulement si le champ n'est pas vide
+                    progressElement.parentElement.style.opacity = progressValue > 0 && progressValue < 100 ? 1 : 0;
+                    progressElement.value = progressValue;
+                }
+
+                return isValid;
+            }
+
+            function attachRealtimeValidation(form) {
+                // Sélectionner tous les champs requis, y compris les select
+                form.querySelectorAll('input:required, select:required, textarea:required').forEach(input => {
+                    input.addEventListener('input', () => validateField(input));
+                    input.addEventListener('change', () => validateField(input));
+                    // Déclencher la validation au focus/blur pour un meilleur feedback
+                    input.addEventListener('blur', () => validateField(input));
+                });
+            }
+
+            function validateStep(form) {
+                let isValid = true;
+                let firstInvalid = null;
+                const inputs = form.querySelectorAll('input:required, select:required, textarea:required');
+                
+                inputs.forEach(input => {
+                    // Déclencher la validation complète pour tous les champs à la soumission
+                    if (!validateField(input)) {
+                        isValid = false;
+                        if (!firstInvalid) {
+                             // Garder une référence au premier champ invalide pour le focus
+                            firstInvalid = input;
+                        }
+                    }
+                });
+
+                // Validation spécifique Étape 1: Expérience (car ce n'est pas un champ input/select normal)
+                if (form.id === 'step-1-form' && RESERVATION_STATE.experience === null) {
+                    const expError = document.getElementById('error-step1-experience');
+                    expError.style.display = 'block';
+                    isValid = false;
+                    // Mettre le focus sur le premier élément d'expérience si aucune n'est sélectionnée
+                    if (!firstInvalid) document.querySelector('.experience-row').focus(); 
+                } else if (form.id === 'step-1-form' && RESERVATION_STATE.experience !== null) {
+                     // S'assurer que le message d'erreur d'expérience est caché si c'est bon
+                    document.getElementById('error-step1-experience').style.display = 'none';
+                }
+
+                // Focus sur le premier champ invalide
+                if (!isValid && firstInvalid) {
+                    firstInvalid.focus();
+                }
+
+                return isValid;
+            }
+
+            return {
+                validateStep,
+                attachRealtimeValidation
+            };
+        })();
+
+        // --- 4. MODULE DE GESTION DES DONNÉES ET API SIMULÉ ---
+        const DataManager = (() => {
+            const form1 = document.getElementById('step-1-form');
+            const form2 = document.getElementById('step-2-form');
+            // const form3 = document.getElementById('step-3-form'); // Non utilisé directement ici
+            
+            // Étape 1: Enregistrer les données
+            function collectStep1Data() {
+                RESERVATION_STATE.date = form1.elements['date'].value;
+                // Formater l'heure pour le résumé
+                const timeValue = form1.elements['time'].value;
+                RESERVATION_STATE.time = timeValue ? `${timeValue.substring(0, 2)}:${timeValue.substring(2, 4)}` : '';
+                RESERVATION_STATE.guests = parseInt(form1.elements['guests'].value) || 0;
+            }
+            
+            // Étape 2: Enregistrer les données
+            function collectStep2Data() {
+                RESERVATION_STATE.lastname = form2.elements['lastname'].value;
+                RESERVATION_STATE.email = form2.elements['email'].value;
+                RESERVATION_STATE.phone = form2.elements['phone'].value;
+                RESERVATION_STATE.specialRequests = form2.elements['special_requests'].value;
+            }
+            
+            // Mise à jour des données du panneau latéral
+            function updateSummary() {
+                document.getElementById('summary-experience').textContent = RESERVATION_STATE.experience ? RESERVATION_STATE.experience.name : 'Non sélectionnée';
+                
+                const dateSummary = RESERVATION_STATE.date ? new Date(RESERVATION_STATE.date + 'T00:00:00').toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' }) : '--';
+                const timeSummary = RESERVATION_STATE.time || '--';
+
+                document.getElementById('summary-datetime').textContent = `${dateSummary} à ${timeSummary}`;
+                document.getElementById('summary-guests').textContent = RESERVATION_STATE.guests > 0 ? `${RESERVATION_STATE.guests} Pers.` : '--';
+                
+                const deposit = RESERVATION_STATE.guests * 50;
+                document.getElementById('summary-deposit-amount').textContent = `${deposit} €`;
+                
+                const price = RESERVATION_STATE.experience ? RESERVATION_STATE.experience.price : 0;
+                // Mettre à jour le prix estimé
+                document.getElementById('summary-price-per-guest').textContent = RESERVATION_STATE.experience ? `${price} €` : '0 €';
+            }
+
+            // SIMULATION DE VÉRIFICATION SERVEUR (Étape 1)
+            function checkAvailability() {
+                UIManager.hideServerError(); // Cacher l'erreur précédente
+                
+                return new Promise((resolve, reject) => {
+                    // Simuler la latence réseau
+                    setTimeout(() => {
+                        // Exemple de logique : la table n'est pas disponible pour 6 personnes le 15 du mois
+                        const date = RESERVATION_STATE.date ? new Date(RESERVATION_STATE.date + 'T00:00:00').getUTCDate() : null;
+                        const isUnavailable = RESERVATION_STATE.guests === 6 && date === 15;
+                        
+                        if (isUnavailable) {
+                            reject("Table non disponible. Veuillez choisir une autre date/heure ou moins de convives.");
+                        } else {
+                            resolve();
+                        }
+                    }, 800);
+                });
+            }
+            
+            // SIMULATION DE CONFIRMATION (Étape 3)
+            function finalConfirmation() {
+                 return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        // 1 chance sur 10 que la carte soit rejetée à la fin
+                        if (Math.random() < 0.1) { 
+                            reject("Paiement rejeté par la banque. Vérifiez vos informations de carte.");
+                        } else {
+                            resolve();
+                        }
+                    }, 1200);
+                });
+            }
+
+            return {
+                collectStep1Data,
+                collectStep2Data,
+                updateSummary,
+                checkAvailability,
+                finalConfirmation
+            };
+        })();
+
+        // --- 5. INITIALISATION DES ÉVÉNEMENTS GLOBALS ---
+        const initializeApp = () => {
+            const experienceRows = document.querySelectorAll('.experience-row');
+            
+            // 5.1 GESTION DE LA SÉLECTION D'EXPÉRIENCE
+            experienceRows.forEach(row => {
+                const selectExperience = (r) => {
+                    experienceRows.forEach(r => {
+                        r.classList.remove('selected');
+                        r.setAttribute('aria-checked', 'false');
+                    });
+                    
+                    r.classList.add('selected');
+                    r.setAttribute('aria-checked', 'true');
+                    
+                    RESERVATION_STATE.experience = {
+                        id: r.getAttribute('data-id'),
+                        name: r.getAttribute('data-experience'),
+                        // Utiliser parseFloat pour gérer les prix (même si l'exemple utilise des entiers)
+                        price: parseFloat(r.getAttribute('data-price'))
+                    };
+                    document.getElementById('selected_experience').value = RESERVATION_STATE.experience.name;
+                    document.getElementById('experience_price').value = RESERVATION_STATE.experience.price;
+                    document.getElementById('experience_id').value = RESERVATION_STATE.experience.id;
+                    document.getElementById('error-step1-experience').style.display = 'none';
+                    DataManager.updateSummary();
+                };
+                
+                row.addEventListener('click', () => selectExperience(row));
+                row.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        selectExperience(row);
+                    }
+                });
+            });
+
+            // 5.2 GESTION DES FORMULAIRES (Soumission par étape)
+            document.querySelectorAll('.step-form').forEach(form => {
+                ValidationManager.attachRealtimeValidation(form);
+
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    UIManager.hideServerError(); 
+                    
+                    // Désactiver le bouton pour éviter les doubles clics pendant l'attente du serveur
+                    const submitButton = form.querySelector('.btn-next, .btn-submit');
+                    submitButton.disabled = true;
+
+                    if (!ValidationManager.validateStep(form)) {
+                        submitButton.disabled = false; // Réactiver si la validation front-end échoue
+                        return;
+                    }
+
+                    if (RESERVATION_STATE.currentStep === 1) {
+                        DataManager.collectStep1Data();
+                        
+                        try {
+                            // Vérification Simulé de disponibilité (Latence/API Call)
+                            await DataManager.checkAvailability();
+                            UIManager.updateProgress(2);
+                            submitButton.disabled = false;
+                        } catch (error) {
+                            UIManager.showServerError(error);
+                            submitButton.disabled = false; // Réactiver si le serveur rejette
+                            // Rester à l'étape 1
+                        }
+                    } else if (RESERVATION_STATE.currentStep === 2) {
+                        DataManager.collectStep2Data();
+                        UIManager.updateProgress(3);
+                        submitButton.disabled = false;
+                    } else if (RESERVATION_STATE.currentStep === 3) {
+                        // Tentative de confirmation finale (API Call)
+                          try {
+                            await DataManager.finalConfirmation();
+                            RESERVATION_STATE.isConfirmed = true;
+                            alert(`✅ Réservation MIRO Confirmée pour ${RESERVATION_STATE.lastname} ! Un email a été envoyé à ${RESERVATION_STATE.email}.`);
+                            submitButton.textContent = 'RÉSERVATION CONFIRMÉE';
+                            submitButton.disabled = true; 
+                            // Enlever tous les autres boutons
+                            form.querySelectorAll('.btn-back').forEach(btn => btn.style.display = 'none');
+                        } catch (error) {
+                            UIManager.showServerError(error);
+                            submitButton.disabled = false; // Réactiver si le paiement est rejeté
+                            // Rester à l'étape 3
+                        }
+                    }
+                    DataManager.updateSummary();
+                });
+            });
+            
+            // 5.3 GESTION DES CHAMPS D'ENTRÉE (Date, Heure, Convives) pour mettre à jour le résumé
+            document.querySelectorAll('#date, #time, #guests').forEach(input => {
+                input.addEventListener('change', () => {
+                    DataManager.collectStep1Data();
+                    DataManager.updateSummary();
+                    // Cacher l'erreur serveur si on modifie l'étape 1
+                    UIManager.hideServerError();
+                });
+            });
+
+            // 5.4 GESTION DES BOUTONS RETOUR
+            document.querySelectorAll('.btn-back').forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetStep = parseInt(button.getAttribute('data-target')) || RESERVATION_STATE.currentStep - 1;
+                    if (targetStep >= 1) {
+                        UIManager.updateProgress(targetStep);
+                        UIManager.hideServerError();
+                        // Réactiver le bouton suivant de l'étape précédente
+                        document.querySelector(`#step-${targetStep}-form .btn-next`).disabled = false;
+                    }
+                });
+            });
+            
+            // 5.5 GESTION DE L'ACCORDÉON (FAQ)
+            document.querySelectorAll('.accordion-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const isExpanded = header.getAttribute('aria-expanded') === 'true';
+                    
+                    // Fermer tous les autres
+                    document.querySelectorAll('.accordion-header').forEach(h => {
+                        if (h !== header) {
+                            h.setAttribute('aria-expanded', 'false');
+                            h.nextElementSibling.style.maxHeight = 0;
+                            h.querySelector('span').textContent = '+';
+                        }
+                    });
+                    
+                    // Ouvrir ou fermer celui-ci
+                    if (!isExpanded) {
+                        header.setAttribute('aria-expanded', 'true');
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        header.querySelector('span').textContent = '-';
+                    } else {
+                        header.setAttribute('aria-expanded', 'false');
+                        content.style.maxHeight = 0;
+                        header.querySelector('span').textContent = '+';
+                    }
+                });
+            });
+
+            // 5.6 Initialisation finale
+            document.getElementById('date').min = new Date().toISOString().split('T')[0];
+            UIManager.initThemeToggle();
+            UIManager.updateProgress(1); // Démarre à l'étape 1 au chargement
+        };
+
+        // Lancement de l'application
+        document.addEventListener('DOMContentLoaded', initializeApp);
+    </script>
+</body>
+</html>
