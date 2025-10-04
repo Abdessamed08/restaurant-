@@ -988,6 +988,93 @@
             color: var(--color-text-light);
         }
 
+
+
+        /* ======================================================= */
+        /* ====== STYLES POUR LE SÉLECTEUR DE DATE (CALENDRIER) ==== */
+        /* ======================================================= */
+
+        /* ======================================================= */
+        /* ====== STYLES POUR LE SÉLECTEUR DE DATE (CALENDRIER) ==== */
+        /* ======================================================= */
+
+        /* 1. Style des cartes (similaire aux cartes de menu) */
+        .calendar-slider {
+            /* Utilise les styles de flexbox du .menu-categories-slider */
+            display: flex; 
+            overflow-x: auto; 
+            gap: 20px;
+            padding: 10px 0;
+        }
+
+        .calendar-month {
+            /* Nouvelle classe pour styliser la carte d'un mois */
+            flex: 0 0 350px; /* Largeur fixe pour la carte du mois */
+            min-width: 300px; 
+            
+            /* Reprendre le style de la carte de menu pour l'homogénéité */
+            background: rgba(40, 40, 40, 0.8);
+            border: 1px solid var(--color-border);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            scroll-snap-align: start; 
+            transition: transform 0.3s ease;
+            
+            text-align: center;
+        }
+
+        .calendar-month h5 {
+            color: var(--color-primary);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        /* Grille des jours inchangée */
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+        }
+        /* ... day-name, day-cell, inactive, disabled ... (styles inchangés) */
+
+
+        /* 2. Style du cercle "Dessin" ou "Anneau" */
+        .day-cell.selected {
+            background: none; /* Enlever le fond solide */
+            color: var(--color-primary); /* Garder la couleur principale pour le chiffre */
+            font-weight: bold;
+            
+            /* Créer un anneau visuel sans utiliser de border classique */
+            /* Le box-shadow agit comme une double bordure "dessinée" */
+            box-shadow: 
+                0 0 0 1px var(--color-primary), /* Ligne intérieure fine */
+                0 0 0 3px transparent, /* Espace transparent */
+                0 0 0 4px rgba(var(--color-primary-rgb), 0.7); /* Ligne extérieure plus douce et semi-transparente */
+            
+            /* Assurer que l'anneau est bien un cercle parfait */
+            padding: 6px 0; /* Ajuster le padding pour que le cercle soit parfait */
+        }
+
+        /* Effet de survol sur la sélection pour montrer que c'est bien la date active */
+        .day-cell.selected:hover {
+            background-color: transparent !important; /* Pas de fond, même au survol */
+        }
+
+        /* Mode Clair (Light Mode) Ajustements */
+        body.light-mode .calendar-month {
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        body.light-mode .day-cell.selected {
+            /* La couleur principale doit rester l'anneau, le chiffre doit être lisible */
+            color: var(--color-primary); 
+        }
+
+
+    
+
         /* --- MEDIA QUERIES pour le responsive et le bouton de toggle (ULTRA-SPÉCIFIQUE) --- */
         @media (max-width: 900px) {
             .reservation-container {
@@ -1212,10 +1299,17 @@
                     <h3>Date et Nombre de Convives</h3>
                     
                     <div class="grid-layout">
-                        <div class="form-group">
-                            <label for="date">Date</label>
-                            <input type="date" id="date" name="date" required aria-required="true">
-                            <p class="error-message" id="error-step1-date">Date requise et valide.</p>
+                        
+                        <div class="form-group date-selection-group full-width">
+                            <label for="reservation_date">Date de la Visite</label>
+                            
+                            <div class="menu-categories-slider calendar-slider" id="date-picker-container">
+                                </div>
+                            
+                            <p class="selected-date-display" id="selected-date-display">Date sélectionnée : <span class="date-value">Aucune</span></p>
+                            <p class="error-message" id="error-step1-date">Veuillez sélectionner une date valide.</p>
+
+                            <input type="hidden" id="reservation_date" name="reservation_date" required>
                         </div>
                         
                         <div class="form-group">
@@ -1227,7 +1321,7 @@
                                     <option value="2000">20:00</option>
                                     <option value="2030">20:30</option>
                                 </optgroup>
-                            </select>
+                                </select>
                             <p class="error-message" id="error-step1-time">Heure requise.</p>
                         </div>
                         
@@ -1235,10 +1329,18 @@
                             <label for="guests">Convives (1 à 8)</label>
                             <select id="guests" name="guests" required aria-required="true">
                                 <option value="">-- Nb Pers. --</option>
-                                <option value="2">2</option><option value="4">4</option><option value="6">6</option>
+                                <option value="1">1</option>
+                                <option value="2" selected>2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
                             </select>
                             <p class="error-message" id="error-step1-guests">Nombre de convives requis.</p>
                         </div>
+                        
                     </div>
                 </section>
 
@@ -1375,17 +1477,6 @@
                 <div class="summary-item" style="border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 15px; padding-top: 15px;">
                     <span>Coût Estimé par Convive :</span>
                     <span id="summary-price-per-guest">0 €</span>
-                </div>
-            </div>
-
-            <div class="summary-section menu-recap">
-                <h4>Votre Pré-Commande</h4>
-                <div id="summary-cart-details" class="recap-list">
-                    <p class="placeholder-text">Votre panier est vide.</p>
-                </div>
-                <div class="summary-line total-line">
-                    <span class="label">Total Panier Estimé:</span>
-                    <strong id="summary-cart-total-price">0.00 €</strong>
                 </div>
             </div>
 
@@ -2052,6 +2143,155 @@
 
         // Affichage initial
         updateRecapDisplay();
+    });
+     
+        
+    document.addEventListener('DOMContentLoaded', () => {
+        const container = document.getElementById('date-picker-container');
+        const hiddenInput = document.getElementById('reservation_date');
+        const displayElement = document.getElementById('selected-date-display').querySelector('.date-value');
+        
+        // Configs
+        const today = new Date();
+        // Liste des jours pour l'affichage (commence par Lundi)
+        const dayNames = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim']; 
+        // Format de sortie pour l'utilisateur
+        const displayFormatOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        
+        // Déterminer les deux mois à afficher
+        const currentMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+        const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, 1);
+
+        // Date actuellement sélectionnée par l'utilisateur
+        let selectedDate = null;
+
+        /**
+         * Retourne le jour de la semaine (0 pour Lun, 6 pour Dim)
+         * @param {Date} date 
+         * @returns {number}
+         */
+        function getWeekDay(date) {
+            // Le JS retourne Dim=0, Lun=1... Nous voulons Lun=0, Dim=6
+            let day = date.getDay();
+            return (day === 0) ? 6 : day - 1; 
+        }
+
+        /**
+         * Génère le HTML pour un calendrier mensuel DANS UNE CARTE (`menu-card`).
+         * @param {Date} monthDate - Date représentant le mois à afficher (le 1er du mois).
+         * @returns {string} Le HTML du calendrier dans sa carte.
+         */
+        function generateCalendar(monthDate) {
+            const year = monthDate.getFullYear();
+            const month = monthDate.getMonth();
+            const monthName = monthDate.toLocaleDateString('fr-FR', { month: 'long' });
+            
+            // Trouver le dernier jour du mois
+            const lastDay = new Date(year, month + 1, 0).getDate();
+            // Trouver le premier jour de la semaine du mois
+            const startDayIndex = getWeekDay(monthDate); 
+
+            // 🚨 Changement : Encapsulation dans une carte
+            let html = `
+                <div class="calendar-month menu-card">
+                    <h5>${monthName.charAt(0).toUpperCase() + monthName.slice(1)} ${year}</h5>
+                    <div class="calendar-days">
+            `;
+
+            // Ajouter les noms des jours
+            dayNames.forEach(name => {
+                html += `<span class="day-name">${name}</span>`;
+            });
+
+            // Ajouter des cellules inactives pour les jours du mois précédent
+            for (let i = 0; i < startDayIndex; i++) {
+                html += `<span class="day-cell inactive"></span>`;
+            }
+
+            // Ajouter les jours du mois
+            for (let day = 1; day <= lastDay; day++) {
+                const date = new Date(year, month, day);
+                const isToday = date.toDateString() === today.toDateString();
+                const isDisabled = date < today; // Désactiver les dates passées
+                
+                // Créer la chaîne de date au format ISO pour le stockage (YYYY-MM-DD)
+                const dateISO = date.toISOString().split('T')[0];
+                
+                let classes = 'day-cell';
+                if (isDisabled) {
+                    classes += ' disabled';
+                } else if (isToday) {
+                    // Mettre en évidence la date d'aujourd'hui (peut être sélectionnable)
+                    classes += ' today'; 
+                }
+                
+                // Vérifier si c'est la date actuellement sélectionnée
+                if (selectedDate && dateISO === selectedDate.toISOString().split('T')[0]) {
+                    classes += ' selected';
+                }
+
+                html += `
+                    <span class="${classes}" data-date="${dateISO}">
+                        ${day}
+                    </span>
+                `;
+            }
+
+            // 🚨 Changement : Fermeture de la carte
+            html += `</div></div>`;
+            return html;
+        }
+
+        /**
+         * Met à jour l'état visuel après une sélection.
+         */
+        function updateSelection(newDateISO) {
+            // Supprimer la classe 'selected' de tous les jours
+            document.querySelectorAll('.day-cell.selected').forEach(cell => {
+                cell.classList.remove('selected');
+            });
+
+            const newCell = document.querySelector(`.day-cell[data-date="${newDateISO}"]`);
+            if (newCell && !newCell.classList.contains('disabled')) {
+                // Appliquer la classe 'selected' pour l'effet de cercle
+                newCell.classList.add('selected');
+
+                // Mettre à jour les données
+                selectedDate = new Date(newDateISO);
+                hiddenInput.value = newDateISO;
+                displayElement.textContent = selectedDate.toLocaleDateString('fr-FR', displayFormatOptions);
+            }
+        }
+
+        /**
+         * Gère le clic sur une cellule de jour.
+         */
+        function handleDayClick(event) {
+            const cell = event.target.closest('.day-cell');
+            if (!cell || cell.classList.contains('disabled')) {
+                return; 
+            }
+
+            const dateISO = cell.dataset.date;
+            if (dateISO) {
+                updateSelection(dateISO);
+            }
+        }
+
+        // --- EXECUTION ---
+        
+        // 1. Générer et insérer les calendriers
+        const currentMonthHTML = generateCalendar(currentMonth);
+        const nextMonthHTML = generateCalendar(nextMonth);
+        // Insère les deux cartes générées dans le conteneur `date-picker-container`
+        container.innerHTML = currentMonthHTML + nextMonthHTML;
+
+        // 2. Attacher l'écouteur d'événements
+        container.addEventListener('click', handleDayClick);
+
+        // Optionnel : Sélectionner par défaut la date d'aujourd'hui s'il n'y en a pas
+        const todayISO = today.toISOString().split('T')[0];
+        updateSelection(todayISO);
     });
     </script>
 </body>
