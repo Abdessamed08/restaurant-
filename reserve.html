@@ -89,11 +89,13 @@
         }
 
         /* --- NOUVEAU : GESTION DE LA VISIBILITÉ DE LA SIDEBAR --- */
+        /* Lignes autour de 185 */
         .sidebar {
             flex: 1;
             background-color: rgba(0, 0, 0, 0.5); 
             color: white;
             padding: 40px;
+            position: relative; /* 👈 AJOUTEZ CECI */
             /* Rendre la sidebar visible par défaut sur grand écran */
             transition: transform 0.5s, opacity 0.5s;
         }
@@ -653,52 +655,63 @@
           transform: translateX(20px);
         }
 
-        /* --- MEDIA QUERIES pour le responsive et le bouton de toggle --- */
+        /* --- MEDIA QUERIES pour le responsive et le bouton de toggle (ULTRA-SPÉCIFIQUE) --- */
         @media (max-width: 900px) {
             .reservation-container {
                 flex-direction: column;
                 width: 95%;
-                /* La sidebar est masquée par défaut sur les petits écrans */
-                /* On utilise 'flex-basis: 0; width: 0' pour cacher la sidebar tout en gardant 'display: flex' */
-                /* Cependant, pour le masquage/affichage facile, on va plutôt utiliser display: none; sur .sidebar */
             }
+
             .form-area {
                 padding: 20px;
+                position: relative; /* Ancrage '☰' */
             }
+
             .sidebar {
                 padding: 20px;
-                order: -1; /* Placer la sidebar en haut sur mobile (optionnel) */
-                display: none; /* Masqué par défaut sur mobile/petit écran */
+                order: -1;
+                display: none; 
             }
-            
-            /* Afficher le bouton d'ouverture sur les petits écrans */
+
+            /* Afficher le bouton d'ouverture (☰) sur les petits écrans */
             .sidebar-toggle-btn {
-                display: block; 
+                display: block;
                 position: absolute;
                 top: 20px;
                 right: 20px;
-                z-index: 2; /* S'assurer qu'il est au-dessus du formulaire */
+                z-index: 2;
             }
-            
-            /* Révéler la sidebar lorsque la classe .sidebar-hidden n'est pas là */
-            .reservation-container .sidebar {
-                display: none;
-            }
-            
+
+            /* Révéler la sidebar (version affichage local) */
             .reservation-container:not(.sidebar-hidden) .sidebar {
                 display: block;
-                flex-basis: 100%; /* S'étale sur toute la largeur */
-                /* Ajouter une transition pour l'animation */
+                flex-basis: 100%;
                 max-height: 800px; 
                 opacity: 1;
             }
-            
-            /* Masquer le bouton de bascule quand la sidebar est affichée */
-             .reservation-container:not(.sidebar-hidden) .sidebar-toggle-btn.open-btn {
+
+            /* Masquer le bouton OUVRIR (☰) quand la sidebar est affichée */
+            .reservation-container:not(.sidebar-hidden) .sidebar-toggle-btn.open-btn {
                 display: none;
             }
-             .reservation-container:not(.sidebar-hidden) .sidebar-toggle-btn.close-btn {
-                display: none; /* Le bouton "close" sera dans la sidebar elle-même */
+
+            /* ✅ CORRECTION ULTIME : Force l'affichage du '✖'
+            C'est le sélecteur le plus long et le plus spécifique pour écraser tout conflit.
+            */
+            .reservation-container:not(.sidebar-hidden) .sidebar .sidebar-toggle-btn.close-btn {
+                display: block !important; /* Force le navigateur à l'afficher */
+                position: absolute; 
+                top: 40px; 
+                right: 40px; 
+                z-index: 9999; /* Z-index très élevé au cas où un autre élément le couvre */
+                background: transparent;
+                color: white; 
+                font-size: 2em; 
+            }
+            
+            /* Cache l'icône 'X' par défaut quand elle ne doit pas être là, pour plus de clarté */
+            .sidebar-toggle-btn.close-btn { 
+                display: none; 
             }
         }
     </style>
