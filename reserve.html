@@ -1072,6 +1072,26 @@
             opacity: 1; /* Rendre l'opacité pleine */
         }
 
+        /* Style pour les jours passés (non sélectionnables) */
+        .day-cell.disabled {
+            opacity: 0.35; /* Griser la date */
+            cursor: not-allowed; /* Curseur d'interdiction */
+            pointer-events: none; /* TRÈS IMPORTANT : Empêche tout clic */
+            
+            /* 🚨 AJOUT POUR BARRER LA DATE 🚨 */
+            text-decoration: line-through; 
+            text-decoration-thickness: 2px; /* Rendre la ligne un peu plus visible */
+            
+            background-color: transparent !important;
+            box-shadow: none !important; 
+            transform: none !important; 
+        }
+
+        /* S'assurer que le survol n'a aucun effet visuel */
+        .day-cell.disabled:hover {
+            background-color: transparent;
+        }
+
         /* Mode Clair (Light Mode) Ajustements */
         body.light-mode .calendar-month {
             /* Annule les styles de carte Light Mode si vous les aviez */
@@ -2157,12 +2177,20 @@
      
        
     document.addEventListener('DOMContentLoaded', () => {
+        // ... (éléments HTML inchangés)
         const container = document.getElementById('date-picker-container');
         const hiddenInput = document.getElementById('reservation_date');
         const displayElement = document.getElementById('selected-date-display').querySelector('.date-value');
         
         // Configs
         const today = new Date();
+        // Ajout de la date d'aujourd'hui réinitialisée à minuit (00:00:00) pour la comparaison des jours
+        const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate()); 
+        
+        // 🚨 NOUVELLE RÈGLE D'HEURE LIMITE 🚨
+        // Date limite pour la réservation en ligne : aujourd'hui à 18h00
+        const todayCutoff = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 18, 0, 0); 
+        
         // Liste des jours pour l'affichage (commence par Lundi)
         const dayNames = ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim']; 
         // Format de sortie pour l'utilisateur
@@ -2174,7 +2202,10 @@
 
         // Date actuellement sélectionnée par l'utilisateur
         let selectedDate = null;
-
+        
+        // ... (Les fonctions suivent)
+        
+        // ... (Les fonctions getWeekDay, generateCalendar, etc. suivent ici)
         /**
          * Retourne le jour de la semaine (0 pour Lun, 6 pour Dim)
          * @param {Date} date 
@@ -2201,7 +2232,6 @@
             // Trouver le premier jour de la semaine du mois
             const startDayIndex = getWeekDay(monthDate); 
 
-            // 🚨 CORRECTION ICI : Suppression de la classe 'menu-card'
             let html = `
                 <div class="calendar-month">
                     <h5>${monthName.charAt(0).toUpperCase() + monthName.slice(1)} ${year}</h5>
@@ -2221,8 +2251,16 @@
             // Ajouter les jours du mois
             for (let day = 1; day <= lastDay; day++) {
                 const date = new Date(year, month, day);
-                const isToday = date.toDateString() === today.toDateString();
-                const isDisabled = date < today; // Désactiver les dates passées
+                
+                // 1. Vérifier si c'est une date passée (antérieure à aujourd'hui minuit)
+                let isDisabled = date < todayMidnight; 
+
+                // 🚨 2. Vérifier si c'est la date d'aujourd'hui ET s'il est après 18h00 🚨
+                if (date.toDateString() === todayMidnight.toDateString() && today > todayCutoff) {
+                    isDisabled = true;
+                }
+                
+                const isToday = date.toDateString() === todayMidnight.toDateString();
                 
                 // Créer la chaîne de date au format ISO pour le stockage (YYYY-MM-DD)
                 const dateISO = date.toISOString().split('T')[0];
@@ -2231,7 +2269,7 @@
                 if (isDisabled) {
                     classes += ' disabled';
                 } else if (isToday) {
-                    // Mettre en évidence la date d'aujourd'hui (peut être sélectionnable)
+                    // Mettre en évidence la date d'aujourd'hui
                     classes += ' today'; 
                 }
                 
@@ -2251,7 +2289,6 @@
             html += `</div></div>`;
             return html;
         }
-
         /**
          * Met à jour l'état visuel après une sélection.
          */
