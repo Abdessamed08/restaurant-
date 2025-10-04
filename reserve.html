@@ -998,28 +998,28 @@
         /* ====== STYLES POUR LE SÉLECTEUR DE DATE (CALENDRIER) ==== */
         /* ======================================================= */
 
-        /* 1. Style des cartes (similaire aux cartes de menu) */
+        /* 1. Style de la disposition (flexbox pour le slider) */
         .calendar-slider {
             /* Utilise les styles de flexbox du .menu-categories-slider */
             display: flex; 
             overflow-x: auto; 
-            gap: 20px;
+            gap: 40px; /* Augmente l'espace entre les mois pour la clarté */
             padding: 10px 0;
+            border: none; /* Assure qu'il n'y a pas de bordure autour du conteneur global */
         }
 
         .calendar-month {
-            /* Nouvelle classe pour styliser la carte d'un mois */
-            flex: 0 0 350px; /* Largeur fixe pour la carte du mois */
+            /* Nouvelle classe pour styliser le mois (Maintenant style "MUR") */
+            flex: 1; /* Permet aux deux mois de s'étendre également */
             min-width: 300px; 
             
-            /* Reprendre le style de la carte de menu pour l'homogénéité */
-            background: rgba(40, 40, 40, 0.8);
-            border: 1px solid var(--color-border);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            scroll-snap-align: start; 
-            transition: transform 0.3s ease;
+            /* 🚨 Styles retirés ou neutralisés pour l'effet "sur le mur" 🚨 */
+            background: none; /* TRÈS IMPORTANT : Retire le fond de la carte */
+            border: none; /* Retire la bordure de la carte */
+            padding: 0; /* Simplifie le padding à l'intérieur du conteneur */
+            box-shadow: none; /* Retire l'ombre de la carte */
+            scroll-snap-align: none; /* Inutile sans largeur fixe pour le slider */
+            transition: none; /* Retire les transitions inutiles */
             
             text-align: center;
         }
@@ -1037,38 +1037,48 @@
             grid-template-columns: repeat(7, 1fr);
             gap: 2px;
         }
-        /* ... day-name, day-cell, inactive, disabled ... (styles inchangés) */
 
+        /* --- Styles des cellules de jour (à conserver et ajuster si nécessaire) --- */
 
-        /* 2. Style du cercle "Dessin" ou "Anneau" */
-        .day-cell.selected {
-            background: none; /* Enlever le fond solide */
-            color: var(--color-primary); /* Garder la couleur principale pour le chiffre */
-            font-weight: bold;
-            
-            /* Créer un anneau visuel sans utiliser de border classique */
-            /* Le box-shadow agit comme une double bordure "dessinée" */
-            box-shadow: 
-                0 0 0 1px var(--color-primary), /* Ligne intérieure fine */
-                0 0 0 3px transparent, /* Espace transparent */
-                0 0 0 4px rgba(var(--color-primary-rgb), 0.7); /* Ligne extérieure plus douce et semi-transparente */
-            
-            /* Assurer que l'anneau est bien un cercle parfait */
-            padding: 6px 0; /* Ajuster le padding pour que le cercle soit parfait */
+        /* Style de base des cellules de jour */
+        .day-cell {
+            padding: 8px 0;
+            cursor: pointer;
+            font-size: 0.9em;
+            border-radius: 50%; /* Essentiel pour la forme du cercle */
+            transition: background-color 0.15s, color 0.15s;
+            user-select: none;
         }
 
-        /* Effet de survol sur la sélection pour montrer que c'est bien la date active */
+        /* 🚨 STYLE DU CERCLE "DESSINÉ AU CRAYON" 🚨 */
+        /* ALTERNATIVE 2 : Soulignement actif (pas de cercle) */
+        /* ALTERNATIVE 1 : Cercle plein et contrasté */
+        .day-cell.selected {
+            background-color: var(--color-primary); 
+            box-shadow: none; 
+            color: white; 
+            font-weight: bold;
+            padding: 8px 0;
+            
+            /* 🚨 AJOUT DE L'EFFET ZOOM ET TRANSITION 🚨 */
+            transform: scale(1.15); /* Agrandissement de 15% */
+            transition: transform 0.2s ease-out; /* Assure une animation fluide */
+            z-index: 10; /* S'assure qu'il apparaît au-dessus des autres jours */
+        }
+
+        /* Le survol devrait être conservé pour la date sélectionnée */
         .day-cell.selected:hover {
-            background-color: transparent !important; /* Pas de fond, même au survol */
+            background-color: var(--color-primary); 
+            opacity: 1; /* Rendre l'opacité pleine */
         }
 
         /* Mode Clair (Light Mode) Ajustements */
         body.light-mode .calendar-month {
-            background-color: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            /* Annule les styles de carte Light Mode si vous les aviez */
+            background-color: transparent; 
+            box-shadow: none;
         }
         body.light-mode .day-cell.selected {
-            /* La couleur principale doit rester l'anneau, le chiffre doit être lisible */
             color: var(--color-primary); 
         }
 
@@ -2145,7 +2155,7 @@
         updateRecapDisplay();
     });
      
-        
+       
     document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById('date-picker-container');
         const hiddenInput = document.getElementById('reservation_date');
@@ -2177,9 +2187,9 @@
         }
 
         /**
-         * Génère le HTML pour un calendrier mensuel DANS UNE CARTE (`menu-card`).
+         * Génère le HTML pour un calendrier mensuel (Style "Mur").
          * @param {Date} monthDate - Date représentant le mois à afficher (le 1er du mois).
-         * @returns {string} Le HTML du calendrier dans sa carte.
+         * @returns {string} Le HTML du calendrier.
          */
         function generateCalendar(monthDate) {
             const year = monthDate.getFullYear();
@@ -2191,9 +2201,9 @@
             // Trouver le premier jour de la semaine du mois
             const startDayIndex = getWeekDay(monthDate); 
 
-            // 🚨 Changement : Encapsulation dans une carte
+            // 🚨 CORRECTION ICI : Suppression de la classe 'menu-card'
             let html = `
-                <div class="calendar-month menu-card">
+                <div class="calendar-month">
                     <h5>${monthName.charAt(0).toUpperCase() + monthName.slice(1)} ${year}</h5>
                     <div class="calendar-days">
             `;
@@ -2237,7 +2247,7 @@
                 `;
             }
 
-            // 🚨 Changement : Fermeture de la carte
+            // Fermeture des divs
             html += `</div></div>`;
             return html;
         }
@@ -2283,13 +2293,13 @@
         // 1. Générer et insérer les calendriers
         const currentMonthHTML = generateCalendar(currentMonth);
         const nextMonthHTML = generateCalendar(nextMonth);
-        // Insère les deux cartes générées dans le conteneur `date-picker-container`
+        // Insère les deux mois générés dans le conteneur `date-picker-container`
         container.innerHTML = currentMonthHTML + nextMonthHTML;
 
         // 2. Attacher l'écouteur d'événements
         container.addEventListener('click', handleDayClick);
 
-        // Optionnel : Sélectionner par défaut la date d'aujourd'hui s'il n'y en a pas
+        // Sélectionner par défaut la date d'aujourd'hui
         const todayISO = today.toISOString().split('T')[0];
         updateSelection(todayISO);
     });
